@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -23,12 +27,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Producto.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Models\\Producto.cs",
+              "RelativeDocumentMoniker": "Models\\Producto.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Models\\Producto.cs",
+              "RelativeToolTip": "Models\\Producto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-29T20:30:48.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Cliente.cs",
               "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Models\\Cliente.cs",
               "RelativeDocumentMoniker": "Models\\Cliente.cs",
               "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Models\\Cliente.cs",
               "RelativeToolTip": "Models\\Cliente.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAtAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-29T20:27:32.972Z",
               "EditorCaption": ""
