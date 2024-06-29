@@ -16,7 +16,6 @@ C:\Users\victo\OneDrive\Documentos\InversionesLtda.API\API C#\InversionesLtda.AP
 C:\Users\victo\OneDrive\Documentos\InversionesLtda.API\API C#\InversionesLtda.API\obj\Debug\net8.0\InversionesLtda.API.csproj.CoreCompileInputs.cache
 C:\Users\victo\OneDrive\Documentos\InversionesLtda.API\API C#\InversionesLtda.API\obj\Debug\net8.0\InversionesLtda.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\victo\OneDrive\Documentos\InversionesLtda.API\API C#\InversionesLtda.API\obj\Debug\net8.0\InversionesLtda.API.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\victo\OneDrive\Documentos\InversionesLtda.API\API C#\InversionesLtda.API\obj\Debug\net8.0\InversionesLtda.API.sourcelink.json
 C:\Users\victo\OneDrive\Documentos\InversionesLtda.API\API C#\InversionesLtda.API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\victo\OneDrive\Documentos\InversionesLtda.API\API C#\InversionesLtda.API\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\victo\OneDrive\Documentos\InversionesLtda.API\API C#\InversionesLtda.API\obj\Debug\net8.0\staticwebassets\msbuild.InversionesLtda.API.Microsoft.AspNetCore.StaticWebAssets.props
