@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\inversionesltda.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:inversionesltda.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\api c#\\inversionesltda.api\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A98BB59-C689-4154-B3B9-39A80E0D2666}|InversionesLtda.API.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,7 +46,59 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "InversionesLtda.API.http",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\InversionesLtda.API.http",
+              "RelativeDocumentMoniker": "InversionesLtda.API.http",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\InversionesLtda.API.http",
+              "RelativeToolTip": "InversionesLtda.API.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-06-29T20:50:11.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-29T20:50:08.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ProductoController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Controllers\\ProductoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductoController.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Controllers\\ProductoController.cs",
+              "RelativeToolTip": "Controllers\\ProductoController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-29T20:40:02.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClienteController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Controllers\\ClienteController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClienteController.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Controllers\\ClienteController.cs",
+              "RelativeToolTip": "Controllers\\ClienteController.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAQwC8AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-29T20:34:46.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -47,20 +111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ClienteController.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Controllers\\ClienteController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ClienteController.cs",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Controllers\\ClienteController.cs",
-              "RelativeToolTip": "Controllers\\ClienteController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADMAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-29T20:34:46.997Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Producto.cs",
               "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\API C#\\InversionesLtda.API\\Models\\Producto.cs",
               "RelativeDocumentMoniker": "Models\\Producto.cs",
@@ -81,7 +132,8 @@
               "RelativeToolTip": "Models\\Cliente.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-29T20:27:32.972Z"
+              "WhenOpened": "2024-06-29T20:27:32.972Z",
+              "EditorCaption": ""
             }
           ]
         }
