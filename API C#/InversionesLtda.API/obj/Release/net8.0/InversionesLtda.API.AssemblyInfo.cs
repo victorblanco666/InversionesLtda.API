@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("InversionesLtda.API")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+693f9fd430da2ef9b2e48aab7fa2104b235bbb49")]
 [assembly: System.Reflection.AssemblyProductAttribute("InversionesLtda.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InversionesLtda.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
