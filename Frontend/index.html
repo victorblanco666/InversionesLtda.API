@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+</head>
+<body>
+    <h1>Listado de Clientes</h1>
+
+    <ul>
+        {% for cliente in clientes %}
+        <li>
+            <strong>ID:</strong> {{ cliente.id }} <br>
+            <strong>Nombre:</strong> {{ cliente.nombre }} <br>
+            <strong>Email:</strong> {{ cliente.email }} <br>
+            <strong>Teléfono:</strong> {{ cliente.telefono }}
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+
+    <h1>Lista de Productos</h1>
+    <ul>
+        {% for producto in productos %}
+        <li>
+            <strong>Id:</strong> {{ producto.id }} <br>
+            <strong>Descripcion:</strong> {{ producto.descripcion }} <br>
+            <strong>Precio:</strong> {{ producto.precio }} <br>
+            <strong>Stock:</strong> {{ producto.stock }}
+        </li>
+        {% endfor %}
+    </ul>
+
+
+    <h1>Lista de Clientes</h1>
+    <ul>
+        {% for cliente in clientes %}
+        <li>{{ cliente.nombre }} - Email: {{ cliente.email }}</li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>
