@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 import requests
 import urllib3
 
-app = Flask(__name__, template_folder='../Frontend')
+app = Flask(__name__, template_folder='Frontend')
 
 # Deshabilitar advertencias de SSL para urllib3 (solo para desarrollo)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
