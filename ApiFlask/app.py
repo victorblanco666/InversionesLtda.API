@@ -2,17 +2,17 @@ from flask import Flask, render_template, jsonify
 import requests
 import urllib3
 
-app = Flask(__name__, template_folder='Frontend')
+app = Flask(__name__,static_folder="Frontend/Static" , template_folder='Frontend')
 
 # Deshabilitar advertencias de SSL para urllib3 (solo para desarrollo)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Endpoint para obtener clientes y productos desde la API en C#
 @app.route('/')
-def index():
+def vista():
     # URL de la API en C# para los clientes y productos
     clientes_url = 'https://localhost:5000/api/cliente'
-    productos_url = 'https://localhost:5000/api/producto'
+    productos_url = 'https://localhost:5000/api/producto'   
 
     try:
         # Realizar solicitud GET a la API en C# para clientes
@@ -38,6 +38,9 @@ def index():
 
     except requests.exceptions.RequestException as e:
         return "Error de conexión: " + str(e)
+    
+def index():
+    return render_template
 
 if __name__ == '__main__':
     app.run(port=5001 , debug=True)
