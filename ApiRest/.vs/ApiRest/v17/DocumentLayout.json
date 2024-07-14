@@ -1,29 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\",
+  "WorkspaceRootPath": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\apirest\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|solutionrelative:controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\apirest\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|solutionrelative:models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\apirest\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|solutionrelative:models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\apirest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\apirest\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\documentos\\inversionesltda.api\\apirest\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{034CC557-6B94-4D12-B4D6-4795E50DFAD4}|ApiRest.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -44,9 +44,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ProductoController.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Controllers\\ProductoController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Controllers\\ProductoController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductoController.cs",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Controllers\\ProductoController.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Controllers\\ProductoController.cs",
               "RelativeToolTip": "Controllers\\ProductoController.cs",
               "ViewState": "AQIAABoAAAAAAAAAAAAAwDEAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -57,9 +57,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Producto.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Models\\Producto.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Models\\Producto.cs",
               "RelativeDocumentMoniker": "Models\\Producto.cs",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Models\\Producto.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Models\\Producto.cs",
               "RelativeToolTip": "Models\\Producto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -69,9 +69,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Program.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Program.cs",
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -81,9 +81,9 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "ClienteController.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Controllers\\ClienteController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Controllers\\ClienteController.cs",
               "RelativeDocumentMoniker": "Controllers\\ClienteController.cs",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Controllers\\ClienteController.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Controllers\\ClienteController.cs",
               "RelativeToolTip": "Controllers\\ClienteController.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAYwB0AAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -93,9 +93,9 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Cliente.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Models\\Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Models\\Cliente.cs",
               "RelativeDocumentMoniker": "Models\\Cliente.cs",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Models\\Cliente.cs",
               "RelativeToolTip": "Models\\Cliente.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -105,9 +105,9 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Properties\\launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\Properties\\launchSettings.json",
               "RelativeToolTip": "Properties\\launchSettings.json",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABQAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",

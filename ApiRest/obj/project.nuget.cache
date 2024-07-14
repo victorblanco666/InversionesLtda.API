@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5PMUY1eXH8tnfqoHIEvNs+jlYkkwdx4yCZRC5pcHn8CSmfRhy9WjiqZ38dqPsQq4B5NlRZdGsSwvMyKhiYm/4Q==",
+  "dgSpecHash": "7xJfu94vnOdzeFVBSWytePOQKN/K/KQwNZ2An/XF7Yza/PYrNycggYWvPNynaqS7nGMRUZXfeUGSxBlf79DQwA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\victo\\OneDrive\\Documentos\\InversionesLtda.API\\ApiRest\\ApiRest.csproj",
+  "projectFilePath": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\victo\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\victo\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

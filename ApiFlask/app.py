@@ -5,7 +5,7 @@ import urllib3
 app = Flask(__name__,static_folder="Frontend/Static" , template_folder='Frontend')
 
 # Deshabilitar advertencias de SSL para urllib3 (solo para desarrollo)
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+#urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Endpoint para obtener clientes y productos desde la API en C#
 @app.route('/')
