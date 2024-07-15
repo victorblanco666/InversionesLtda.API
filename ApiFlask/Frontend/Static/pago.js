@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Función para formatear números en miles de pesos chilenos (CLP)
     function formatearCLP(numero) {
         return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0 }).format(numero);
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const btnConfirmarPago = document.getElementById('btnConfirmarPago');
 
-    btnConfirmarPago.addEventListener('click', function() {
+    btnConfirmarPago.addEventListener('click', function () {
         const nombreCliente = document.getElementById('nombreCliente').value;
         const emailCliente = document.getElementById('emailCliente').value;
         const telefonoCliente = document.getElementById('telefonoCliente').value;
@@ -72,18 +72,32 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(datosCliente)
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error al enviar los datos del cliente.');
+                } else {
+                    alert('Compra confirmada. Datos del cliente enviados.');
+                    window.print();
+
+                    document.getElementById('nombreCliente').value = '';
+                    document.getElementById('emailCliente').value = '';
+                    document.getElementById('telefonoCliente').value = '';
+                    document.getElementById('montoPagar').value = '';
+                    localStorage.removeItem('productosEnCarrito');
+
+
+
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
                 alert('Error al enviar los datos del cliente.');
-            } else {
-                alert('Compra confirmada. Datos del cliente enviados.');
-                window.print();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al enviar los datos del cliente.');
-        });
+            });
+
     }
+
+
+
+
 });

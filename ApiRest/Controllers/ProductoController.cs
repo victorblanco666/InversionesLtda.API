@@ -10,8 +10,8 @@ namespace ApiRest.Controllers
 
         private static List<Producto> Productos = new List<Producto>
         {
-            new Producto { Id = 1, Nombre = "Producto 1", Descripcion = "Descripción del Producto 1", Precio = 99, Stock = 10 },
-            new Producto { Id = 2, Nombre = "Producto 2", Descripcion = "Descripción del Producto 2", Precio = 49, Stock = 20 }
+            new Producto { Id = 1, Nombre = "Producto 1", Descripcion = "Descripción del Producto 1", Precio = 20000, Stock = 10 },
+            new Producto { Id = 2, Nombre = "Producto 2", Descripcion = "Descripción del Producto 2", Precio = 30000, Stock = 20 }
         };
 
 
