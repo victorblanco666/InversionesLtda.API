@@ -99,53 +99,7 @@
 
 
 
-  <!-- Productos -->
-  <section>
-    <div class="container text-center mt-5" id="tarjeta">
-        <h3 class="display-6">Productos</h3>
-        <div class="row mt-5" id="crd">
-            {% for producto in productos %}
-            <div class="col-sm-12 col-md-4 col-lg-4 py-3">
-                <div class="card shadow">
-                    <img src="../Static/CierraC.jpg" class="card-img-top" alt="{{ producto.descripcion }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ producto.nombre }}</h5>
-                        <p class="card-text">{{ producto.descripcion }}</p>
-                        <p class="card-text card-precio">Precio: ${{ producto.precio }}</p>
-                        <a href="#" class="btn btn-primary btn-agregar" data-producto-id="{{ producto.id }}">Añadir al carrito</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- Modal -->
-<div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="carritoModalLabel">Productos en el carrito</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Contenido del modal, aquí se mostrarán los productos agregados -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <a href="{{ url_for('pagar') }}" class="btn btn-primary">Pagar</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-    <!--
+    <!-- Productos -->
     <section>
         <div class="container text-center mt-5" id="tarjeta">
             <h3 class="display-6">Productos</h3>
@@ -157,7 +111,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ producto.nombre }}</h5>
                             <p class="card-text">{{ producto.descripcion }}</p>
-                            <p class="card-text card-precio">Precio: {{ producto.precio }}</p>
+                            <p class="card-text card-precio">Precio: ${{ producto.precio }}</p>
                             <a href="#" class="btn btn-primary btn-agregar" data-producto-id="{{ producto.id }}">Añadir
                                 al carrito</a>
                         </div>
@@ -167,8 +121,26 @@
             </div>
         </div>
     </section>
-    -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carritoModalLabel">Productos en el carrito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenido del modal, aquí puedes mostrar los productos agregados -->
+                </div>
+                <div id="productosAgregados"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a href="{{ url_for('pago') }}" class="btn btn-primary">Pagar</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

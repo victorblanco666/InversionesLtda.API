@@ -39,11 +39,10 @@ def vista():
     except requests.exceptions.RequestException as e:
         return "Error de conexión: " + str(e)
 
-
-@app.route('/pagar')
-def pagar():
-    # Renderizar la página de pago
-    return render_template('pagar.html')
+@app.route('/pago')
+def pago():
+    # Aquí puedes pasar cualquier dato necesario a la plantilla pago.html
+    return render_template('pago.html')
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)

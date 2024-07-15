@@ -50,14 +50,24 @@ document.addEventListener('DOMContentLoaded', function() {
         modalBody.appendChild(totalElemento);
     }
 
+    
+
     // Mostrar productos en carrito al cargar la página
     mostrarProductosEnCarrito();
-    actualizarContadorCarrito();
+    actualizarContadorCarrito();   
+
+     const botonPagar = document.querySelector('.btn-pagar');
+
+    if (botonPagar) {
+        botonPagar.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = "{{ url_for('pago') }}";
+        });
+    }
 
 
-    
-    
-  
+
+
 });
 
 
