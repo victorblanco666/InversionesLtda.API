@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const botonesAgregar = document.querySelectorAll('.btn-agregar');
     let productosEnCarrito = JSON.parse(localStorage.getItem('productosEnCarrito')) || {};
 
+    // Función para formatear números en miles de pesos chilenos (CLP)
+    function formatearCLP(numero) {
+        return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0 }).format(numero);
+    }
+
     botonesAgregar.forEach(boton => {
         boton.addEventListener('click', function(e) {
             e.preventDefault();
@@ -40,15 +45,16 @@ document.addEventListener('DOMContentLoaded', function() {
             totalGeneral += totalProducto;
 
             const productoElemento = document.createElement('p');
-            productoElemento.textContent = `Producto: ${producto.nombre}, Cantidad: ${producto.cantidad}, Precio: $${producto.precio.toFixed(2)}`;
+            productoElemento.textContent = `Producto: ${producto.nombre}, Cantidad: ${producto.cantidad}, Precio: ${formatearCLP(producto.precio)}`;
             modalBody.appendChild(productoElemento);
         }
 
         const totalElemento = document.createElement('p');
         totalElemento.className = 'fw-bold mt-3';
-        totalElemento.textContent = `Total General: $${totalGeneral.toFixed(2)}`;
+        totalElemento.textContent = `Total General: ${formatearCLP(totalGeneral)}`;
         modalBody.appendChild(totalElemento);
     }
+
     // Mostrar productos en carrito al cargar la página
     mostrarProductosEnCarrito();
     actualizarContadorCarrito();   
@@ -61,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
 
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);

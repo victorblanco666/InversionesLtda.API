@@ -1,11 +1,11 @@
-from flask import Flask, render_template, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import requests
 import urllib3
 
 app = Flask(__name__, static_folder="Frontend/Static", template_folder='Frontend')
 
 # Deshabilitar advertencias de SSL para urllib3 (solo para desarrollo)
-#urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Endpoint para obtener clientes y productos desde la API en C#
 @app.route('/')
@@ -44,11 +44,18 @@ def pago():
     # Aquí puedes pasar cualquier dato necesario a la plantilla pago.html
     return render_template('pago.html')
 
+# Nuevo endpoint para recibir los datos del cliente desde el formulario y reenviarlos a la API de C#
+@app.route('/api/enviar_cliente', methods=['POST'])
+def enviar_cliente():
+    cliente = request.json
+    url_api_csharp = 'https://localhost:5000/api/cliente'
 
-@app.route('/boleta')
-def boleta():
-    # Aquí puedes pasar cualquier dato necesario a la plantilla pago.html
-    return render_template('boleta.html')
+    try:
+        response = requests.post(url_api_csharp, json=cliente, verify=False)  # Deshabilitar verificación SSL (solo para desarrollo)
+        response.raise_for_status()
+        return jsonify(response.json())
+    except requests.exceptions.RequestException as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)

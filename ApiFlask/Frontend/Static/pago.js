@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Función para formatear números en miles de pesos chilenos (CLP)
+    function formatearCLP(numero) {
+        return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0 }).format(numero);
+    }
+
     // Función para obtener y mostrar el detalle de la compra
     function mostrarDetalleCompra() {
         // Obtener el elemento donde se mostrará el detalle de la compra
@@ -21,14 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
             totalGeneral += totalProducto;
 
             const productoElemento = document.createElement('p');
-            productoElemento.textContent = `Producto: ${producto.nombre}, Cantidad: ${producto.cantidad}, Precio: $${producto.precio.toFixed(2)}`;
+            productoElemento.textContent = `Producto: ${producto.nombre}, Cantidad: ${producto.cantidad}, Precio: ${formatearCLP(producto.precio)}`;
             detalleCompraElemento.appendChild(productoElemento);
         }
 
         // Mostrar el total general
         const totalElemento = document.createElement('p');
         totalElemento.className = 'fw-bold mt-3';
-        totalElemento.textContent = `Total General: $${totalGeneral.toFixed(2)}`;
+        totalElemento.textContent = `Total General: ${formatearCLP(totalGeneral)}`;
         detalleCompraElemento.appendChild(totalElemento);
     }
 
@@ -43,13 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const telefonoCliente = document.getElementById('telefonoCliente').value;
         const montoPagar = document.getElementById('montoPagar').value;
 
-        // Validación básica de campos
         if (!nombreCliente || !emailCliente || !telefonoCliente || !montoPagar) {
             alert('Por favor complete todos los campos.');
             return;
         }
 
-        // Ejemplo de cómo podrías usar estos datos (puedes adaptarlo según tu lógica)
         const datosCliente = {
             nombre: nombreCliente,
             email: emailCliente,
@@ -57,23 +60,30 @@ document.addEventListener('DOMContentLoaded', function() {
             monto: parseFloat(montoPagar)
         };
 
-        // Ejemplo de cómo podrías enviar estos datos a través de una petición AJAX, por ejemplo
         enviarDatosCompra(datosCliente);
     });
 
     // Función para enviar los datos del cliente y continuar con el proceso de compra
     function enviarDatosCompra(datosCliente) {
-        // Aquí podrías implementar tu lógica para enviar los datos al servidor
-        // Por ejemplo, podrías usar fetch() o axios para enviar una solicitud POST
-        // y procesar la respuesta del servidor según sea necesario.
-        console.log('Datos del cliente:', datosCliente);
-
-        // Simulación de una petición AJAX exitosa
-        setTimeout(() => {
-            alert('Compra confirmada. Datos del cliente enviados.');
-
-            // Después de confirmar la compra, activar la impresión o guardado como PDF
-            window.print();
-        }, 1000); // Simular una demora de 1 segundo para la respuesta del servidor
+        fetch('/api/enviar_cliente', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datosCliente)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert('Error al enviar los datos del cliente.');
+            } else {
+                alert('Compra confirmada. Datos del cliente enviados.');
+                window.print();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al enviar los datos del cliente.');
+        });
     }
 });
