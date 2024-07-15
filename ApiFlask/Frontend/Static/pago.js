@@ -65,6 +65,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para enviar los datos del cliente y continuar con el proceso de compra
     function enviarDatosCompra(datosCliente) {
+        // Obtener los productos en el carrito desde localStorage
+        const productosEnCarrito = JSON.parse(localStorage.getItem('productosEnCarrito')) || {};
+    
+        // Verificar si hay productos en el carrito
+        if (Object.keys(productosEnCarrito).length === 0) {
+            alert('No hay productos en el carrito.');
+            window.location.reload();
+            return;
+        }
+        
+    
         fetch('/api/enviar_cliente', {
             method: 'POST',
             headers: {
@@ -72,31 +83,30 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify(datosCliente)
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert('Error al enviar los datos del cliente.');
-                } else {
-                    alert('Compra confirmada. Datos del cliente enviados.');
-                    window.print();
-
-                    document.getElementById('nombreCliente').value = '';
-                    document.getElementById('emailCliente').value = '';
-                    document.getElementById('telefonoCliente').value = '';
-                    document.getElementById('montoPagar').value = '';
-                    localStorage.removeItem('productosEnCarrito');
-
-
-
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
                 alert('Error al enviar los datos del cliente.');
-            });
-
+            } else {
+                alert('Compra confirmada. Datos del cliente enviados.');
+                window.print();
+    
+                document.getElementById('nombreCliente').value = '';
+                document.getElementById('emailCliente').value = '';
+                document.getElementById('telefonoCliente').value = '';
+                document.getElementById('montoPagar').value = '';
+                localStorage.removeItem('productosEnCarrito');
+    
+                // Recargar la página para reflejar los cambios en index.html
+                window.location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al enviar los datos del cliente.');
+        });
     }
-
+    
 
 
 
