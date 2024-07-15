@@ -42,11 +42,15 @@
 
                 <div class="nav-item">
                     <a class="nav-link" href="#" id="carrito" data-bs-toggle="modal" data-bs-target="#carritoModal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-cart" viewBox="0 0 16 16">
+                            <path
+                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
                         </svg>
                         <span class="badge bg-primary rounded-pill" id="contador-carrito">0</span>
-                      </a>
+                    </a>
+
+
 
                     <!-- Modal -->
                     <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel"
@@ -60,17 +64,20 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- Contenido del modal, aquí puedes mostrar los productos agregados -->
-                                     
                                 </div>
                                 <div id="productosAgregados"></div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary">Pagar</button>
+                                    <a href="{{ url_for('pagar') }}" class="btn btn-primary">Pagar</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
                 </div>
 
 
@@ -92,11 +99,11 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../Static/Ferremas.png" class="d-block w-100" alt="Ferremas">
+                <img src="../Static/Ferreteria2.jpg" class="d-block w-100" alt="Ferremas">
 
             </div>
             <div class="carousel-item">
-                <img src="../Static/Ferremas.png" class="d-block w-100" alt="../Frontend/Ferremas.png">
+                <img src="../Static/Ferreteria.jpg" class="d-block w-100" alt="../Frontend/Ferremas.png">
             </div>
             <div class="carousel-item">
                 <img src="../Static/Ferremas.png" class="d-block w-100" alt="../Frontend/Ferremas.png">
@@ -120,9 +127,8 @@
             <h3 class="display-6">Quiénes Somos</h3>
             <div class="row mt-5">
                 <div class="col-lg-6 mx-auto">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae error nam dignissimos assumenda
-                        sunt, vel veritatis laborum fugit repellat quam? A voluptates fuga delectus quibusdam. Minus
-                        nesciunt officia magni facilis.</p>
+                    <p id="slogan">“Ferretería Ferremas: Innovación, Calidad y Servicio para Construir un Futuro Mejor.”
+                    </p>
                 </div>
             </div>
         </div>
@@ -136,7 +142,7 @@
                 {% for producto in productos %}
                 <div class="col-sm-12 col-md-4 col-lg-4 py-3">
                     <div class="card shadow">
-                        <img src="../Static/Ferremas.png" class="card-img-top" alt="{{ producto.descripcion }}">
+                        <img src="../Static/CierraC.jpg" class="card-img-top" alt="{{ producto.descripcion }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ producto.nombre }}</h5>
                             <p class="card-text">{{ producto.descripcion }}</p>
@@ -153,6 +159,8 @@
 
 
 
+
+
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2024 Ferretería Ferremas. Todos los derechos reservados.</p>
     </footer>
@@ -162,42 +170,6 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 
-
-    <!--
-    <h1>Listado de Clientes</h1>
-
-    <ul>
-        {% for cliente in clientes %}
-        <li>
-            <strong>ID:</strong> {{ cliente.id }} <br>
-            <strong>Nombre:</strong> {{ cliente.nombre }} <br>
-            <strong>Email:</strong> {{ cliente.email }} <br>
-            <strong>Teléfono:</strong> {{ cliente.telefono }}
-        </li>
-        <br>
-        {% endfor %}
-    </ul>
-
-    <h1>Lista de Productos</h1>
-    <ul>
-        {% for producto in productos %}
-        <li>
-            <strong>Id:</strong> {{ producto.id }} <br>
-            <strong>Descripcion:</strong> {{ producto.descripcion }} <br>
-            <strong>Precio:</strong> {{ producto.precio }} <br>
-            <strong>Stock:</strong> {{ producto.stock }}
-        </li>
-        {% endfor %}
-    </ul>
-
-
-    <h1>Lista de Clientes</h1>
-    <ul>
-        {% for cliente in clientes %}
-        <li>{{ cliente.nombre }} - Email: {{ cliente.email }}</li>
-        {% endfor %}
-    </ul>-->
-    
 </body>
 
 </html>

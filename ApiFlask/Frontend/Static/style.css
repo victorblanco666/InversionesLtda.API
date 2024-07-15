@@ -4,6 +4,11 @@
     margin-bottom: 45px;
 }
 
+#slogan{
+    font-size: 30px;
+    margin-bottom: 70px;
+}
+
 /* Estilos generales */
 body {
     font-family: 'Arial', sans-serif;
@@ -78,6 +83,8 @@ body {
     font-size: 0.9rem;
     color: #6c757d;
 }
+
+
 
 .btn-primary {
     background-color: #007bff;

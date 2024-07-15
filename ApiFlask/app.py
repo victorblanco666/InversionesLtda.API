@@ -1,8 +1,8 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, redirect, url_for
 import requests
 import urllib3
 
-app = Flask(__name__,static_folder="Frontend/Static" , template_folder='Frontend')
+app = Flask(__name__, static_folder="Frontend/Static", template_folder='Frontend')
 
 # Deshabilitar advertencias de SSL para urllib3 (solo para desarrollo)
 #urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -38,9 +38,11 @@ def vista():
 
     except requests.exceptions.RequestException as e:
         return "Error de conexión: " + str(e)
-    
-def index():
-    return render_template
+
+@app.route('/pagar')
+def pagar():
+    # Renderizar la página de pago
+    return render_template('pagar.html')
 
 if __name__ == '__main__':
-    app.run(port=5001 , debug=True)
+    app.run(port=5001, debug=True)
