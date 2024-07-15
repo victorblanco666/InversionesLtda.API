@@ -59,21 +59,25 @@ document.addEventListener('DOMContentLoaded', function() {
     mostrarProductosEnCarrito();
     actualizarContadorCarrito();   
 
+    const btnVaciarCarrito = document.getElementById('btnVaciarCarrito');
     const botonPagar = document.querySelector('.btn-pagar');
     if (botonPagar) {
         botonPagar.addEventListener('click', function(e) {
             e.preventDefault();
             window.location.href = "{{ url_for('pago') }}";
         });
-    }
-});
+    } else {
+        btnVaciarCarrito.addEventListener('click', function() {
+        localStorage.removeItem('productosEnCarrito');
+        productosEnCarrito = {};
+        actualizarContadorCarrito();
+        mostrarProductosEnCarrito();
+    });
 
-function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-        window.scrollTo({
-            top: section.offsetTop,
-            behavior: 'smooth'
-        });
     }
-}
+
+
+    // Vaciar carrito al hacer clic en "Vaciar Carrito"
+    
+    
+});
