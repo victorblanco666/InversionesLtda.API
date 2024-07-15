@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             detalleCompraElemento.innerHTML = '<p>No hay productos en el carrito.</p>';
             return;
         }
+
         // Crear elementos HTML para mostrar el detalle de cada producto
         let totalGeneral = 0;
         for (const productoId in productosEnCarrito) {
@@ -42,7 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const telefonoCliente = document.getElementById('telefonoCliente').value;
         const montoPagar = document.getElementById('montoPagar').value;
 
-        // Aquí podrías validar los campos antes de continuar
+        // Validación básica de campos
+        if (!nombreCliente || !emailCliente || !telefonoCliente || !montoPagar) {
+            alert('Por favor complete todos los campos.');
+            return;
+        }
 
         // Ejemplo de cómo podrías usar estos datos (puedes adaptarlo según tu lógica)
         const datosCliente = {
@@ -55,14 +60,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // Ejemplo de cómo podrías enviar estos datos a través de una petición AJAX, por ejemplo
         enviarDatosCompra(datosCliente);
     });
+
     // Función para enviar los datos del cliente y continuar con el proceso de compra
     function enviarDatosCompra(datosCliente) {
         // Aquí podrías implementar tu lógica para enviar los datos al servidor
         // Por ejemplo, podrías usar fetch() o axios para enviar una solicitud POST
         // y procesar la respuesta del servidor según sea necesario.
         console.log('Datos del cliente:', datosCliente);
-        alert('Compra confirmada. Datos del cliente enviados.');
+
+        // Simulación de una petición AJAX exitosa
+        setTimeout(() => {
+            alert('Compra confirmada. Datos del cliente enviados.');
+
+            // Después de confirmar la compra, activar la impresión o guardado como PDF
+            window.print();
+        }, 1000); // Simular una demora de 1 segundo para la respuesta del servidor
     }
 });
-
-
