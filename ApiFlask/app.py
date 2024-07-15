@@ -39,6 +39,7 @@ def vista():
     except requests.exceptions.RequestException as e:
         return "Error de conexión: " + str(e)
 
+
 @app.route('/pagar')
 def pagar():
     # Renderizar la página de pago

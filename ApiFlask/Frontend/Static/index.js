@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     const botonesAgregar = document.querySelectorAll('.btn-agregar');
-    const productosEnCarrito = JSON.parse(localStorage.getItem('productosEnCarrito')) || {};
+    let productosEnCarrito = JSON.parse(localStorage.getItem('productosEnCarrito')) || {};
 
     botonesAgregar.forEach(boton => {
         boton.addEventListener('click', function(e) {
             e.preventDefault();
             const productoId = this.dataset.productoId;
             const productoNombre = this.parentNode.querySelector('.card-title').textContent;
-            const productoPrecio = this.parentNode.querySelector('.card-precio').textContent;
+            const productoPrecioText = this.parentNode.querySelector('.card-precio').textContent;
+            const productoPrecio = parseFloat(productoPrecioText.replace('Precio: $', '').trim());
 
             if (productosEnCarrito[productoId]) {
                 productosEnCarrito[productoId].cantidad += 1;
@@ -30,25 +31,35 @@ document.addEventListener('DOMContentLoaded', function() {
     function mostrarProductosEnCarrito() {
         const modalBody = document.querySelector('.modal-body');
         modalBody.innerHTML = '';
+
+        let totalGeneral = 0;
+
         for (const productoId in productosEnCarrito) {
             const producto = productosEnCarrito[productoId];
+            const totalProducto = producto.cantidad * producto.precio;
+            totalGeneral += totalProducto;
+
             const productoElemento = document.createElement('p');
-            productoElemento.textContent = `Producto: ${producto.nombre}, ${producto.precio}, Cantidad: ${producto.cantidad}`;
+            productoElemento.textContent = `Producto: ${producto.nombre}, Cantidad: ${producto.cantidad}, Precio: $${producto.precio.toFixed(2)}`;
             modalBody.appendChild(productoElemento);
         }
+
+        const totalElemento = document.createElement('p');
+        totalElemento.className = 'fw-bold mt-3';
+        totalElemento.textContent = `Total General: $${totalGeneral.toFixed(2)}`;
+        modalBody.appendChild(totalElemento);
     }
 
-    // Mostrar los productos en la página de pago
-    const resumenCarrito = document.getElementById('resumen-carrito');
-    if (resumenCarrito) {
-        for (const productoId in productosEnCarrito) {
-            const producto = productosEnCarrito[productoId];
-            const productoElemento = document.createElement('p');
-            productoElemento.textContent = `Producto: ${producto.nombre}, ${producto.precio}, Cantidad: ${producto.cantidad}`;
-            resumenCarrito.appendChild(productoElemento);
-        }
-    }
+    // Mostrar productos en carrito al cargar la página
+    mostrarProductosEnCarrito();
+    actualizarContadorCarrito();
+
+
+    
+    
+  
 });
+
 
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
