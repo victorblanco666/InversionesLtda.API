@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
             detalleCompraElemento.innerHTML = '<p>No hay productos en el carrito.</p>';
             return;
         }
-
         // Crear elementos HTML para mostrar el detalle de cada producto
         let totalGeneral = 0;
         for (const productoId in productosEnCarrito) {
@@ -34,4 +33,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Llamar a la función para mostrar el detalle de la compra al cargar la página
     mostrarDetalleCompra();
+
+    const btnConfirmarPago = document.getElementById('btnConfirmarPago');
+
+    btnConfirmarPago.addEventListener('click', function() {
+        const nombreCliente = document.getElementById('nombreCliente').value;
+        const emailCliente = document.getElementById('emailCliente').value;
+        const telefonoCliente = document.getElementById('telefonoCliente').value;
+        const montoPagar = document.getElementById('montoPagar').value;
+
+        // Aquí podrías validar los campos antes de continuar
+
+        // Ejemplo de cómo podrías usar estos datos (puedes adaptarlo según tu lógica)
+        const datosCliente = {
+            nombre: nombreCliente,
+            email: emailCliente,
+            telefono: telefonoCliente,
+            monto: parseFloat(montoPagar)
+        };
+
+        // Ejemplo de cómo podrías enviar estos datos a través de una petición AJAX, por ejemplo
+        enviarDatosCompra(datosCliente);
+    });
+    // Función para enviar los datos del cliente y continuar con el proceso de compra
+    function enviarDatosCompra(datosCliente) {
+        // Aquí podrías implementar tu lógica para enviar los datos al servidor
+        // Por ejemplo, podrías usar fetch() o axios para enviar una solicitud POST
+        // y procesar la respuesta del servidor según sea necesario.
+        console.log('Datos del cliente:', datosCliente);
+        alert('Compra confirmada. Datos del cliente enviados.');
+    }
 });
+
+

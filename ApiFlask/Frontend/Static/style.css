@@ -10,7 +10,12 @@
 }
 
 #final{
-    margin-top: 19.5rem;
+    margin-top: 13.6rem;
+}
+
+#compra{
+    justify-content: center;
+    width: 30rem;
 }
 /* Estilos generales */
 body {

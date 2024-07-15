@@ -49,25 +49,17 @@ document.addEventListener('DOMContentLoaded', function() {
         totalElemento.textContent = `Total General: $${totalGeneral.toFixed(2)}`;
         modalBody.appendChild(totalElemento);
     }
-
-    
-
     // Mostrar productos en carrito al cargar la página
     mostrarProductosEnCarrito();
     actualizarContadorCarrito();   
 
-     const botonPagar = document.querySelector('.btn-pagar');
-
+    const botonPagar = document.querySelector('.btn-pagar');
     if (botonPagar) {
         botonPagar.addEventListener('click', function(e) {
             e.preventDefault();
             window.location.href = "{{ url_for('pago') }}";
         });
     }
-
-
-
-
 });
 
 

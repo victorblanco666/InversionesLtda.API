@@ -44,5 +44,11 @@ def pago():
     # Aquí puedes pasar cualquier dato necesario a la plantilla pago.html
     return render_template('pago.html')
 
+
+@app.route('/boleta')
+def boleta():
+    # Aquí puedes pasar cualquier dato necesario a la plantilla pago.html
+    return render_template('boleta.html')
+
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
