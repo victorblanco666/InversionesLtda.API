@@ -61,14 +61,14 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../Static/Ferreteria2.jpg" class="d-block w-100" alt="Ferremas">
+                <img src="{{ url_for('static', filename='img/iStock-1345964041.jpg') }}" class="d-block w-100" alt="Ferremas">
 
             </div>
             <div class="carousel-item">
-                <img src="../Static/Ferreteria.jpg" class="d-block w-100" alt="../Frontend/Ferremas.png">
+                <img src="{{ url_for('static', filename='img/iStock-1345964041.jpg') }}" class="d-block w-100" alt="../Frontend/Ferremas.png">
             </div>
             <div class="carousel-item">
-                <img src="../Static/Ferremas.png" class="d-block w-100" alt="../Frontend/Ferremas.png">
+                <img src="{{ url_for('static', filename='img/iStock-1345964041.jpg') }}" class="d-block w-100" alt="../Frontend/Ferremas.png">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -107,7 +107,7 @@
                 {% for producto in productos %}
                 <div class="col-sm-12 col-md-4 col-lg-4 py-3">
                     <div class="card shadow">
-                        <img src="../Static/CierraC.jpg" class="card-img-top" alt="{{ producto.descripcion }}">
+                        <img src="{{ url_for('static', filename='img/CierraC.jpg') }}" class="card-img-top" alt="{{ producto.descripcion }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ producto.nombre }}</h5>
                             <p class="card-text">{{ producto.descripcion }}</p>
@@ -149,7 +149,7 @@
         <p>&copy; 2024 Ferretería Ferremas. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
