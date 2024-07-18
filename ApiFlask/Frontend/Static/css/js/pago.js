@@ -76,35 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         
     
-        fetch('/api/enviar_cliente', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(datosCliente)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert('Error al enviar los datos del cliente.');
-            } else {
-                alert('Compra confirmada. Datos del cliente enviados.');
-                window.print();
-    
-                document.getElementById('nombreCliente').value = '';
-                document.getElementById('emailCliente').value = '';
-                document.getElementById('telefonoCliente').value = '';
-                document.getElementById('montoPagar').value = '';
-                localStorage.removeItem('productosEnCarrito');
-    
-                // Recargar la página para reflejar los cambios en index.html
-                window.location.reload();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al enviar los datos del cliente.');
-        });
+        
     }
     
 

@@ -109,7 +109,7 @@
                     <div class="card shadow">
                         <img src="{{ url_for('static', filename='img/CierraC.jpg') }}" class="card-img-top" alt="{{ producto.descripcion }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ producto.nombre }}</h5>
+                            <h5 class="card-title">{{ producto.nombreProducto }}</h5>
                             <p class="card-text">{{ producto.descripcion }}</p>
                             <p class="card-text card-precio">Precio: ${{ producto.precio }}</p>
                             <a href="#" class="btn btn-primary btn-agregar" data-producto-id="{{ producto.id }}">Añadir

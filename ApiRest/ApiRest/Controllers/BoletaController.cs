@@ -76,10 +76,35 @@ namespace ApiRest.Controllers
         // POST: api/Boletas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Boleta>> PostBoleta(Boleta boleta)
+        public async Task<ActionResult<Boleta>> PostBoleta(BoletaCreateDTO boletaDTO)
         {
+            // Verificar si el cliente existe en el contexto
+            var cliente = await _context.Cliente.FindAsync(boletaDTO.ClienteId);
+
+            if (cliente == null)
+            {
+                // Si el cliente no existe, crear uno nuevo con los datos proporcionados
+                cliente = new Cliente
+                {
+                    NombreCliente = boletaDTO.Cliente.NombreCliente,
+                    Email = boletaDTO.Cliente.Email,
+                    Telefono = boletaDTO.Cliente.Telefono
+                };
+
+                _context.Cliente.Add(cliente);
+                await _context.SaveChangesAsync(); // Guardar el cliente nuevo para obtener su Id
+            }
+
+            // Crear la boleta
+            var boleta = new Boleta
+            {
+                Total = boletaDTO.Total,
+                ClienteId = cliente.Id,
+                ProductoId = boletaDTO.ProductoId
+            };
+
             _context.Boleta.Add(boleta);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); // Guardar la boleta
 
             return CreatedAtAction("GetBoleta", new { id = boleta.Id }, boleta);
         }
