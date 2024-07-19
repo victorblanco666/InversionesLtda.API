@@ -91,7 +91,7 @@
             <h3 class="display-6">Quiénes Somos</h3>
             <div class="row mt-5">
                 <div class="col-lg-6 mx-auto">
-                    <p id="slogan">“Ferretería Ferremas: Innovación, Calidad y Servicio para Construir un Futuro Mejor.”
+                    <p id="slogan">“Ferretería Ferremas: Innovación, Calidad y Servicio para Construir Tus Seños.”
                     </p>
                 </div>
             </div>
@@ -103,18 +103,19 @@
 
     <!-- Productos -->
     <section>
-        <div class="container text-center mt-4" id="tarjeta">
-            <h3 class="display-7">Productos</h3> <!-- Usar display-7 para un título más pequeño -->
-            <div class="row mt-4" id="crd"> <!-- Reduce el margen superior -->
+        <div class="container text-center mt-5" id="tarjeta">
+            <h3 class="display-6">Productos</h3>
+            <div class="row mt-5" id="crd">
                 {% for producto in productos %}
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 py-2"> <!-- Ajusta el ancho y padding -->
-                    <div class="card shadow-sm"> <!-- Usa shadow-sm para una sombra más ligera -->
+                <div class="col-sm-12 col-md-4 col-lg-4 py-3">
+                    <div class="card shadow">
                         <img src="{{ url_for('static', filename='img/CierraC.jpg') }}" class="card-img-top" alt="{{ producto.descripcion }}">
                         <div class="card-body">
-                            <h5 class="card-title fs-6">{{ producto.nombreProducto }}</h5> <!-- Reduce el tamaño de fuente -->
-                            <p class="card-text fs-6">{{ producto.descripcion }}</p> <!-- Reduce el tamaño de fuente -->
-                            <p class="card-text fs-6">Precio: ${{ producto.precio }}</p> <!-- Reduce el tamaño de fuente -->
-                            <a href="#" class="btn btn-primary btn-sm" data-producto-id="{{ producto.id }}">Añadir al carrito</a> <!-- Botón más pequeño -->
+                            <h5 class="card-title">{{ producto.nombreProducto }}</h5>
+                            <p class="card-text">{{ producto.descripcion }}</p>
+                            <p class="card-text card-precio">Precio: ${{ producto.precio }}</p>
+                            <a href="#" class="btn btn-primary btn-agregar" data-producto-id="{{ producto.id }}">Añadir
+                                al carrito</a>
                         </div>
                     </div>
                 </div>
