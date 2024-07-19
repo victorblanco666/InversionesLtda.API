@@ -10,6 +10,8 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
+
+
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -101,19 +103,18 @@
 
     <!-- Productos -->
     <section>
-        <div class="container text-center mt-5" id="tarjeta">
-            <h3 class="display-6">Productos</h3>
-            <div class="row mt-5" id="crd">
+        <div class="container text-center mt-4" id="tarjeta">
+            <h3 class="display-7">Productos</h3> <!-- Usar display-7 para un título más pequeño -->
+            <div class="row mt-4" id="crd"> <!-- Reduce el margen superior -->
                 {% for producto in productos %}
-                <div class="col-sm-12 col-md-4 col-lg-4 py-3">
-                    <div class="card shadow">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 py-2"> <!-- Ajusta el ancho y padding -->
+                    <div class="card shadow-sm"> <!-- Usa shadow-sm para una sombra más ligera -->
                         <img src="{{ url_for('static', filename='img/CierraC.jpg') }}" class="card-img-top" alt="{{ producto.descripcion }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ producto.nombreProducto }}</h5>
-                            <p class="card-text">{{ producto.descripcion }}</p>
-                            <p class="card-text card-precio">Precio: ${{ producto.precio }}</p>
-                            <a href="#" class="btn btn-primary btn-agregar" data-producto-id="{{ producto.id }}">Añadir
-                                al carrito</a>
+                            <h5 class="card-title fs-6">{{ producto.nombreProducto }}</h5> <!-- Reduce el tamaño de fuente -->
+                            <p class="card-text fs-6">{{ producto.descripcion }}</p> <!-- Reduce el tamaño de fuente -->
+                            <p class="card-text fs-6">Precio: ${{ producto.precio }}</p> <!-- Reduce el tamaño de fuente -->
+                            <a href="#" class="btn btn-primary btn-sm" data-producto-id="{{ producto.id }}">Añadir al carrito</a> <!-- Botón más pequeño -->
                         </div>
                     </div>
                 </div>
@@ -131,7 +132,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Contenido del modal, aquí puedes mostrar los productos agregados -->
+                <!-- Contenido del modal, se muestran los productos agregados -->
             </div>
             <div id="productosAgregados"></div>
             <div class="modal-footer">
@@ -141,10 +142,6 @@
         </div>
     </div>
 </div>
-
-
-
-
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2024 Ferretería Ferremas. Todos los derechos reservados.</p>
     </footer>
