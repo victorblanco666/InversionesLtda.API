@@ -1040,3 +1040,11 @@ C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug
 C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\System.Windows.Extensions.dll
+C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\victo\OneDrive\Escritorio\InversionesLtda.API\ApiRest\ApiRest\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
