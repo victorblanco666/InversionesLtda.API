@@ -1,11 +1,16 @@
 using ApiRest.Context;
+using ApiRest.Services;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddScoped<TransbankService>();
+
 //Crear variable para la conexion
-var connectionString = builder.Configuration.GetConnectionString("Connection2");
+var connectionString = builder.Configuration.GetConnectionString("Connection");
 //Registrar servicio
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString)); 
 
