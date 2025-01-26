@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiRest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250126175200_Init")]
-    partial class Init
+    [Migration("20250126205430_In")]
+    partial class In
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,6 +93,27 @@ namespace ApiRest.Migrations
                     b.ToTable("Comuna");
                 });
 
+            modelBuilder.Entity("ApiRest.Models.Producto", b =>
+                {
+                    b.Property<int>("CodProducto")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreProducto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Precio")
+                        .HasColumnType("int");
+
+                    b.HasKey("CodProducto");
+
+                    b.ToTable("Producto");
+                });
+
             modelBuilder.Entity("ApiRest.Models.Provincia", b =>
                 {
                     b.Property<int>("CodRegion")
@@ -122,6 +143,58 @@ namespace ApiRest.Migrations
                     b.HasKey("CodRegion");
 
                     b.ToTable("Region");
+                });
+
+            modelBuilder.Entity("ApiRest.Models.Stock", b =>
+                {
+                    b.Property<int>("CodStock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodSucursal")
+                        .HasColumnType("int");
+
+                    b.HasKey("CodStock");
+
+                    b.HasIndex("CodProducto");
+
+                    b.HasIndex("CodSucursal");
+
+                    b.ToTable("Stock");
+                });
+
+            modelBuilder.Entity("ApiRest.Models.Sucursal", b =>
+                {
+                    b.Property<int>("CodSucursal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodComuna")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodProvincia")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodRegion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CodSucursal");
+
+                    b.HasIndex("CodRegion", "CodProvincia", "CodComuna");
+
+                    b.ToTable("Sucursal");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Cliente", b =>
@@ -173,9 +246,46 @@ namespace ApiRest.Migrations
                     b.Navigation("Region");
                 });
 
+            modelBuilder.Entity("ApiRest.Models.Stock", b =>
+                {
+                    b.HasOne("ApiRest.Models.Producto", "Producto")
+                        .WithMany("Stock")
+                        .HasForeignKey("CodProducto")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ApiRest.Models.Sucursal", "Sucursal")
+                        .WithMany("Stock")
+                        .HasForeignKey("CodSucursal")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Producto");
+
+                    b.Navigation("Sucursal");
+                });
+
+            modelBuilder.Entity("ApiRest.Models.Sucursal", b =>
+                {
+                    b.HasOne("ApiRest.Models.Comuna", "Comuna")
+                        .WithMany("Sucursal")
+                        .HasForeignKey("CodRegion", "CodProvincia", "CodComuna")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Comuna");
+                });
+
             modelBuilder.Entity("ApiRest.Models.Comuna", b =>
                 {
                     b.Navigation("Cliente");
+
+                    b.Navigation("Sucursal");
+                });
+
+            modelBuilder.Entity("ApiRest.Models.Producto", b =>
+                {
+                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Provincia", b =>
@@ -190,6 +300,11 @@ namespace ApiRest.Migrations
                     b.Navigation("Cliente");
 
                     b.Navigation("Provincia");
+                });
+
+            modelBuilder.Entity("ApiRest.Models.Sucursal", b =>
+                {
+                    b.Navigation("Stock");
                 });
 #pragma warning restore 612, 618
         }

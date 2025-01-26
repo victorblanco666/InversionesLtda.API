@@ -72,6 +72,45 @@ namespace ApiRest.Context
                 .HasForeignKey(cl => new { cl.CodRegion, cl.CodProvincia, cl.CodComuna })
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // Configuración de Sucursal
+            modelBuilder.Entity<Sucursal>()
+                .Property(s => s.CodSucursal)
+                .ValueGeneratedNever(); // Clave primaria manual
+            modelBuilder.Entity<Sucursal>()
+                .HasKey(s => s.CodSucursal);
+
+            modelBuilder.Entity<Sucursal>()
+                .HasOne(s => s.Comuna)
+                .WithMany(c => c.Sucursal) // Agregar ICollection<Sucursal> en Comuna
+                .HasForeignKey(s => new { s.CodRegion, s.CodProvincia, s.CodComuna })
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuración de Producto
+            modelBuilder.Entity<Producto>()
+                .Property(p => p.CodProducto)
+                .ValueGeneratedNever(); // Clave primaria manual
+            modelBuilder.Entity<Producto>()
+                .HasKey(p => p.CodProducto);
+
+            // Configuración de Stock
+            modelBuilder.Entity<Stock>()
+                .Property(st => st.CodStock)
+                .ValueGeneratedNever(); // Clave primaria manual
+            modelBuilder.Entity<Stock>()
+                .HasKey(st => st.CodStock);
+
+            modelBuilder.Entity<Stock>()
+                .HasOne(st => st.Producto)
+                .WithMany(p => p.Stock)
+                .HasForeignKey(st => st.CodProducto)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Stock>()
+                .HasOne(st => st.Sucursal)
+                .WithMany(s => s.Stock)
+                .HasForeignKey(st => st.CodSucursal)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(modelBuilder);
         }
     }
