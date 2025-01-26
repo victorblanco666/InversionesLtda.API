@@ -3,41 +3,167 @@
   "WorkspaceRootPath": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126153135_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126153135_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\models\\regiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\models\\regiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\models\\region.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\models\\region.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\models\\provinciadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\models\\provinciadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\models\\provincia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\models\\provincia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\models\\comuna.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\models\\comuna.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\controllers\\regioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\controllers\\regioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\models\\comunadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\models\\comunadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\controllers\\comunacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\controllers\\comunacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\controllers\\provinciacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\controllers\\provinciacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126085047_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126085047_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126084402_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126084402_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126082736_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126082736_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126080633_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126080633_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\controllers\\transbankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\controllers\\transbankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126071856_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126071856_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126063533_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126063533_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126062623_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126062623_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126053430_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126053430_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126053131_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126053131_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126044350_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126044350_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126044257_In.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126044257_In.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126044222_Ini.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126044222_Ini.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126043658_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126043658_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126041647_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126041647_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126041525_In.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126041525_In.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126015338_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126015338_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126014942_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126014942_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126014738_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126014738_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126014259_Initttoo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250126014259_Initttoo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223859_Initttooooo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250125223859_Initttooooo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223749_Initttooooo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250125223749_Initttooooo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223453_Inittt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250125223453_Inittt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223240_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20250125223240_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\apirest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\apirest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\inversionesltda.api\\apirest\\apirest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|solutionrelative:apirest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
-      "VerticalTabListWidth": 444,
+      "VerticalTabListWidth": 215,
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AppDbContextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\AppDbContextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "ApiRest\\Migrations\\AppDbContextModelSnapshot.cs",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\AppDbContextModelSnapshot.cs",
-              "RelativeToolTip": "ApiRest\\Migrations\\AppDbContextModelSnapshot.cs",
-              "ViewState": "AgIAAF4AAAAAAAAAAAAQwBAAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T18:08:39.028Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -49,28 +175,495 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "20250126153135_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126153135_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126153135_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126153135_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126153135_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T15:31:35.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RegionController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\RegionController.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Controllers\\RegionController.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\RegionController.cs",
+              "RelativeToolTip": "ApiRest\\Controllers\\RegionController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwC8AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:52:01.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ComunaDto.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\ComunaDto.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Models\\ComunaDto.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\ComunaDto.cs",
+              "RelativeToolTip": "ApiRest\\Models\\ComunaDto.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:49:44.893Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProvinciaDto.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\ProvinciaDto.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Models\\ProvinciaDto.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\ProvinciaDto.cs",
+              "RelativeToolTip": "ApiRest\\Models\\ProvinciaDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:49:11.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RegionDto.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\RegionDto.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Models\\RegionDto.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\RegionDto.cs",
+              "RelativeToolTip": "ApiRest\\Models\\RegionDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:48:38.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Comuna.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\Comuna.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Models\\Comuna.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\Comuna.cs",
+              "RelativeToolTip": "ApiRest\\Models\\Comuna.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAQwAsAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T22:23:37.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Context\\AppDbContext.cs",
               "RelativeDocumentMoniker": "ApiRest\\Context\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Context\\AppDbContext.cs",
               "RelativeToolTip": "ApiRest\\Context\\AppDbContext.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAQwBkAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-21T20:30:26.006Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ClienteController.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\ClienteController.cs",
-              "RelativeDocumentMoniker": "ApiRest\\Controllers\\ClienteController.cs",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\ClienteController.cs",
-              "RelativeToolTip": "ApiRest\\Controllers\\ClienteController.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAA7wA0AAAATAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Region.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\Region.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Models\\Region.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\Region.cs",
+              "RelativeToolTip": "ApiRest\\Models\\Region.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T20:25:55.047Z",
+              "WhenOpened": "2025-01-25T22:22:48.307Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Provincia.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\Provincia.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Models\\Provincia.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Models\\Provincia.cs",
+              "RelativeToolTip": "ApiRest\\Models\\Provincia.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T22:23:18.902Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ComunaController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\ComunaController.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Controllers\\ComunaController.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\ComunaController.cs",
+              "RelativeToolTip": "ApiRest\\Controllers\\ComunaController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:56:00.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "20250126085047_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126085047_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126085047_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126085047_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126085047_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:50:48.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProvinciaController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\ProvinciaController.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Controllers\\ProvinciaController.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\ProvinciaController.cs",
+              "RelativeToolTip": "ApiRest\\Controllers\\ProvinciaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:54:59.266Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "20250126084402_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126084402_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126084402_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126084402_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126084402_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:44:02.488Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "20250126082736_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126082736_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126082736_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126082736_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126082736_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:27:37.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "20250126080633_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126080633_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126080633_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126080633_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126080633_Init.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAowBUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T08:06:33.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "TransbankController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\TransbankController.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Controllers\\TransbankController.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\TransbankController.cs",
+              "RelativeToolTip": "ApiRest\\Controllers\\TransbankController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAzwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T04:27:50.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "20250126071856_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126071856_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126071856_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126071856_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126071856_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T07:18:56.722Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "20250126063533_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126063533_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126063533_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126063533_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126063533_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T06:35:33.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "20250126062623_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126062623_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126062623_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126062623_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126062623_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T06:26:23.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "20250126053131_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126053131_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126053131_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126053131_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126053131_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T05:31:31.948Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "20250126053430_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126053430_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126053430_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126053430_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126053430_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T05:34:30.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "20250126043658_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126043658_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126043658_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126043658_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126043658_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T04:36:59.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "20250126044222_Ini.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126044222_Ini.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126044222_Ini.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126044222_Ini.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126044222_Ini.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T04:42:22.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "20250126044257_In.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126044257_In.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126044257_In.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126044257_In.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126044257_In.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T04:42:57.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "20250126044350_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126044350_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126044350_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126044350_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126044350_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T04:43:50.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "20250126041647_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126041647_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126041647_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126041647_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126041647_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T04:16:48.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "20250126041525_In.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126041525_In.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126041525_In.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126041525_In.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126041525_In.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T04:15:25.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "20250126015338_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126015338_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126015338_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126015338_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126015338_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T01:53:38.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "20250126014942_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126014942_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126014942_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126014942_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126014942_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T01:49:42.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "20250126014738_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126014738_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126014738_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126014738_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126014738_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T01:47:38.836Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "20250126014259_Initttoo.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126014259_Initttoo.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250126014259_Initttoo.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250126014259_Initttoo.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250126014259_Initttoo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-26T01:43:00.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "20250125223859_Initttooooo.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223859_Initttooooo.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250125223859_Initttooooo.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223859_Initttooooo.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250125223859_Initttooooo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T22:38:59.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "20250125223240_Init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223240_Init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250125223240_Init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223240_Init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250125223240_Init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T22:32:40.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "20250125223453_Inittt.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223453_Inittt.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250125223453_Inittt.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223453_Inittt.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250125223453_Inittt.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T22:34:53.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "20250125223749_Initttooooo.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223749_Initttooooo.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20250125223749_Initttooooo.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20250125223749_Initttooooo.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20250125223749_Initttooooo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T22:37:49.338Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\appsettings.json",
+              "RelativeDocumentMoniker": "ApiRest\\appsettings.json",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\appsettings.json",
+              "RelativeToolTip": "ApiRest\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-24T13:18:47.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "ApiRest",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\ApiRest.csproj",
+              "RelativeDocumentMoniker": "ApiRest\\ApiRest.csproj",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\ApiRest.csproj",
+              "RelativeToolTip": "ApiRest\\ApiRest.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-25T22:14:01.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Program.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Program.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Program.cs",
+              "RelativeToolTip": "ApiRest\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T14:11:51.033Z"
             }
           ]
         }

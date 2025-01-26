@@ -1,15 +1,15 @@
 [
   {
-    "ContainingType": "ApiRest.Controllers.BoletaController",
-    "Method": "GetBoleta",
-    "RelativePath": "api/Boleta",
+    "ContainingType": "ApiRest.Controllers.ComunaController",
+    "Method": "GetComunas",
+    "RelativePath": "api/Comuna",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiRest.Models.Boleta, ApiRest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiRest.Models.ComunaDto, ApiRest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -20,22 +20,22 @@
     ]
   },
   {
-    "ContainingType": "ApiRest.Controllers.BoletaController",
-    "Method": "PostBoleta",
-    "RelativePath": "api/Boleta",
+    "ContainingType": "ApiRest.Controllers.ComunaController",
+    "Method": "CreateComuna",
+    "RelativePath": "api/Comuna",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "boletaDTO",
-        "Type": "ApiRest.Models.BoletaCreateDTO",
+        "Name": "comunaDto",
+        "Type": "ApiRest.Models.ComunaDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ApiRest.Models.Boleta",
+        "Type": "ApiRest.Models.ComunaDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -46,79 +46,16 @@
     ]
   },
   {
-    "ContainingType": "ApiRest.Controllers.BoletaController",
-    "Method": "GetBoleta",
-    "RelativePath": "api/Boleta/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ApiRest.Models.Boleta",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ApiRest.Controllers.BoletaController",
-    "Method": "PutBoleta",
-    "RelativePath": "api/Boleta/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "boleta",
-        "Type": "ApiRest.Models.Boleta",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiRest.Controllers.BoletaController",
-    "Method": "DeleteBoleta",
-    "RelativePath": "api/Boleta/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiRest.Controllers.ClienteController",
-    "Method": "GetCliente",
-    "RelativePath": "api/Cliente",
+    "ContainingType": "ApiRest.Controllers.ProvinciaController",
+    "Method": "GetProvincias",
+    "RelativePath": "api/Provincia",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiRest.Models.Cliente, ApiRest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiRest.Models.ProvinciaDto, ApiRest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -129,22 +66,22 @@
     ]
   },
   {
-    "ContainingType": "ApiRest.Controllers.ClienteController",
-    "Method": "PostCliente",
-    "RelativePath": "api/Cliente",
+    "ContainingType": "ApiRest.Controllers.ProvinciaController",
+    "Method": "CreateProvincia",
+    "RelativePath": "api/Provincia",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "cliente",
-        "Type": "ApiRest.Models.Cliente",
+        "Name": "provinciaDto",
+        "Type": "ApiRest.Models.ProvinciaDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ApiRest.Models.Cliente",
+        "Type": "ApiRest.Models.ProvinciaDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -155,79 +92,16 @@
     ]
   },
   {
-    "ContainingType": "ApiRest.Controllers.ClienteController",
-    "Method": "GetCliente",
-    "RelativePath": "api/Cliente/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ApiRest.Models.Cliente",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ApiRest.Controllers.ClienteController",
-    "Method": "PutCliente",
-    "RelativePath": "api/Cliente/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "cliente",
-        "Type": "ApiRest.Models.Cliente",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiRest.Controllers.ClienteController",
-    "Method": "DeleteCliente",
-    "RelativePath": "api/Cliente/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiRest.Controllers.ProductoController",
-    "Method": "GetProducto",
-    "RelativePath": "api/Producto",
+    "ContainingType": "ApiRest.Controllers.RegionController",
+    "Method": "GetRegions",
+    "RelativePath": "api/Region",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiRest.Models.Producto, ApiRest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiRest.Models.RegionDto, ApiRest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -238,22 +112,22 @@
     ]
   },
   {
-    "ContainingType": "ApiRest.Controllers.ProductoController",
-    "Method": "PostProducto",
-    "RelativePath": "api/Producto",
+    "ContainingType": "ApiRest.Controllers.RegionController",
+    "Method": "CreateRegion",
+    "RelativePath": "api/Region",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "producto",
-        "Type": "ApiRest.Models.Producto",
+        "Name": "regionDto",
+        "Type": "ApiRest.Models.RegionDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ApiRest.Models.Producto",
+        "Type": "ApiRest.Models.RegionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -262,69 +136,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "ApiRest.Controllers.ProductoController",
-    "Method": "GetProducto",
-    "RelativePath": "api/Producto/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ApiRest.Models.Producto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ApiRest.Controllers.ProductoController",
-    "Method": "PutProducto",
-    "RelativePath": "api/Producto/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "producto",
-        "Type": "ApiRest.Models.Producto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiRest.Controllers.ProductoController",
-    "Method": "DeleteProducto",
-    "RelativePath": "api/Producto/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "ApiRest.Controllers.TransbankController",
