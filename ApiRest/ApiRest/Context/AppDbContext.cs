@@ -14,6 +14,9 @@ namespace ApiRest.Context
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Stock> Stock { get; set; }
         public DbSet<Sucursal> Sucursal { get; set; }
+        public DbSet<Tarjeta> Tarjeta { get; set; }
+        public DbSet<Boleta> Boleta { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuración de Region
@@ -58,19 +61,19 @@ namespace ApiRest.Context
 
             modelBuilder.Entity<Cliente>()
                 .HasOne(cl => cl.Region)
-                .WithMany(r => r.Cliente) // Agregar ICollection<Cliente> a la clase Region
+                .WithMany(r => r.Cliente)
                 .HasForeignKey(cl => cl.CodRegion)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Cliente>()
                 .HasOne(cl => cl.Provincia)
-                .WithMany(p => p.Cliente) // Agregar ICollection<Cliente> a la clase Provincia
+                .WithMany(p => p.Cliente)
                 .HasForeignKey(cl => new { cl.CodRegion, cl.CodProvincia })
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Cliente>()
                 .HasOne(cl => cl.Comuna)
-                .WithMany(c => c.Cliente) // Agregar ICollection<Cliente> a la clase Comuna
+                .WithMany(c => c.Cliente)
                 .HasForeignKey(cl => new { cl.CodRegion, cl.CodProvincia, cl.CodComuna })
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -83,7 +86,7 @@ namespace ApiRest.Context
 
             modelBuilder.Entity<Sucursal>()
                 .HasOne(s => s.Comuna)
-                .WithMany(c => c.Sucursal) // Agregar ICollection<Sucursal> en Comuna
+                .WithMany(c => c.Sucursal)
                 .HasForeignKey(s => new { s.CodRegion, s.CodProvincia, s.CodComuna })
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -111,6 +114,32 @@ namespace ApiRest.Context
                 .HasOne(st => st.Sucursal)
                 .WithMany(s => s.Stock)
                 .HasForeignKey(st => st.CodSucursal)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuración de Tarjeta
+            modelBuilder.Entity<Tarjeta>()
+                .Property(t => t.CodTarjeta)
+                .ValueGeneratedNever(); // Clave manual
+            modelBuilder.Entity<Tarjeta>()
+                .HasKey(t => t.CodTarjeta);
+
+            modelBuilder.Entity<Tarjeta>()
+                .HasMany(t => t.Boleta)
+                .WithOne(b => b.Tarjeta)
+                .HasForeignKey(b => b.CodTarjeta)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuración de Boleta
+            modelBuilder.Entity<Boleta>()
+                .Property(b => b.CodBoleta)
+                .ValueGeneratedNever(); // Clave manual
+            modelBuilder.Entity<Boleta>()
+                .HasKey(b => b.CodBoleta);
+
+            modelBuilder.Entity<Boleta>()
+                .HasOne(b => b.Cliente)
+                .WithMany(cl => cl.Boleta)
+                .HasForeignKey(b => b.NumRun)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);

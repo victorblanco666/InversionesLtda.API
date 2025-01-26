@@ -22,5 +22,6 @@
         // Relación con Comuna
         public int CodComuna { get; set; } // FK con Comuna
         public Comuna Comuna { get; set; } // Relación uno a muchos
+        public ICollection<Boleta> Boleta { get; set; }
     }
 }
