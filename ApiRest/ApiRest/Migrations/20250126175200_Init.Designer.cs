@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiRest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250126153135_Init")]
+    [Migration("20250126175200_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -23,6 +23,55 @@ namespace ApiRest.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ApiRest.Models.Cliente", b =>
+                {
+                    b.Property<int>("NumRun")
+                        .HasColumnType("int");
+
+                    b.Property<string>("A_Materno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("A_Paterno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CodComuna")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodProvincia")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodRegion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DvRun")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("P_Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("S_Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NumRun");
+
+                    b.HasIndex("CodRegion", "CodProvincia", "CodComuna");
+
+                    b.ToTable("Cliente");
+                });
 
             modelBuilder.Entity("ApiRest.Models.Comuna", b =>
                 {
@@ -75,6 +124,33 @@ namespace ApiRest.Migrations
                     b.ToTable("Region");
                 });
 
+            modelBuilder.Entity("ApiRest.Models.Cliente", b =>
+                {
+                    b.HasOne("ApiRest.Models.Region", "Region")
+                        .WithMany("Cliente")
+                        .HasForeignKey("CodRegion")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ApiRest.Models.Provincia", "Provincia")
+                        .WithMany("Cliente")
+                        .HasForeignKey("CodRegion", "CodProvincia")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ApiRest.Models.Comuna", "Comuna")
+                        .WithMany("Cliente")
+                        .HasForeignKey("CodRegion", "CodProvincia", "CodComuna")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Comuna");
+
+                    b.Navigation("Provincia");
+
+                    b.Navigation("Region");
+                });
+
             modelBuilder.Entity("ApiRest.Models.Comuna", b =>
                 {
                     b.HasOne("ApiRest.Models.Provincia", "Provincia")
@@ -97,13 +173,22 @@ namespace ApiRest.Migrations
                     b.Navigation("Region");
                 });
 
+            modelBuilder.Entity("ApiRest.Models.Comuna", b =>
+                {
+                    b.Navigation("Cliente");
+                });
+
             modelBuilder.Entity("ApiRest.Models.Provincia", b =>
                 {
+                    b.Navigation("Cliente");
+
                     b.Navigation("Comuna");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Region", b =>
                 {
+                    b.Navigation("Cliente");
+
                     b.Navigation("Provincia");
                 });
 #pragma warning restore 612, 618

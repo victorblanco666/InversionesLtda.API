@@ -11,7 +11,7 @@
         // Relación con Provincia
         public Provincia Provincia { get; set; }
 
-
+        public ICollection<Cliente> Cliente { get; set; }
 
     }
 }
