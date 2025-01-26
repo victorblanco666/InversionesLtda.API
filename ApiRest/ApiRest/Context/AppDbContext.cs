@@ -11,7 +11,9 @@ namespace ApiRest.Context
         public DbSet<Provincia> Provincia { get; set; }
         public DbSet<Comuna> Comuna { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
-
+        public DbSet<Producto> Producto { get; set; }
+        public DbSet<Stock> Stock { get; set; }
+        public DbSet<Sucursal> Sucursal { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuración de Region
