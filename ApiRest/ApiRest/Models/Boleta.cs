@@ -7,6 +7,9 @@
         public int CodTarjeta { get; set; } // FK hacia Tarjeta (opcional)
         public Tarjeta Tarjeta { get; set; } // Relación con Tarjeta
         public ICollection<DetalleBoleta> DetalleBoleta { get; set; } // Relación con DetalleBoleta
-        public ICollection<Cliente> Cliente { get; set; } // Relación con DetalleBoleta
+        public ICollection<Cliente> Cliente { get; set; } // Relación con Cliente
+
+        public int Total { get; set; } // Nuevo campo Total
+        public string RunCliente { get; set; } // Nuevo campo Run del cliente
     }
 }

@@ -137,8 +137,26 @@ namespace ApiRest.Context
                 .ValueGeneratedNever();
             modelBuilder.Entity<Boleta>()
                 .HasKey(b => b.CodBoleta);
+            modelBuilder.Entity<Boleta>()
+                .Property(b => b.RunCliente)
+                .HasMaxLength(12) // Tamaño típico para un RUN con puntos y guion
+                .IsRequired(); // Define el campo como obligatorio
+            modelBuilder.Entity<Boleta>()
+                .Property(b => b.Total)
+                .IsRequired(); // Define el campo como obligatorio
+
 
             // Configuración de DetalleBoleta
+            modelBuilder.Entity<Boleta>()
+                .Property(b => b.RunCliente)
+                .HasMaxLength(12)
+                .IsRequired();
+
+            modelBuilder.Entity<Boleta>()
+                .Property(b => b.Total)
+                .IsRequired();
+
+
             modelBuilder.Entity<DetalleBoleta>()
                 .Property(db => db.CodDetalle)
                 .ValueGeneratedNever();

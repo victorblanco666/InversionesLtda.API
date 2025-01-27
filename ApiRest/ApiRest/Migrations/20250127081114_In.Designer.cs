@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiRest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250127062633_In")]
+    [Migration("20250127081114_In")]
     partial class In
     {
         /// <inheritdoc />
@@ -30,18 +30,21 @@ namespace ApiRest.Migrations
                     b.Property<int>("CodBoleta")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClienteNumRun")
-                        .HasColumnType("int");
-
                     b.Property<int>("CodTarjeta")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("CodBoleta");
+                    b.Property<string>("RunCliente")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
 
-                    b.HasIndex("ClienteNumRun");
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("CodBoleta");
 
                     b.HasIndex("CodTarjeta");
 
@@ -261,12 +264,23 @@ namespace ApiRest.Migrations
                     b.ToTable("Tarjeta");
                 });
 
+            modelBuilder.Entity("BoletaCliente", b =>
+                {
+                    b.Property<int>("BoletaCodBoleta")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClienteNumRun")
+                        .HasColumnType("int");
+
+                    b.HasKey("BoletaCodBoleta", "ClienteNumRun");
+
+                    b.HasIndex("ClienteNumRun");
+
+                    b.ToTable("BoletaCliente");
+                });
+
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
-                    b.HasOne("ApiRest.Models.Cliente", null)
-                        .WithMany("Boleta")
-                        .HasForeignKey("ClienteNumRun");
-
                     b.HasOne("ApiRest.Models.Tarjeta", "Tarjeta")
                         .WithMany("Boleta")
                         .HasForeignKey("CodTarjeta")
@@ -374,14 +388,24 @@ namespace ApiRest.Migrations
                     b.Navigation("Comuna");
                 });
 
+            modelBuilder.Entity("BoletaCliente", b =>
+                {
+                    b.HasOne("ApiRest.Models.Boleta", null)
+                        .WithMany()
+                        .HasForeignKey("BoletaCodBoleta")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApiRest.Models.Cliente", null)
+                        .WithMany()
+                        .HasForeignKey("ClienteNumRun")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
                     b.Navigation("DetalleBoleta");
-                });
-
-            modelBuilder.Entity("ApiRest.Models.Cliente", b =>
-                {
-                    b.Navigation("Boleta");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Comuna", b =>

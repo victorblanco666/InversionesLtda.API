@@ -25,12 +25,17 @@ namespace ApiRest.Controllers
                 return BadRequest("Datos de venta incompletos.");
             }
 
+            // Calcular el total de la venta
+            int totalVenta = ventaDto.DetalleProductos.Sum(dp => dp.Cantidad * dp.PrecioUnitario);
+
             // Crear la Boleta
             var boleta = new Boleta
             {
                 CodBoleta = ventaDto.CodBoleta,
                 Fecha = DateTime.Now,
-                CodTarjeta = ventaDto.CodTarjeta
+                CodTarjeta = ventaDto.CodTarjeta,
+                RunCliente = ventaDto.RunCliente, // Asignar el RunCliente
+                Total = totalVenta // Asignar el total calculado
             };
             _context.Boleta.Add(boleta);
 
@@ -63,7 +68,7 @@ namespace ApiRest.Controllers
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
-            return Ok("Venta realizada con éxito.");
+            return Ok(new { Message = "Venta realizada con éxito.", Total = totalVenta });
         }
     }
 }
