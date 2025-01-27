@@ -25,25 +25,30 @@ namespace ApiRest.Migrations
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
                     b.Property<int>("CodBoleta")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodBoleta"));
+
+                    b.Property<int?>("ClienteNumRun")
                         .HasColumnType("int");
 
                     b.Property<int>("CodTarjeta")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FechaEmision")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NumRun")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int>("Total")
                         .HasColumnType("int");
 
                     b.HasKey("CodBoleta");
 
-                    b.HasIndex("CodTarjeta");
+                    b.HasIndex("ClienteNumRun");
 
-                    b.HasIndex("NumRun");
+                    b.HasIndex("CodTarjeta");
 
                     b.ToTable("Boleta");
                 });
@@ -97,22 +102,6 @@ namespace ApiRest.Migrations
                     b.ToTable("Cliente");
                 });
 
-            modelBuilder.Entity("ApiRest.Models.Compra", b =>
-                {
-                    b.Property<int>("CodCompra")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CodBoleta")
-                        .HasColumnType("int");
-
-                    b.HasKey("CodCompra");
-
-                    b.HasIndex("CodBoleta")
-                        .IsUnique();
-
-                    b.ToTable("Compra");
-                });
-
             modelBuilder.Entity("ApiRest.Models.Comuna", b =>
                 {
                     b.Property<int>("CodRegion")
@@ -136,15 +125,21 @@ namespace ApiRest.Migrations
             modelBuilder.Entity("ApiRest.Models.DetalleCompra", b =>
                 {
                     b.Property<int>("CodDetalleCompra")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodDetalleCompra"));
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("CodCompra")
+                    b.Property<int>("CodBoleta")
                         .HasColumnType("int");
 
                     b.Property<int>("CodProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductoCodProducto")
                         .HasColumnType("int");
 
                     b.Property<int>("Subtotal")
@@ -152,9 +147,11 @@ namespace ApiRest.Migrations
 
                     b.HasKey("CodDetalleCompra");
 
-                    b.HasIndex("CodCompra");
+                    b.HasIndex("CodBoleta");
 
                     b.HasIndex("CodProducto");
+
+                    b.HasIndex("ProductoCodProducto");
 
                     b.ToTable("DetalleCompra");
                 });
@@ -279,19 +276,15 @@ namespace ApiRest.Migrations
 
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
+                    b.HasOne("ApiRest.Models.Cliente", null)
+                        .WithMany("Boleta")
+                        .HasForeignKey("ClienteNumRun");
+
                     b.HasOne("ApiRest.Models.Tarjeta", "Tarjeta")
                         .WithMany("Boleta")
                         .HasForeignKey("CodTarjeta")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("ApiRest.Models.Cliente", "Cliente")
-                        .WithMany("Boleta")
-                        .HasForeignKey("NumRun")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
 
                     b.Navigation("Tarjeta");
                 });
@@ -323,17 +316,6 @@ namespace ApiRest.Migrations
                     b.Navigation("Region");
                 });
 
-            modelBuilder.Entity("ApiRest.Models.Compra", b =>
-                {
-                    b.HasOne("ApiRest.Models.Boleta", "Boleta")
-                        .WithOne("Compra")
-                        .HasForeignKey("ApiRest.Models.Compra", "CodBoleta")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Boleta");
-                });
-
             modelBuilder.Entity("ApiRest.Models.Comuna", b =>
                 {
                     b.HasOne("ApiRest.Models.Provincia", "Provincia")
@@ -347,19 +329,23 @@ namespace ApiRest.Migrations
 
             modelBuilder.Entity("ApiRest.Models.DetalleCompra", b =>
                 {
-                    b.HasOne("ApiRest.Models.Compra", "Compra")
+                    b.HasOne("ApiRest.Models.Boleta", "Boleta")
                         .WithMany("DetalleCompra")
-                        .HasForeignKey("CodCompra")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("CodBoleta")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ApiRest.Models.Producto", "Producto")
-                        .WithMany("DetalleCompra")
+                        .WithMany()
                         .HasForeignKey("CodProducto")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Compra");
+                    b.HasOne("ApiRest.Models.Producto", null)
+                        .WithMany("DetalleCompra")
+                        .HasForeignKey("ProductoCodProducto");
+
+                    b.Navigation("Boleta");
 
                     b.Navigation("Producto");
                 });
@@ -407,18 +393,12 @@ namespace ApiRest.Migrations
 
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
-                    b.Navigation("Compra")
-                        .IsRequired();
+                    b.Navigation("DetalleCompra");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Cliente", b =>
                 {
                     b.Navigation("Boleta");
-                });
-
-            modelBuilder.Entity("ApiRest.Models.Compra", b =>
-                {
-                    b.Navigation("DetalleCompra");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Comuna", b =>

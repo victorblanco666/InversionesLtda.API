@@ -16,7 +16,6 @@ namespace ApiRest.Context
         public DbSet<Sucursal> Sucursal { get; set; }
         public DbSet<Tarjeta> Tarjeta { get; set; }
         public DbSet<Boleta> Boleta { get; set; }
-        public DbSet<Compra> Compra { get; set; }
         public DbSet<DetalleCompra> DetalleCompra { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,14 +23,14 @@ namespace ApiRest.Context
             // Configuración de Region
             modelBuilder.Entity<Region>()
                 .Property(r => r.CodRegion)
-                .ValueGeneratedNever(); // Clave manual
+                .ValueGeneratedNever();
             modelBuilder.Entity<Region>()
                 .HasKey(r => r.CodRegion);
 
             // Configuración de Provincia
             modelBuilder.Entity<Provincia>()
                 .Property(p => p.CodProvincia)
-                .ValueGeneratedNever(); // Clave manual
+                .ValueGeneratedNever();
             modelBuilder.Entity<Provincia>()
                 .HasKey(p => new { p.CodRegion, p.CodProvincia });
 
@@ -44,7 +43,7 @@ namespace ApiRest.Context
             // Configuración de Comuna
             modelBuilder.Entity<Comuna>()
                 .Property(c => c.CodComuna)
-                .ValueGeneratedNever(); // Clave manual
+                .ValueGeneratedNever();
             modelBuilder.Entity<Comuna>()
                 .HasKey(c => new { c.CodRegion, c.CodProvincia, c.CodComuna });
 
@@ -57,7 +56,7 @@ namespace ApiRest.Context
             // Configuración de Cliente
             modelBuilder.Entity<Cliente>()
                 .Property(cl => cl.NumRun)
-                .ValueGeneratedNever(); // Clave primaria manual
+                .ValueGeneratedNever();
             modelBuilder.Entity<Cliente>()
                 .HasKey(cl => cl.NumRun);
 
@@ -82,7 +81,7 @@ namespace ApiRest.Context
             // Configuración de Sucursal
             modelBuilder.Entity<Sucursal>()
                 .Property(s => s.CodSucursal)
-                .ValueGeneratedNever(); // Clave primaria manual
+                .ValueGeneratedNever();
             modelBuilder.Entity<Sucursal>()
                 .HasKey(s => s.CodSucursal);
 
@@ -95,14 +94,14 @@ namespace ApiRest.Context
             // Configuración de Producto
             modelBuilder.Entity<Producto>()
                 .Property(p => p.CodProducto)
-                .ValueGeneratedNever(); // Clave primaria manual
+                .ValueGeneratedNever();
             modelBuilder.Entity<Producto>()
                 .HasKey(p => p.CodProducto);
 
             // Configuración de Stock
             modelBuilder.Entity<Stock>()
                 .Property(st => st.CodStock)
-                .ValueGeneratedNever(); // Clave primaria manual
+                .ValueGeneratedNever();
             modelBuilder.Entity<Stock>()
                 .HasKey(st => st.CodStock);
 
@@ -121,7 +120,7 @@ namespace ApiRest.Context
             // Configuración de Tarjeta
             modelBuilder.Entity<Tarjeta>()
                 .Property(t => t.CodTarjeta)
-                .ValueGeneratedNever(); // Clave manual
+                .ValueGeneratedNever();
             modelBuilder.Entity<Tarjeta>()
                 .HasKey(t => t.CodTarjeta);
 
@@ -133,53 +132,29 @@ namespace ApiRest.Context
 
             // Configuración de Boleta
             modelBuilder.Entity<Boleta>()
-                .Property(b => b.CodBoleta)
-                .ValueGeneratedNever(); // Clave manual
-            modelBuilder.Entity<Boleta>()
                 .HasKey(b => b.CodBoleta);
 
             modelBuilder.Entity<Boleta>()
-                .HasOne(b => b.Cliente)
-                .WithMany(cl => cl.Boleta)
-                .HasForeignKey(b => b.NumRun)
-                .OnDelete(DeleteBehavior.Restrict);
+                .Property(b => b.Total)
+                .IsRequired();
 
-            // Configuración de Compra
-            modelBuilder.Entity<Compra>()
-                .Property(c => c.CodCompra)
-                .ValueGeneratedNever(); // Clave primaria manual
-            modelBuilder.Entity<Compra>()
-                .HasKey(c => c.CodCompra);
+            modelBuilder.Entity<Boleta>()
+                .Property(b => b.FechaEmision)
+                .HasDefaultValueSql("GETDATE()");
 
-            modelBuilder.Entity<Compra>()
-                .HasOne(c => c.Boleta)
-                .WithOne(b => b.Compra)
-                .HasForeignKey<Compra>(c => c.CodBoleta)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Boleta>()
+                .HasMany(b => b.DetalleCompra)
+                .WithOne(dc => dc.Boleta)
+                .HasForeignKey(dc => dc.CodBoleta)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Configuración de DetalleCompra
-            modelBuilder.Entity<DetalleCompra>()
-                .Property(dc => dc.CodDetalleCompra)
-                .ValueGeneratedNever(); // Clave primaria manual
             modelBuilder.Entity<DetalleCompra>()
                 .HasKey(dc => dc.CodDetalleCompra);
 
             modelBuilder.Entity<DetalleCompra>()
-                .HasOne(dc => dc.Compra)
-                .WithMany(c => c.DetalleCompra)
-                .HasForeignKey(dc => dc.CodCompra)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<DetalleCompra>()
                 .HasOne(dc => dc.Producto)
-                .WithMany(p => p.DetalleCompra)
-                .HasForeignKey(dc => dc.CodProducto)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Configuración de Producto (para relacionar con DetalleCompra)
-            modelBuilder.Entity<Producto>()
-                .HasMany(p => p.DetalleCompra)
-                .WithOne(dc => dc.Producto)
+                .WithMany()
                 .HasForeignKey(dc => dc.CodProducto)
                 .OnDelete(DeleteBehavior.Restrict);
 

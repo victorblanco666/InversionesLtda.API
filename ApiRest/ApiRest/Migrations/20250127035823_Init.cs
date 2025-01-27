@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -34,6 +35,18 @@ namespace ApiRest.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Region", x => x.CodRegion);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tarjeta",
+                columns: table => new
+                {
+                    CodTarjeta = table.Column<int>(type: "int", nullable: false),
+                    NombreTransaccion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tarjeta", x => x.CodTarjeta);
                 });
 
             migrationBuilder.CreateTable(
@@ -137,6 +150,33 @@ namespace ApiRest.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Boleta",
+                columns: table => new
+                {
+                    CodBoleta = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodTarjeta = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<int>(type: "int", nullable: false),
+                    FechaEmision = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    ClienteNumRun = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Boleta", x => x.CodBoleta);
+                    table.ForeignKey(
+                        name: "FK_Boleta_Cliente_ClienteNumRun",
+                        column: x => x.ClienteNumRun,
+                        principalTable: "Cliente",
+                        principalColumn: "NumRun");
+                    table.ForeignKey(
+                        name: "FK_Boleta_Tarjeta_CodTarjeta",
+                        column: x => x.CodTarjeta,
+                        principalTable: "Tarjeta",
+                        principalColumn: "CodTarjeta",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Stock",
                 columns: table => new
                 {
@@ -162,10 +202,69 @@ namespace ApiRest.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DetalleCompra",
+                columns: table => new
+                {
+                    CodDetalleCompra = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodProducto = table.Column<int>(type: "int", nullable: false),
+                    CodBoleta = table.Column<int>(type: "int", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    Subtotal = table.Column<int>(type: "int", nullable: false),
+                    ProductoCodProducto = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetalleCompra", x => x.CodDetalleCompra);
+                    table.ForeignKey(
+                        name: "FK_DetalleCompra_Boleta_CodBoleta",
+                        column: x => x.CodBoleta,
+                        principalTable: "Boleta",
+                        principalColumn: "CodBoleta",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DetalleCompra_Producto_CodProducto",
+                        column: x => x.CodProducto,
+                        principalTable: "Producto",
+                        principalColumn: "CodProducto",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DetalleCompra_Producto_ProductoCodProducto",
+                        column: x => x.ProductoCodProducto,
+                        principalTable: "Producto",
+                        principalColumn: "CodProducto");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Boleta_ClienteNumRun",
+                table: "Boleta",
+                column: "ClienteNumRun");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Boleta_CodTarjeta",
+                table: "Boleta",
+                column: "CodTarjeta");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cliente_CodRegion_CodProvincia_CodComuna",
                 table: "Cliente",
                 columns: new[] { "CodRegion", "CodProvincia", "CodComuna" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DetalleCompra_CodBoleta",
+                table: "DetalleCompra",
+                column: "CodBoleta");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DetalleCompra_CodProducto",
+                table: "DetalleCompra",
+                column: "CodProducto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DetalleCompra_ProductoCodProducto",
+                table: "DetalleCompra",
+                column: "ProductoCodProducto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stock_CodProducto",
@@ -187,16 +286,25 @@ namespace ApiRest.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cliente");
+                name: "DetalleCompra");
 
             migrationBuilder.DropTable(
                 name: "Stock");
+
+            migrationBuilder.DropTable(
+                name: "Boleta");
 
             migrationBuilder.DropTable(
                 name: "Producto");
 
             migrationBuilder.DropTable(
                 name: "Sucursal");
+
+            migrationBuilder.DropTable(
+                name: "Cliente");
+
+            migrationBuilder.DropTable(
+                name: "Tarjeta");
 
             migrationBuilder.DropTable(
                 name: "Comuna");
