@@ -16,6 +16,8 @@ namespace ApiRest.Context
         public DbSet<Sucursal> Sucursal { get; set; }
         public DbSet<Tarjeta> Tarjeta { get; set; }
         public DbSet<Boleta> Boleta { get; set; }
+        public DbSet<Compra> Compra { get; set; }
+        public DbSet<DetalleCompra> DetalleCompra { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -140,6 +142,45 @@ namespace ApiRest.Context
                 .HasOne(b => b.Cliente)
                 .WithMany(cl => cl.Boleta)
                 .HasForeignKey(b => b.NumRun)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuración de Compra
+            modelBuilder.Entity<Compra>()
+                .Property(c => c.CodCompra)
+                .ValueGeneratedNever(); // Clave primaria manual
+            modelBuilder.Entity<Compra>()
+                .HasKey(c => c.CodCompra);
+
+            modelBuilder.Entity<Compra>()
+                .HasOne(c => c.Boleta)
+                .WithOne(b => b.Compra)
+                .HasForeignKey<Compra>(c => c.CodBoleta)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuración de DetalleCompra
+            modelBuilder.Entity<DetalleCompra>()
+                .Property(dc => dc.CodDetalleCompra)
+                .ValueGeneratedNever(); // Clave primaria manual
+            modelBuilder.Entity<DetalleCompra>()
+                .HasKey(dc => dc.CodDetalleCompra);
+
+            modelBuilder.Entity<DetalleCompra>()
+                .HasOne(dc => dc.Compra)
+                .WithMany(c => c.DetalleCompra)
+                .HasForeignKey(dc => dc.CodCompra)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<DetalleCompra>()
+                .HasOne(dc => dc.Producto)
+                .WithMany(p => p.DetalleCompra)
+                .HasForeignKey(dc => dc.CodProducto)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuración de Producto (para relacionar con DetalleCompra)
+            modelBuilder.Entity<Producto>()
+                .HasMany(p => p.DetalleCompra)
+                .WithOne(dc => dc.Producto)
+                .HasForeignKey(dc => dc.CodProducto)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);

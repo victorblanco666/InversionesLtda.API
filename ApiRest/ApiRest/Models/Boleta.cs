@@ -9,5 +9,6 @@
         public Tarjeta Tarjeta { get; set; } // Relación con Tarjeta
         public DateTime FechaEmision { get; set; } // Fecha de la boleta
         public int Total { get; set; } // Total de la compra
+        public Compra Compra { get; set; }
     }
 }
