@@ -32,6 +32,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="scrollToSection('tarjeta')">Productos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="scrollToSection('tarjeta')">Sucursales</a>
+                    </li>
                 </ul>
 
                 <!-- Icono de Carrito de Comprass-->
@@ -123,6 +126,43 @@
             </div>
         </div>
     </section>
+
+    <section id="sucursales">
+    <div class="container text-center mt-5">
+        <h3 class="display-6">Sucursales</h3>
+        <div class="row mt-5" id="sucursales-list">
+            {% for sucursal in sucursales %}
+            <div class="col-sm-12 col-md-4 col-lg-4 py-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ sucursal.nombreSucursal }}</h5>
+                        <p class="card-text">Dirección: {{ sucursal.direccion }}</p>
+                        <p class="card-text">Teléfono: {{ sucursal.telefono }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="stock">
+    <div class="container text-center mt-5">
+        <h3 class="display-6">Stock Disponible</h3>
+        <div class="row mt-5">
+            <div class="col-lg-6 mx-auto">
+                <ul class="list-group">
+                    {% for item in stock %}
+                    <li class="list-group-item">
+                        <h5>Producto: Cierra Circular {{ item.nombreProducto }}</h5>
+                        <p>Stock disponible: {{ item.cantidad }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section> 
 
  <!-- Modal -->
 <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">

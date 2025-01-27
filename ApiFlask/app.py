@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request ,redirect
+from flask import Flask, jsonify, render_template, request ,redirect , url_for
 import requests
 import urllib3
 
@@ -10,52 +10,39 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 @app.route('/')
 def vista():
     productos_url = 'https://localhost:5000/api/producto'
+    sucursales_url = 'https://localhost:5000/api/sucursal'
+    stock_url = 'https://localhost:5000/api/stock'  # URL para el stock
 
     try:
+        # Obtener productos
         response_productos = requests.get(productos_url, verify=False)
         if response_productos.status_code == 200:
             productos = response_productos.json()
         else:
-            return "Error al obtener datos de la API de Productos en C#: " + str(response_productos.status_code)
+            return "Error al obtener datos de la API de Productos: " + str(response_productos.status_code)
+        
+        # Obtener sucursales
+        response_sucursales = requests.get(sucursales_url, verify=False)
+        if response_sucursales.status_code == 200:
+            sucursales = response_sucursales.json()  # Obtenemos la lista de sucursales
+        else:
+            return "Error al obtener datos de la API de Sucursales: " + str(response_sucursales.status_code)
 
-        return render_template('index.html', productos=productos)
+        # Obtener stock
+        response_stock = requests.get(stock_url, verify=False)
+        if response_stock.status_code == 200:
+            stock = response_stock.json()  # Obtenemos la lista de stock
+        else:
+            return "Error al obtener datos de la API de Stock: " + str(response_stock.status_code)
+
+        # Pasar productos, sucursales y stock a la plantilla
+        return render_template('index.html', productos=productos, sucursales=sucursales, stock=stock)
 
     except requests.exceptions.RequestException as e:
         return "Error de conexión: " + str(e)
+    
 
-"""@app.route('/pago', methods=['GET', 'POST'])
-def pago():
-    if request.method == 'POST':
-        try:
-            nombreCliente = request.form.get('nombreCliente')
-            emailCliente = request.form.get('emailCliente')
-            telefonoCliente = request.form.get('telefonoCliente')
-            total = request.form.get('montoPagar')
-            productoId = request.form.get('productoId')
 
-            payload = {
-                "total": total,
-                "cliente": {
-                    "nombreCliente": nombreCliente,
-                    "email": emailCliente,
-                    "telefono": telefonoCliente
-                },
-                "productoId": productoId
-            }
-
-            boleta_url = 'https://localhost:5000/api/boleta'
-            response = requests.post(boleta_url, json=payload, verify=False)
-
-            if response.status_code == 201:
-                return "Pago realizado exitosamente."
-            else:
-                return f"Error al realizar el pago: {response.status_code}"
-
-        except requests.exceptions.RequestException as e:
-            return f"Error de conexión: {str(e)}"
-
-    # Si es un GET, renderiza el template pago.html sin datos de producto estáticos
-    return render_template('pago.html')"""
 
 @app.route('/pago', methods=['GET', 'POST'])
 def pago():
@@ -106,6 +93,8 @@ def pago():
 
     # Si el método es GET, simplemente renderizamos la página
     return render_template('pago.html')
+
+
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
