@@ -16,7 +16,8 @@ namespace ApiRest.Context
         public DbSet<Sucursal> Sucursal { get; set; }
         public DbSet<Tarjeta> Tarjeta { get; set; }
         public DbSet<Boleta> Boleta { get; set; }
-        public DbSet<DetalleCompra> DetalleCompra { get; set; }
+        public DbSet<DetalleBoleta> DetalleBoleta { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -132,31 +133,31 @@ namespace ApiRest.Context
 
             // Configuración de Boleta
             modelBuilder.Entity<Boleta>()
+                .Property(b => b.CodBoleta)
+                .ValueGeneratedNever();
+            modelBuilder.Entity<Boleta>()
                 .HasKey(b => b.CodBoleta);
 
-            modelBuilder.Entity<Boleta>()
-                .Property(b => b.Total)
-                .IsRequired();
+            // Configuración de DetalleBoleta
+            modelBuilder.Entity<DetalleBoleta>()
+                .Property(db => db.CodDetalle)
+                .ValueGeneratedNever();
+            modelBuilder.Entity<DetalleBoleta>()
+                .HasKey(db => db.CodDetalle);
 
-            modelBuilder.Entity<Boleta>()
-                .Property(b => b.FechaEmision)
-                .HasDefaultValueSql("GETDATE()");
-
-            modelBuilder.Entity<Boleta>()
-                .HasMany(b => b.DetalleCompra)
-                .WithOne(dc => dc.Boleta)
-                .HasForeignKey(dc => dc.CodBoleta)
+            modelBuilder.Entity<DetalleBoleta>()
+                .HasOne(db => db.Boleta)
+                .WithMany(b => b.DetalleBoleta)
+                .HasForeignKey(db => db.CodBoleta)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Configuración de DetalleCompra
-            modelBuilder.Entity<DetalleCompra>()
-                .HasKey(dc => dc.CodDetalleCompra);
-
-            modelBuilder.Entity<DetalleCompra>()
-                .HasOne(dc => dc.Producto)
-                .WithMany()
-                .HasForeignKey(dc => dc.CodProducto)
+            modelBuilder.Entity<DetalleBoleta>()
+                .HasOne(db => db.Producto)
+                .WithMany(p => p.DetalleBoleta)
+                .HasForeignKey(db => db.CodProducto)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
 
             base.OnModelCreating(modelBuilder);
         }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiRest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250127035823_Init")]
-    partial class Init
+    [Migration("20250127062633_In")]
+    partial class In
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,10 +28,7 @@ namespace ApiRest.Migrations
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
                     b.Property<int>("CodBoleta")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodBoleta"));
 
                     b.Property<int?>("ClienteNumRun")
                         .HasColumnType("int");
@@ -39,13 +36,8 @@ namespace ApiRest.Migrations
                     b.Property<int>("CodTarjeta")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaEmision")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("CodBoleta");
 
@@ -125,13 +117,10 @@ namespace ApiRest.Migrations
                     b.ToTable("Comuna");
                 });
 
-            modelBuilder.Entity("ApiRest.Models.DetalleCompra", b =>
+            modelBuilder.Entity("ApiRest.Models.DetalleBoleta", b =>
                 {
-                    b.Property<int>("CodDetalleCompra")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodDetalleCompra"));
+                    b.Property<string>("CodDetalle")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
@@ -142,21 +131,16 @@ namespace ApiRest.Migrations
                     b.Property<int>("CodProducto")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductoCodProducto")
+                    b.Property<int>("PrecioUnitario")
                         .HasColumnType("int");
 
-                    b.Property<int>("Subtotal")
-                        .HasColumnType("int");
-
-                    b.HasKey("CodDetalleCompra");
+                    b.HasKey("CodDetalle");
 
                     b.HasIndex("CodBoleta");
 
                     b.HasIndex("CodProducto");
 
-                    b.HasIndex("ProductoCodProducto");
-
-                    b.ToTable("DetalleCompra");
+                    b.ToTable("DetalleBoleta");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Producto", b =>
@@ -330,23 +314,19 @@ namespace ApiRest.Migrations
                     b.Navigation("Provincia");
                 });
 
-            modelBuilder.Entity("ApiRest.Models.DetalleCompra", b =>
+            modelBuilder.Entity("ApiRest.Models.DetalleBoleta", b =>
                 {
                     b.HasOne("ApiRest.Models.Boleta", "Boleta")
-                        .WithMany("DetalleCompra")
+                        .WithMany("DetalleBoleta")
                         .HasForeignKey("CodBoleta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ApiRest.Models.Producto", "Producto")
-                        .WithMany()
+                        .WithMany("DetalleBoleta")
                         .HasForeignKey("CodProducto")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("ApiRest.Models.Producto", null)
-                        .WithMany("DetalleCompra")
-                        .HasForeignKey("ProductoCodProducto");
 
                     b.Navigation("Boleta");
 
@@ -396,7 +376,7 @@ namespace ApiRest.Migrations
 
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
-                    b.Navigation("DetalleCompra");
+                    b.Navigation("DetalleBoleta");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Cliente", b =>
@@ -413,7 +393,7 @@ namespace ApiRest.Migrations
 
             modelBuilder.Entity("ApiRest.Models.Producto", b =>
                 {
-                    b.Navigation("DetalleCompra");
+                    b.Navigation("DetalleBoleta");
 
                     b.Navigation("Stock");
                 });

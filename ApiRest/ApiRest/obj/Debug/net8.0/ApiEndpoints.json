@@ -447,5 +447,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.VentasController",
+    "Method": "RealizarVenta",
+    "RelativePath": "api/Ventas/RealizarVenta",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ventaDto",
+        "Type": "ApiRest.Models.VentaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

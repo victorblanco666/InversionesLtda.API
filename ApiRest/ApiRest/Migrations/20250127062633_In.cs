@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ApiRest.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class In : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -153,11 +153,9 @@ namespace ApiRest.Migrations
                 name: "Boleta",
                 columns: table => new
                 {
-                    CodBoleta = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodBoleta = table.Column<int>(type: "int", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CodTarjeta = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<int>(type: "int", nullable: false),
-                    FechaEmision = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     ClienteNumRun = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -203,37 +201,30 @@ namespace ApiRest.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DetalleCompra",
+                name: "DetalleBoleta",
                 columns: table => new
                 {
-                    CodDetalleCompra = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CodProducto = table.Column<int>(type: "int", nullable: false),
+                    CodDetalle = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CodBoleta = table.Column<int>(type: "int", nullable: false),
+                    CodProducto = table.Column<int>(type: "int", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    Subtotal = table.Column<int>(type: "int", nullable: false),
-                    ProductoCodProducto = table.Column<int>(type: "int", nullable: true)
+                    PrecioUnitario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DetalleCompra", x => x.CodDetalleCompra);
+                    table.PrimaryKey("PK_DetalleBoleta", x => x.CodDetalle);
                     table.ForeignKey(
-                        name: "FK_DetalleCompra_Boleta_CodBoleta",
+                        name: "FK_DetalleBoleta_Boleta_CodBoleta",
                         column: x => x.CodBoleta,
                         principalTable: "Boleta",
                         principalColumn: "CodBoleta",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DetalleCompra_Producto_CodProducto",
+                        name: "FK_DetalleBoleta_Producto_CodProducto",
                         column: x => x.CodProducto,
                         principalTable: "Producto",
                         principalColumn: "CodProducto",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_DetalleCompra_Producto_ProductoCodProducto",
-                        column: x => x.ProductoCodProducto,
-                        principalTable: "Producto",
-                        principalColumn: "CodProducto");
                 });
 
             migrationBuilder.CreateIndex(
@@ -252,19 +243,14 @@ namespace ApiRest.Migrations
                 columns: new[] { "CodRegion", "CodProvincia", "CodComuna" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetalleCompra_CodBoleta",
-                table: "DetalleCompra",
+                name: "IX_DetalleBoleta_CodBoleta",
+                table: "DetalleBoleta",
                 column: "CodBoleta");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetalleCompra_CodProducto",
-                table: "DetalleCompra",
+                name: "IX_DetalleBoleta_CodProducto",
+                table: "DetalleBoleta",
                 column: "CodProducto");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DetalleCompra_ProductoCodProducto",
-                table: "DetalleCompra",
-                column: "ProductoCodProducto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stock_CodProducto",
@@ -286,7 +272,7 @@ namespace ApiRest.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DetalleCompra");
+                name: "DetalleBoleta");
 
             migrationBuilder.DropTable(
                 name: "Stock");

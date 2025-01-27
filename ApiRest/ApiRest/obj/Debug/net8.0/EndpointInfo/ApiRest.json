@@ -799,6 +799,37 @@
           }
         }
       }
+    },
+    "/api/Ventas/RealizarVenta": {
+      "post": {
+        "tags": [
+          "Ventas"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VentaDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VentaDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VentaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -911,6 +942,28 @@
         },
         "additionalProperties": false
       },
+      "DetalleVentaDto": {
+        "type": "object",
+        "properties": {
+          "codProducto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codSucursal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precioUnitario": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "ProductoDto": {
         "type": "object",
         "properties": {
@@ -1013,6 +1066,27 @@
           "codComuna": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VentaDto": {
+        "type": "object",
+        "properties": {
+          "codBoleta": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codTarjeta": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalleProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleVentaDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false

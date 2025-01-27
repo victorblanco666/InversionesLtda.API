@@ -2,15 +2,11 @@
 {
     public class Boleta
     {
-        public int CodBoleta { get; set; }
-        public int CodTarjeta { get; set; } // Clave foránea
-        public int Total { get; set; }
-        public DateTime FechaEmision { get; set; }
-
-        // Propiedad de navegación hacia Tarjeta
-        public Tarjeta Tarjeta { get; set; }
-
-        // Propiedad de navegación hacia DetalleCompra
-        public ICollection<DetalleCompra> DetalleCompra { get; set; }
+        public int CodBoleta { get; set; } // Clave primaria
+        public DateTime Fecha { get; set; } // Fecha de la transacción
+        public int CodTarjeta { get; set; } // FK hacia Tarjeta (opcional)
+        public Tarjeta Tarjeta { get; set; } // Relación con Tarjeta
+        public ICollection<DetalleBoleta> DetalleBoleta { get; set; } // Relación con DetalleBoleta
+        public ICollection<Cliente> Cliente { get; set; } // Relación con DetalleBoleta
     }
 }
