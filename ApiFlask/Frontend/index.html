@@ -27,13 +27,14 @@
                             onclick="scrollToSection('inicio')">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="scrollToSection('quienes-somos')">Quiénes Somos</a>
+                        <a class="nav-link" href="#quienes-somos" onclick="scrollToSection('quienes-somos')">Quiénes
+                            Somos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="scrollToSection('tarjeta')">Productos</a>
+                        <a class="nav-link" href="#productos" onclick="scrollToSection('tarjeta')">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="scrollToSection('tarjeta')">Sucursales</a>
+                        <a class="nav-link" href="#sucursal" onclick="scrollToSection('tarjeta')">Sucursales</a>
                     </li>
                 </ul>
 
@@ -66,14 +67,17 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ url_for('static', filename='img/iStock-1345964041.jpg') }}" class="d-block w-100" alt="Ferremas">
+                <img src="{{ url_for('static', filename='img/iStock-1345964041.jpg') }}" class="d-block w-100"
+                    alt="Ferremas">
 
             </div>
             <div class="carousel-item">
-                <img src="{{ url_for('static', filename='img/iStock-1345964041.jpg') }}" class="d-block w-100" alt="../Frontend/Ferremas.png">
+                <img src="{{ url_for('static', filename='img/iStock-1345964041.jpg') }}" class="d-block w-100"
+                    alt="../Frontend/Ferremas.png">
             </div>
             <div class="carousel-item">
-                <img src="{{ url_for('static', filename='img/iStock-1345964041.jpg') }}" class="d-block w-100" alt="../Frontend/Ferremas.png">
+                <img src="{{ url_for('static', filename='img/iStock-1345964041.jpg') }}" class="d-block w-100"
+                    alt="../Frontend/Ferremas.png">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -105,20 +109,24 @@
 
 
     <!-- Productos -->
-    <section>
+    <section id="productos">
         <div class="container text-center mt-5" id="tarjeta">
             <h3 class="display-6">Productos</h3>
             <div class="row mt-5" id="crd">
                 {% for producto in productos %}
                 <div class="col-sm-12 col-md-4 col-lg-4 py-3">
                     <div class="card shadow">
-                        <img src="{{ url_for('static', filename='img/CierraC.jpg') }}" class="card-img-top" alt="{{ producto.descripcion }}">
+                        <img src="{{ url_for('static', filename='img/CierraC.jpg') }}" class="card-img-top"
+                            alt="{{ producto.descripcion }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ producto.nombreProducto }}</h5>
                             <p class="card-text">{{ producto.descripcion }}</p>
                             <p class="card-text card-precio">Precio: ${{ producto.precio }}</p>
-                            <a href="#" class="btn btn-primary btn-agregar" data-producto-id="{{ producto.id }}">Añadir
-                                al carrito</a>
+                            <p class="card-text"><strong>Stock Disponible:</strong> {{ producto.stock_disponible }}</p>
+                            <a href="#" class="btn btn-primary btn-agregar"
+                                data-producto-id="{{ producto.codProducto }}">
+                                Añadir al carrito
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -127,62 +135,64 @@
         </div>
     </section>
 
-    <section id="sucursales">
-    <div class="container text-center mt-5">
-        <h3 class="display-6">Sucursales</h3>
-        <div class="row mt-5" id="sucursales-list">
-            {% for sucursal in sucursales %}
-            <div class="col-sm-12 col-md-4 col-lg-4 py-3">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ sucursal.nombreSucursal }}</h5>
-                        <p class="card-text">Dirección: {{ sucursal.direccion }}</p>
-                        <p class="card-text">Teléfono: {{ sucursal.telefono }}</p>
+    <!-- Sucursales -->
+    <section id="sucursal">
+        <div class="container text-center mt-5">
+            <h3 class="display-6">Conoce Nuestras Sucursales</h3>
+            <div class="row mt-5" id="sucursales-list">
+                {% for sucursal in sucursales %}
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card shadow-lg border-0 rounded-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">Sucursal</h5>
+                            <p class="card-text">
+                                <strong>Dirección:</strong> {{ sucursal.direccion }} <br>
+                                <strong>Teléfono:</strong> {{ sucursal.telefono }} <br>
+                                <strong>Región:</strong>
+                                {% for region in regiones %}
+                                {% if region.codRegion == sucursal.codRegion %}
+                                {{ region.nombreRegion }}
+                                {% endif %}
+                                {% endfor %} <br>
+                                <strong>Comuna:</strong>
+                                {% for comuna in comunas %}
+                                {% if comuna.codRegion == sucursal.codRegion and comuna.codProvincia ==
+                                sucursal.codProvincia and comuna.codComuna == sucursal.codComuna %}
+                                {{ comuna.nombreComuna }}
+                                {% endif %}
+                                {% endfor %}
+                            </p>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="stock">
-    <div class="container text-center mt-5">
-        <h3 class="display-6">Stock Disponible</h3>
-        <div class="row mt-5">
-            <div class="col-lg-6 mx-auto">
-                <ul class="list-group">
-                    {% for item in stock %}
-                    <li class="list-group-item">
-                        <h5>Producto: Cierra Circular {{ item.nombreProducto }}</h5>
-                        <p>Stock disponible: {{ item.cantidad }}</p>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-</section> 
 
- <!-- Modal -->
-<div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="carritoModalLabel">Productos en el carrito</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Contenido del modal, se muestran los productos agregados -->
-            </div>
-            <div id="productosAgregados"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnVaciarCarrito">Vaciar Carrito</button>
-                <a href="{{ url_for('pago') }}" class="btn btn-primary">Pagar</a>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carritoModalLabel">Productos en el carrito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenido del modal, se muestran los productos agregados -->
+                </div>
+                <div id="productosAgregados"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnVaciarCarrito">Vaciar
+                        Carrito</button>
+                    <a href="{{ url_for('pago') }}" class="btn btn-success">Pagar</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2024 Ferretería Ferremas. Todos los derechos reservados.</p>
     </footer>

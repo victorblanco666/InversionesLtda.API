@@ -75,7 +75,8 @@ namespace ApiRest.Migrations
                     CodBoleta = table.Column<int>(type: "int", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CodTarjeta = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<int>(type: "int", nullable: false)
+                    Total = table.Column<int>(type: "int", nullable: false),
+                    RunCliente = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false)
                 },
                 constraints: table =>
                 {

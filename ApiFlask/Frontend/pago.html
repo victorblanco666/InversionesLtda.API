@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url_for('vista') }}">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="{{url_for('vista')}}">Inicio</a>
                     </li>
                 </ul>
             </div>
@@ -34,17 +34,84 @@
                 <h1 class="text-center">Formulario de Pago</h1>
                 <form id="formPago" method="post">
                     <div class="mb-3">
-                        <label for="nombreCliente" class="form-label">Nombre del Cliente</label>
-                        <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" required>
+                        <label for="numRun" class="form-label">Número de RUN</label>
+                        <input type="number" class="form-control" id="numRun" name="numRun" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="emailCliente" class="form-label">Email del Cliente</label>
-                        <input type="email" class="form-control" id="emailCliente" name="emailCliente" required>
+                        <label for="dvRun" class="form-label">Dígito Verificador (DV)</label>
+                        <input type="text" class="form-control" id="dvRun" name="dvRun" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="telefonoCliente" class="form-label">Teléfono del Cliente</label>
+                        <label for="p_Nombre" class="form-label">Primer Nombre</label>
+                        <input type="text" class="form-control" id="p_Nombre" name="p_Nombre" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="s_Nombre" class="form-label">Segundo Nombre</label>
+                        <input type="text" class="form-control" id="s_Nombre" name="s_Nombre">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="a_Paterno" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="a_Paterno" name="a_Paterno" required>
+                    </div>   
+
+
+                    <div class="mb-3">
+                        <label for="a_Materno" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="a_Materno" name="a_Materno" required>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="correo" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="telefonoCliente" class="form-label">Teléfono</label>
                         <input type="tel" class="form-control" id="telefonoCliente" name="telefonoCliente" required>
                     </div>
+
+                    <h3>Dirección y Ubicación</h3>
+
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="region" class="form-label">Región</label>
+                        <select class="form-select" id="region" name="codRegion" required>
+                            <option value="">Seleccione una región</option>
+                            {% for region in regiones %}
+                                <option value="{{ region.codRegion }}">{{ region.nombreRegion }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="provincia" class="form-label">Provincia</label>
+                        <select class="form-select" id="provincia" name="codProvincia" required>
+                            <option value="">Seleccione una provincia</option>
+                            {% for provincia in provincias %}
+                                <option value="{{ provincia.codProvincia }}" data-region="{{ provincia.codRegion }}">{{ provincia.nombreProvincia }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="comuna" class="form-label">Comuna</label>
+                        <select class="form-select" id="comuna" name="codComuna" required>
+                            <option value="">Seleccione una comuna</option>
+                            {% for comuna in comunas %}
+                                <option value="{{ comuna.codComuna }}" data-provincia="{{ comuna.codProvincia }}" data-region="{{ comuna.codRegion }}">{{ comuna.nombreComuna }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
                     <div id="detalleCompra"></div>
                     <input type="hidden" id="productoId" name="productoId">
                     <input type="hidden" id="montoPagar" name="montoPagar">
