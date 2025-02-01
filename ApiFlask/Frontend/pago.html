@@ -33,7 +33,7 @@
             <div class="col-md-4">
                 <h1 class="text-center">Formulario de Pago</h1>
                 <form id="formPago" method="post">
-                    <div class="mb-3">
+                    <!--<div class="mb-3">
                         <label for="numRun" class="form-label">Número de RUN</label>
                         <input type="number" class="form-control" id="numRun" name="numRun" required>
                     </div>
@@ -76,7 +76,8 @@
                     </div>
 
                     <h3>Dirección y Ubicación</h3>
-
+                    
+                     Icono de Carrito de Comprass
                     <div class="mb-3">
                         <label for="direccion" class="form-label">Dirección</label>
                         <input type="text" class="form-control" id="direccion" name="direccion" required>
@@ -110,7 +111,7 @@
                                 <option value="{{ comuna.codComuna }}" data-provincia="{{ comuna.codProvincia }}" data-region="{{ comuna.codRegion }}">{{ comuna.nombreComuna }}</option>
                             {% endfor %}
                         </select>
-                    </div>
+                    </div>-->
 
                     <div id="detalleCompra"></div>
                     <input type="hidden" id="productoId" name="productoId">

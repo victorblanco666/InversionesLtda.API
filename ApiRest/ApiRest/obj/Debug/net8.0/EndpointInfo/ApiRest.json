@@ -694,6 +694,90 @@
         }
       }
     },
+    "/api/Tarjeta": {
+      "get": {
+        "tags": [
+          "Tarjeta"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TarjetaDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TarjetaDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TarjetaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tarjeta"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTarjetaDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTarjetaDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTarjetaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TarjetaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TarjetaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TarjetaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Transbank/Crear_transaccion": {
       "post": {
         "tags": [
@@ -920,6 +1004,20 @@
         },
         "additionalProperties": false
       },
+      "CreateTarjetaDto": {
+        "type": "object",
+        "properties": {
+          "codTarjeta": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreTransaccion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateTransaction": {
         "type": "object",
         "properties": {
@@ -1066,6 +1164,20 @@
           "codComuna": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TarjetaDto": {
+        "type": "object",
+        "properties": {
+          "codTarjeta": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreTransaccion": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

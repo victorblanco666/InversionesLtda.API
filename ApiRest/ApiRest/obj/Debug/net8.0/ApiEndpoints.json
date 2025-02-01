@@ -385,6 +385,52 @@
     ]
   },
   {
+    "ContainingType": "TarjetaController",
+    "Method": "GetTarjetas",
+    "RelativePath": "api/Tarjeta",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ApiRest.Models.TarjetaDto, ApiRest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "TarjetaController",
+    "Method": "PostTarjeta",
+    "RelativePath": "api/Tarjeta",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tarjetaDto",
+        "Type": "ApiRest.Models.CreateTarjetaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ApiRest.Models.TarjetaDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "ApiRest.Controllers.TransbankController",
     "Method": "AnularoDevolver_Transaccion",
     "RelativePath": "api/Transbank/AnularoDevolver_Transaccion",
