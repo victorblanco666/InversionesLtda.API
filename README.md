@@ -6,21 +6,3 @@
 # Entregando una solición solida y robusta al cliente FerreMas                                                                                      
 
 
-# Links de acceso a la url de azure portal 
-
-# -------Aplicacion Index Con Python Flask------------------
-# https://ferremasindex.azurewebsites.net/
-
-# -----------Api Rest Cliente -----------------
-# https://ferremasinterfc.azurewebsites.net/api/cliente
-
-# -----------Api Rest Producto --------------------
-# https://ferremasinterfc.azurewebsites.net/api/producto
-
-# -----------Api Rest Boleta-----------------------
-# https://ferremasinterfc.azurewebsites.net/api/boleta
-
-# -------------Base de datos Sql Server ------------------
-# ferresrv.database.windows.net  database
-
-
