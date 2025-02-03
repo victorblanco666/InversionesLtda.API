@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, render_template, request ,redirect
 import requests
+import urllib3
 
 
 app = Flask(__name__, template_folder='Frontend', static_folder='Frontend/Static/css')
 
 # Deshabilitar advertencias de SSL para urllib3 (solo para desarrollo)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 @app.route('/')
 def vista():
