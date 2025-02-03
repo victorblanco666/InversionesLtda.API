@@ -79,5 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Vaciar carrito al hacer clic en "Vaciar Carrito"
     
+
+    
     
 });
