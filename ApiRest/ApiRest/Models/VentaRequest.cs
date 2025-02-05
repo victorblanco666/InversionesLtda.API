@@ -3,7 +3,7 @@
     public class VentaRequest
     {
         public int CodBoleta { get; set; }
-        public int CodTarjeta { get; set; }
+        public string CodTransaccion { get; set; } // Clave primaria(numero tarjeta)
         public int ClienteNumRun { get; set; } // RUN del cliente
         public List<DetalleProductoRequest> DetalleProductos { get; set; }
     }

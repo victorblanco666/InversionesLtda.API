@@ -27,8 +27,9 @@ namespace ApiRest.Migrations
                     b.Property<int>("CodBoleta")
                         .HasColumnType("int");
 
-                    b.Property<int>("CodTarjeta")
-                        .HasColumnType("int");
+                    b.Property<string>("CodTransaccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
@@ -43,7 +44,7 @@ namespace ApiRest.Migrations
 
                     b.HasKey("CodBoleta");
 
-                    b.HasIndex("CodTarjeta");
+                    b.HasIndex("CodTransaccion");
 
                     b.ToTable("Boleta");
                 });
@@ -249,14 +250,18 @@ namespace ApiRest.Migrations
 
             modelBuilder.Entity("ApiRest.Models.Tarjeta", b =>
                 {
-                    b.Property<int>("CodTarjeta")
-                        .HasColumnType("int");
+                    b.Property<string>("CodTransaccion")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NombreTransaccion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CodTarjeta");
+                    b.Property<int>("NumTarjeta")
+                        .HasColumnType("int");
+
+                    b.HasKey("CodTransaccion");
 
                     b.ToTable("Tarjeta");
                 });
@@ -280,7 +285,7 @@ namespace ApiRest.Migrations
                 {
                     b.HasOne("ApiRest.Models.Tarjeta", "Tarjeta")
                         .WithMany("Boleta")
-                        .HasForeignKey("CodTarjeta")
+                        .HasForeignKey("CodTransaccion")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

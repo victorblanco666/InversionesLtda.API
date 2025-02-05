@@ -22,7 +22,8 @@ public class TarjetaController : ControllerBase
         var tarjetas = await _context.Tarjeta
             .Select(t => new TarjetaDto
             {
-                CodTarjeta = t.CodTarjeta,
+                CodTransaccion = t.CodTransaccion,
+                NumTarjeta = t.NumTarjeta,
                 NombreTransaccion = t.NombreTransaccion
             })
             .ToListAsync();
@@ -36,7 +37,8 @@ public class TarjetaController : ControllerBase
     {
         var tarjeta = new Tarjeta
         {
-            CodTarjeta = tarjetaDto.CodTarjeta,
+            CodTransaccion = tarjetaDto.CodTransaccion,
+            NumTarjeta = tarjetaDto.NumTarjeta,
             NombreTransaccion = tarjetaDto.NombreTransaccion
         };
 
@@ -45,10 +47,10 @@ public class TarjetaController : ControllerBase
 
         var tarjetaResponse = new TarjetaDto
         {
-            CodTarjeta = tarjeta.CodTarjeta,
+            CodTransaccion = tarjeta.CodTransaccion,
             NombreTransaccion = tarjeta.NombreTransaccion
         };
 
-        return CreatedAtAction(nameof(GetTarjetas), new { id = tarjeta.CodTarjeta }, tarjetaResponse);
+        return CreatedAtAction(nameof(GetTarjetas), new { id = tarjeta.CodTransaccion }, tarjetaResponse);
     }
 }

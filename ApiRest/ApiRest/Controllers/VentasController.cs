@@ -33,7 +33,7 @@ namespace ApiRest.Controllers
             {
                 CodBoleta = ventaDto.CodBoleta,
                 Fecha = DateTime.Now,
-                CodTarjeta = ventaDto.CodTarjeta,
+                CodTransaccion = ventaDto.CodTransaccion,
                 RunCliente = ventaDto.RunCliente, // Asignar el RunCliente
                 Total = totalVenta // Asignar el total calculado
             };

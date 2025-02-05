@@ -1007,7 +1007,11 @@
       "CreateTarjetaDto": {
         "type": "object",
         "properties": {
-          "codTarjeta": {
+          "codTransaccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "numTarjeta": {
             "type": "integer",
             "format": "int32"
           },
@@ -1171,7 +1175,11 @@
       "TarjetaDto": {
         "type": "object",
         "properties": {
-          "codTarjeta": {
+          "codTransaccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "numTarjeta": {
             "type": "integer",
             "format": "int32"
           },
@@ -1189,9 +1197,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "codTarjeta": {
-            "type": "integer",
-            "format": "int32"
+          "codTransaccion": {
+            "type": "string",
+            "nullable": true
           },
           "runCliente": {
             "type": "string",

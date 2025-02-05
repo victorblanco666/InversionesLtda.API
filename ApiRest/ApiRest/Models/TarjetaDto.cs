@@ -2,14 +2,16 @@
 {
     public class TarjetaDto
     {
-        public int CodTarjeta { get; set; }
+        public string CodTransaccion { get; set; } // Clave primaria(numero tarjeta)
+        public int NumTarjeta { get; set; } // Clave primaria(numero tarjeta)
         public string NombreTransaccion { get; set; }
     }
 
     public class CreateTarjetaDto
     {
-        public int CodTarjeta { get; set; }
+        public string CodTransaccion { get; set; } // Clave primaria(numero tarjeta)
+        public int NumTarjeta { get; set; } // Clave primaria(numero tarjeta)
         public string NombreTransaccion { get; set; }
-    }
 
+    }
 }

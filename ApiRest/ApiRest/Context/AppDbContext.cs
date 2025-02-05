@@ -120,15 +120,18 @@ namespace ApiRest.Context
 
             // Configuración de Tarjeta
             modelBuilder.Entity<Tarjeta>()
-                .Property(t => t.CodTarjeta)
-                .ValueGeneratedNever();
+                .HasKey(t => t.CodTransaccion); // Definir la clave primaria
+
             modelBuilder.Entity<Tarjeta>()
-                .HasKey(t => t.CodTarjeta);
+                .Property(t => t.CodTransaccion)
+                .IsRequired()
+                .HasMaxLength(50) // Ajusta el tamaño según la longitud de BuyOrder
+                .ValueGeneratedNever(); // Evita que EF intente generarlo automáticamente
 
             modelBuilder.Entity<Tarjeta>()
                 .HasMany(t => t.Boleta)
                 .WithOne(b => b.Tarjeta)
-                .HasForeignKey(b => b.CodTarjeta)
+                .HasForeignKey(b => b.CodTransaccion)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Configuración de Boleta

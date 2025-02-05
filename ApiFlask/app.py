@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, request ,redirect
-import requests
-import urllib3
+import requests , urllib3 , string , random
+
 
 
 app = Flask(__name__, template_folder='Frontend', static_folder='Frontend/Static/css')
@@ -71,10 +71,14 @@ def vista():
 def pago():
     transbank_url = 'https://localhost:5000/api/Transbank/Crear_transaccion'
 
+    def generar_codigo(prefijo, longitud=8):
+        """Genera un código aleatorio con el prefijo dado y longitud específica."""
+        return f"{prefijo}{''.join(random.choices(string.digits, k=longitud))}"
+
     if request.method == 'POST':
         montoPagar = float(request.form['montoPagar'])
-        buy_order = "ORD12345678"
-        session_id = "SESSION987654"
+        buy_order = generar_codigo("ORD", 8)  # Generar buy_order con formato ORDXXXXXXX
+        session_id = generar_codigo("SESSION", 10)  # Generar session_id con formato SESSIONXXXXXXXXXX
         return_url = "http://127.0.0.1:5001/confirmar_pago"
 
         datos_transbank = {
@@ -129,28 +133,31 @@ def confirmar_transaccion(token):
             data = response.json()
             if data.get("exito"):
                 detalles_transaccion = data.get("data", {})
+                cod_transaccion = detalles_transaccion.get("buyOrder")  # Obtener buyOrder de la respuesta
                 card_number = detalles_transaccion.get("cardDetail", {}).get("cardNumber")
 
-                if card_number:
+                if cod_transaccion and card_number:
+                    cod_transaccion = str(cod_transaccion)  # Convertimos buyOrder a string
                     cod_tarjeta = int(card_number)  # Convertimos a int
 
-                    # 2️⃣ Verificar si la tarjeta ya está registrada
-                    response_verificar = requests.get(f"{tarjeta_url}/{cod_tarjeta}", verify=False)
-                    
+                    # 2️⃣ Verificar si el `codTransaccion` ya está registrado
+                    response_verificar = requests.get(f"{tarjeta_url}/{cod_transaccion}", verify=False)
+
                     if response_verificar.status_code == 200:
-                        print("🔍 La tarjeta ya está registrada, no es necesario volver a insertarla.")
+                        print("🔍 La transacción ya está registrada, no es necesario volver a insertarla.")
                     else:
-                        # 3️⃣ Registrar la tarjeta si no existe
+                        # 3️⃣ Registrar la transacción si no existe
                         datos_tarjeta = {
-                            "codTarjeta": cod_tarjeta,
+                            "codTransaccion": cod_transaccion,
+                            "numTarjeta": cod_tarjeta,
                             "nombreTransaccion": "Compra Online"
                         }
                         response_tarjeta = requests.post(tarjeta_url, json=datos_tarjeta, verify=False)
 
-                        if response_tarjeta.status_code == 200:
-                            print("✅ Tarjeta registrada exitosamente")
+                        if response_tarjeta.status_code == 201:
+                            print("✅ Transacción registrada exitosamente")
                         else:
-                            print(f"⚠️ Error al registrar tarjeta: {response_tarjeta.status_code}")
+                            print(f"⚠️ Error al registrar la transacción: {response_tarjeta.status_code}")
                             print(f"🔍 Respuesta del servidor: {response_tarjeta.text}")  
 
                 return render_template('transaccion_confirmada.html', detalles=detalles_transaccion)
@@ -161,6 +168,7 @@ def confirmar_transaccion(token):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 

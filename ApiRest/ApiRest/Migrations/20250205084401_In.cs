@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ApiRest.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class In : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,12 +41,13 @@ namespace ApiRest.Migrations
                 name: "Tarjeta",
                 columns: table => new
                 {
-                    CodTarjeta = table.Column<int>(type: "int", nullable: false),
+                    CodTransaccion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NumTarjeta = table.Column<int>(type: "int", nullable: false),
                     NombreTransaccion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tarjeta", x => x.CodTarjeta);
+                    table.PrimaryKey("PK_Tarjeta", x => x.CodTransaccion);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,7 +75,7 @@ namespace ApiRest.Migrations
                 {
                     CodBoleta = table.Column<int>(type: "int", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CodTarjeta = table.Column<int>(type: "int", nullable: false),
+                    CodTransaccion = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     Total = table.Column<int>(type: "int", nullable: false),
                     RunCliente = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false)
                 },
@@ -82,10 +83,10 @@ namespace ApiRest.Migrations
                 {
                     table.PrimaryKey("PK_Boleta", x => x.CodBoleta);
                     table.ForeignKey(
-                        name: "FK_Boleta_Tarjeta_CodTarjeta",
-                        column: x => x.CodTarjeta,
+                        name: "FK_Boleta_Tarjeta_CodTransaccion",
+                        column: x => x.CodTransaccion,
                         principalTable: "Tarjeta",
-                        principalColumn: "CodTarjeta",
+                        principalColumn: "CodTransaccion",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -248,9 +249,9 @@ namespace ApiRest.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Boleta_CodTarjeta",
+                name: "IX_Boleta_CodTransaccion",
                 table: "Boleta",
-                column: "CodTarjeta");
+                column: "CodTransaccion");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BoletaCliente_ClienteNumRun",
