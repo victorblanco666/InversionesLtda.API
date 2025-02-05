@@ -82,8 +82,7 @@
               "RelativeToolTip": "ApiRest\\Controllers\\TarjetaController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T22:13:15.489Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T22:13:15.489Z"
             },
             {
               "$type": "Document",
@@ -131,8 +130,7 @@
               "RelativeToolTip": "ApiRest\\Models\\Cliente.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-27T08:33:41.177Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-27T08:33:41.177Z"
             },
             {
               "$type": "Document",
@@ -144,8 +142,7 @@
               "RelativeToolTip": "ApiRest\\Controllers\\ClienteController.cs",
               "ViewState": "AgIAAJIAAAAAAAAAAAAAwKUAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-27T08:33:27.017Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-27T08:33:27.017Z"
             },
             {
               "$type": "Document",
@@ -155,7 +152,7 @@
               "RelativeDocumentMoniker": "ApiRest\\Context\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\InversionesLtda.API\\ApiRest\\ApiRest\\Context\\AppDbContext.cs",
               "RelativeToolTip": "ApiRest\\Context\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-27T08:14:58.076Z",
               "EditorCaption": ""
@@ -182,8 +179,7 @@
               "RelativeToolTip": "ApiRest\\Models\\Boleta.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-27T08:14:51.163Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-27T08:14:51.163Z"
             },
             {
               "$type": "Document",
