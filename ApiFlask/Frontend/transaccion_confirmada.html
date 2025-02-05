@@ -24,22 +24,7 @@
 
     <br>
     <a href="/">Volver al inicio</a>
-    <script>
-        function ejecutarVenta() {
-            fetch('/realizar_venta', { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.mensaje) {
-                        console.log("✅ Venta realizada con éxito");
-                        window.location.href = "/";  // Redirigir al inicio
-                    } else {
-                        console.error("⚠️ Error en la venta:", data.error);
-                        alert("Error al procesar la venta.");
-                    }
-                })
-                .catch(error => console.error("⚠️ Error en la solicitud:", error));
-        }
-    </script>
+   
 </body>
 
 </html>

@@ -70,16 +70,52 @@ def vista():
 @app.route('/pago', methods=['GET', 'POST'])
 def pago():
     transbank_url = 'https://localhost:5000/api/Transbank/Crear_transaccion'
+    cliente_url = 'https://localhost:5000/api/Cliente'
+    region_url = 'https://localhost:5000/api/Region'
+    provincia_url = 'https://localhost:5000/api/Provincia'
+    comuna_url = 'https://localhost:5000/api/Comuna'
 
     def generar_codigo(prefijo, longitud=8):
-        """Genera un código aleatorio con el prefijo dado y longitud específica."""
         return f"{prefijo}{''.join(random.choices(string.digits, k=longitud))}"
+
+    try:
+        response_regiones = requests.get(region_url, verify=False)
+        regiones = response_regiones.json() if response_regiones.status_code == 200 else []
+
+        response_provincias = requests.get(provincia_url, verify=False)
+        provincias = response_provincias.json() if response_provincias.status_code == 200 else []
+
+        response_comunas = requests.get(comuna_url, verify=False)
+        comunas = response_comunas.json() if response_comunas.status_code == 200 else []
+    except requests.exceptions.RequestException as e:
+        return f"Error de conexión: {e}"
 
     if request.method == 'POST':
         montoPagar = float(request.form['montoPagar'])
-        buy_order = generar_codigo("ORD", 8)  # Generar buy_order con formato ORDXXXXXXX
-        session_id = generar_codigo("SESSION", 10)  # Generar session_id con formato SESSIONXXXXXXXXXX
+        buy_order = generar_codigo("ORD", 8)
+        session_id = generar_codigo("SESSION", 10)
         return_url = "http://127.0.0.1:5001/confirmar_pago"
+
+        datos_cliente = {
+            "numRun": int(request.form['numRun']),
+            "dvRun": request.form['dvRun'],
+            "p_Nombre": request.form['p_Nombre'],
+            "s_Nombre": request.form.get('s_Nombre', ''),
+            "a_Paterno": request.form['a_Paterno'],
+            "a_Materno": request.form['a_Materno'],
+            "correo": request.form['correo'],
+            "direccion": request.form['direccion'],
+            "codRegion": int(request.form['codRegion']),
+            "codProvincia": int(request.form['codProvincia']),
+            "codComuna": int(request.form['codComuna'])
+        }
+
+        try:
+            response_cliente = requests.post(cliente_url, json=datos_cliente, verify=False)
+            if response_cliente.status_code != 201:
+                return jsonify({"error": "Error al registrar el cliente"}), 500
+        except Exception as e:
+            return jsonify({"error": f"Error en el registro del cliente: {e}"}), 500
 
         datos_transbank = {
             "buy_order": buy_order,
@@ -94,8 +130,6 @@ def pago():
                 data = response.json()
                 if data.get("exito"):
                     urlCompleta = data["data"].get("urlCompleta")
-                    token = data["data"].get("token")  
-                    
                     if urlCompleta:
                         return redirect(urlCompleta)
                     else:
@@ -107,7 +141,7 @@ def pago():
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-    return render_template('pago.html')
+    return render_template('pago.html', regiones=regiones, provincias=provincias, comunas=comunas)
 
 
 @app.route('/confirmar_pago', methods=['GET'])
@@ -124,7 +158,8 @@ def recibir_token():
 @app.route('/confirmar_transaccion/<token>', methods=['GET'])
 def confirmar_transaccion(token):
     confirmacion_url = f'https://localhost:5000/api/Transbank/Confirmar_transaccion/{token}'
-    tarjeta_url = 'https://localhost:5000/api/Tarjeta'  
+    tarjeta_url = 'https://localhost:5000/api/Tarjeta'
+    venta_url = 'https://localhost:5000/api/Ventas/RealizarVenta'
 
     try:
         # 1️⃣ Hacer el GET para confirmar la transacción
@@ -158,7 +193,30 @@ def confirmar_transaccion(token):
                             print("✅ Transacción registrada exitosamente")
                         else:
                             print(f"⚠️ Error al registrar la transacción: {response_tarjeta.status_code}")
-                            print(f"🔍 Respuesta del servidor: {response_tarjeta.text}")  
+                            print(f"🔍 Respuesta del servidor: {response_tarjeta.text}")
+
+                    # 4️⃣ Registrar la venta después de confirmar la transacción
+                    datos_venta = {
+                        "codBoleta": 1,  # Fijo para pruebas
+                        "codTransaccion": cod_transaccion,
+                        "runCliente": "12345678-9",  # 🔴 DEBES CAMBIAR ESTO POR EL RUN CORRECTO
+                        "detalleProductos": [
+                            {
+                                "codProducto": 1,  # 🔴 DEBES OBTENER ESTO DEL FORMULARIO O CARRITO
+                                "codSucursal": 1,
+                                "cantidad": 2,
+                                "precioUnitario": 10000  # 🔴 DEBES OBTENER EL PRECIO REAL
+                            }
+                        ]
+                    }
+
+                    response_venta = requests.post(venta_url, json=datos_venta, verify=False)
+
+                    if response_venta.status_code == 201:
+                        print("✅ Venta registrada exitosamente")
+                    else:
+                        print(f"⚠️ Error al registrar la venta: {response_venta.status_code}")
+                        print(f"🔍 Respuesta del servidor: {response_venta.text}")
 
                 return render_template('transaccion_confirmada.html', detalles=detalles_transaccion)
             else:
