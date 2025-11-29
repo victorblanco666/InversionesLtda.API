@@ -1,13 +1,13 @@
 ﻿using ApiRest.Context;
+using ApiRest.Dto.Request;
 using ApiRest.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiRest.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ClienteController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -17,169 +17,196 @@ namespace ApiRest.Controllers
             _context = context;
         }
 
+        // Método helper para mapear entidad -> DTO
+        private static ClienteDto MapToDto(Cliente c)
+        {
+            return new ClienteDto
+            {
+                NumRun = c.NumRun,
+                DvRun = c.DvRun,
+                P_Nombre = c.P_Nombre,
+                S_Nombre = c.S_Nombre,
+                A_Paterno = c.A_Paterno,
+                A_Materno = c.A_Materno,
+                Correo = c.Correo,
+                Direccion = c.Direccion,
+                CodRegion = c.CodRegion,
+                CodProvincia = c.CodProvincia,
+                CodComuna = c.CodComuna,
+                UsuarioId = c.UsuarioId
+            };
+        }
+
         // GET: api/Cliente
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ClienteDto>>> GetClientes()
         {
             var clientes = await _context.Cliente
-                .Select(cl => new ClienteDto
-                {
-                    NumRun = cl.NumRun,
-                    DvRun = cl.DvRun,
-                    P_Nombre = cl.P_Nombre,
-                    S_Nombre = cl.S_Nombre,
-                    A_Paterno = cl.A_Paterno,
-                    A_Materno = cl.A_Materno,
-                    Correo = cl.Correo,
-                    Direccion = cl.Direccion,
-                    CodRegion = cl.CodRegion,
-                    CodProvincia = cl.CodProvincia,
-                    CodComuna = cl.CodComuna
-                })
+                // Nota: aquí NO necesitamos Include, sólo usamos las columnas directas
                 .ToListAsync();
 
-            return Ok(clientes);
+            var dtos = clientes.Select(MapToDto).ToList();
+            return Ok(dtos);
         }
 
-        // GET: api/Cliente/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ClienteDto>> GetClienteById(int id)
+        // GET: api/Cliente/12345678
+        [HttpGet("{numRun:int}")]
+        public async Task<ActionResult<ClienteDto>> GetCliente(int numRun)
         {
             var cliente = await _context.Cliente
-                .Where(cl => cl.NumRun == id)
-                .Select(cl => new ClienteDto
-                {
-                    NumRun = cl.NumRun,
-                    DvRun = cl.DvRun,
-                    P_Nombre = cl.P_Nombre,
-                    S_Nombre = cl.S_Nombre,
-                    A_Paterno = cl.A_Paterno,
-                    A_Materno = cl.A_Materno,
-                    Correo = cl.Correo,
-                    Direccion = cl.Direccion,
-                    CodRegion = cl.CodRegion,
-                    CodProvincia = cl.CodProvincia,
-                    CodComuna = cl.CodComuna
-                })
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(c => c.NumRun == numRun);
 
             if (cliente == null)
             {
-                return NotFound();
+                return NotFound(new { mensaje = "Cliente no encontrado." });
             }
 
-            return Ok(cliente);
+            var dto = MapToDto(cliente);
+            return Ok(dto);
         }
 
         // POST: api/Cliente
         [HttpPost]
-        public async Task<ActionResult<ClienteDto>> CreateCliente([FromBody] ClienteDto clienteDto)
+        public async Task<ActionResult<ClienteDto>> CrearCliente([FromBody] ClienteDto dto)
         {
-            // Validar que la región, provincia y comuna existan
-            var regionExists = await _context.Region.AnyAsync(r => r.CodRegion == clienteDto.CodRegion);
-            if (!regionExists)
-                return BadRequest("La región asociada no existe.");
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            var provinciaExists = await _context.Provincia.AnyAsync(p =>
-                p.CodRegion == clienteDto.CodRegion && p.CodProvincia == clienteDto.CodProvincia);
-            if (!provinciaExists)
-                return BadRequest("La provincia asociada no existe.");
+            // Verificar si el cliente ya existe por RUN
+            var existe = await _context.Cliente.AnyAsync(c => c.NumRun == dto.NumRun);
+            if (existe)
+            {
+                return Conflict(new { mensaje = "Ya existe un cliente con ese RUN." });
+            }
 
-            var comunaExists = await _context.Comuna.AnyAsync(c =>
-                c.CodRegion == clienteDto.CodRegion &&
-                c.CodProvincia == clienteDto.CodProvincia &&
-                c.CodComuna == clienteDto.CodComuna);
-            if (!comunaExists)
-                return BadRequest("La comuna asociada no existe.");
+            // Validar Región / Provincia / Comuna (igual que antes)
+            var region = await _context.Region.FindAsync(dto.CodRegion);
+            if (region == null)
+                return BadRequest(new { mensaje = "La región especificada no existe." });
+
+            var provincia = await _context.Provincia
+                .FirstOrDefaultAsync(p => p.CodRegion == dto.CodRegion && p.CodProvincia == dto.CodProvincia);
+            if (provincia == null)
+                return BadRequest(new { mensaje = "La provincia especificada no existe." });
+
+            var comuna = await _context.Comuna
+                .FirstOrDefaultAsync(c => c.CodRegion == dto.CodRegion
+                                        && c.CodProvincia == dto.CodProvincia
+                                        && c.CodComuna == dto.CodComuna);
+            if (comuna == null)
+                return BadRequest(new { mensaje = "La comuna especificada no existe." });
+
+            // Opcional: validar UsuarioId si viene
+            if (dto.UsuarioId.HasValue)
+            {
+                var usuario = await _context.Usuario.FindAsync(dto.UsuarioId.Value);
+                if (usuario == null)
+                    return BadRequest(new { mensaje = "El usuario asociado no existe." });
+            }
 
             var cliente = new Cliente
             {
-                NumRun = clienteDto.NumRun,
-                DvRun = clienteDto.DvRun,
-                P_Nombre = clienteDto.P_Nombre,
-                S_Nombre = clienteDto.S_Nombre,
-                A_Paterno = clienteDto.A_Paterno,
-                A_Materno = clienteDto.A_Materno,
-                Correo = clienteDto.Correo,
-                Direccion = clienteDto.Direccion,
-                CodRegion = clienteDto.CodRegion,
-                CodProvincia = clienteDto.CodProvincia,
-                CodComuna = clienteDto.CodComuna
+                NumRun = dto.NumRun,
+                DvRun = dto.DvRun,
+                P_Nombre = dto.P_Nombre,
+                S_Nombre = dto.S_Nombre,
+                A_Paterno = dto.A_Paterno,
+                A_Materno = dto.A_Materno,
+                Correo = dto.Correo,
+                Direccion = dto.Direccion,
+                CodRegion = dto.CodRegion,
+                CodProvincia = dto.CodProvincia,
+                CodComuna = dto.CodComuna,
+                UsuarioId = dto.UsuarioId
             };
 
             _context.Cliente.Add(cliente);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetClienteById), new { id = cliente.NumRun }, clienteDto);
+            var creadoDto = MapToDto(cliente);
+
+            // CreatedAtAction con DTO (no con la entidad)
+            return CreatedAtAction(nameof(GetCliente), new { numRun = creadoDto.NumRun }, creadoDto);
         }
 
-        // PUT: api/Cliente/{id}
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCliente(int id, [FromBody] ClienteDto clienteDto)
+        // PUT: api/Cliente/12345678
+        [HttpPut("{numRun:int}")]
+        public async Task<ActionResult> ActualizarCliente(int numRun, [FromBody] ClienteDto dto)
         {
-            if (id != clienteDto.NumRun)
-            {
-                return BadRequest("El ID del cliente no coincide.");
-            }
+            if (numRun != dto.NumRun)
+                return BadRequest(new { mensaje = "El RUN de la URL no coincide con el del cuerpo." });
 
-            var cliente = await _context.Cliente.FindAsync(id);
+            var cliente = await _context.Cliente.FirstOrDefaultAsync(c => c.NumRun == numRun);
             if (cliente == null)
+                return NotFound(new { mensaje = "Cliente no encontrado." });
+
+            // Validar territorios
+            var region = await _context.Region.FindAsync(dto.CodRegion);
+            if (region == null)
+                return BadRequest(new { mensaje = "La región especificada no existe." });
+
+            var provincia = await _context.Provincia
+                .FirstOrDefaultAsync(p => p.CodRegion == dto.CodRegion && p.CodProvincia == dto.CodProvincia);
+            if (provincia == null)
+                return BadRequest(new { mensaje = "La provincia especificada no existe." });
+
+            var comuna = await _context.Comuna
+                .FirstOrDefaultAsync(c => c.CodRegion == dto.CodRegion
+                                        && c.CodProvincia == dto.CodProvincia
+                                        && c.CodComuna == dto.CodComuna);
+            if (comuna == null)
+                return BadRequest(new { mensaje = "La comuna especificada no existe." });
+
+            // Usuario opcional
+            if (dto.UsuarioId.HasValue)
             {
-                return NotFound();
+                var usuario = await _context.Usuario.FindAsync(dto.UsuarioId.Value);
+                if (usuario == null)
+                    return BadRequest(new { mensaje = "El usuario asociado no existe." });
+
+                cliente.UsuarioId = dto.UsuarioId;
+            }
+            else
+            {
+                cliente.UsuarioId = null;
             }
 
-            // Actualizar los datos del cliente
-            cliente.DvRun = clienteDto.DvRun;
-            cliente.P_Nombre = clienteDto.P_Nombre;
-            cliente.S_Nombre = clienteDto.S_Nombre;
-            cliente.A_Paterno = clienteDto.A_Paterno;
-            cliente.A_Materno = clienteDto.A_Materno;
-            cliente.Correo = clienteDto.Correo;
-            cliente.Direccion = clienteDto.Direccion;
-            cliente.CodRegion = clienteDto.CodRegion;
-            cliente.CodProvincia = clienteDto.CodProvincia;
-            cliente.CodComuna = clienteDto.CodComuna;
+            // Actualizar campos
+            cliente.DvRun = dto.DvRun;
+            cliente.P_Nombre = dto.P_Nombre;
+            cliente.S_Nombre = dto.S_Nombre;
+            cliente.A_Paterno = dto.A_Paterno;
+            cliente.A_Materno = dto.A_Materno;
+            cliente.Correo = dto.Correo;
+            cliente.Direccion = dto.Direccion;
+            cliente.CodRegion = dto.CodRegion;
+            cliente.CodProvincia = dto.CodProvincia;
+            cliente.CodComuna = dto.CodComuna;
 
-            _context.Entry(cliente).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClienteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // DELETE: api/Cliente/{id}
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCliente(int id)
-        {
-            var cliente = await _context.Cliente.FindAsync(id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-
-            _context.Cliente.Remove(cliente);
+            _context.Cliente.Update(cliente);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ClienteExists(int id)
+        // DELETE: api/Cliente/12345678
+        [HttpDelete("{numRun:int}")]
+        public async Task<ActionResult> EliminarCliente(int numRun)
         {
-            return _context.Cliente.Any(cl => cl.NumRun == id);
+            var cliente = await _context.Cliente
+                .Include(c => c.Boletas)
+                .FirstOrDefaultAsync(c => c.NumRun == numRun);
+
+            if (cliente == null)
+                return NotFound(new { mensaje = "Cliente no encontrado." });
+
+            if (cliente.Boletas != null && cliente.Boletas.Any())
+                return BadRequest(new { mensaje = "No se puede eliminar un cliente con boletas asociadas." });
+
+            _context.Cliente.Remove(cliente);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

@@ -25,19 +25,28 @@ namespace ApiRest.Migrations
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
                     b.Property<int>("CodBoleta")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodBoleta"));
 
                     b.Property<string>("CodTransaccion")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("CorreoContacto")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("EsInvitada")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RunCliente")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                    b.Property<int>("RunCliente")
+                        .HasColumnType("int");
 
                     b.Property<int>("Total")
                         .HasColumnType("int");
@@ -45,6 +54,8 @@ namespace ApiRest.Migrations
                     b.HasKey("CodBoleta");
 
                     b.HasIndex("CodTransaccion");
+
+                    b.HasIndex("RunCliente");
 
                     b.ToTable("Boleta");
                 });
@@ -56,11 +67,13 @@ namespace ApiRest.Migrations
 
                     b.Property<string>("A_Materno")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("A_Paterno")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("CodComuna")
                         .HasColumnType("int");
@@ -73,25 +86,37 @@ namespace ApiRest.Migrations
 
                     b.Property<string>("Correo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("DvRun")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("P_Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("S_Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("int");
 
                     b.HasKey("NumRun");
+
+                    b.HasIndex("UsuarioId")
+                        .IsUnique()
+                        .HasFilter("[UsuarioId] IS NOT NULL");
 
                     b.HasIndex("CodRegion", "CodProvincia", "CodComuna");
 
@@ -120,8 +145,11 @@ namespace ApiRest.Migrations
 
             modelBuilder.Entity("ApiRest.Models.DetalleBoleta", b =>
                 {
-                    b.Property<string>("CodDetalle")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
@@ -135,7 +163,7 @@ namespace ApiRest.Migrations
                     b.Property<int>("PrecioUnitario")
                         .HasColumnType("int");
 
-                    b.HasKey("CodDetalle");
+                    b.HasKey("Id");
 
                     b.HasIndex("CodBoleta");
 
@@ -194,6 +222,24 @@ namespace ApiRest.Migrations
                     b.HasKey("CodRegion");
 
                     b.ToTable("Region");
+                });
+
+            modelBuilder.Entity("ApiRest.Models.Rol", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rol");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Stock", b =>
@@ -261,33 +307,76 @@ namespace ApiRest.Migrations
                     b.Property<int>("NumTarjeta")
                         .HasColumnType("int");
 
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.HasKey("CodTransaccion");
 
                     b.ToTable("Tarjeta");
                 });
 
-            modelBuilder.Entity("BoletaCliente", b =>
+            modelBuilder.Entity("ApiRest.Models.Usuario", b =>
                 {
-                    b.Property<int>("BoletaCodBoleta")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ClienteNumRun")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("ApiRest.Models.UsuarioRol", b =>
+                {
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.HasKey("BoletaCodBoleta", "ClienteNumRun");
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ClienteNumRun");
+                    b.HasKey("UsuarioId", "RolId");
 
-                    b.ToTable("BoletaCliente");
+                    b.HasIndex("RolId");
+
+                    b.ToTable("UsuarioRol");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
                     b.HasOne("ApiRest.Models.Tarjeta", "Tarjeta")
-                        .WithMany("Boleta")
+                        .WithMany()
                         .HasForeignKey("CodTransaccion")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApiRest.Models.Cliente", "Cliente")
+                        .WithMany("Boletas")
+                        .HasForeignKey("RunCliente")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Cliente");
 
                     b.Navigation("Tarjeta");
                 });
@@ -295,19 +384,24 @@ namespace ApiRest.Migrations
             modelBuilder.Entity("ApiRest.Models.Cliente", b =>
                 {
                     b.HasOne("ApiRest.Models.Region", "Region")
-                        .WithMany("Cliente")
+                        .WithMany()
                         .HasForeignKey("CodRegion")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ApiRest.Models.Usuario", "Usuario")
+                        .WithOne("Cliente")
+                        .HasForeignKey("ApiRest.Models.Cliente", "UsuarioId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("ApiRest.Models.Provincia", "Provincia")
-                        .WithMany("Cliente")
+                        .WithMany()
                         .HasForeignKey("CodRegion", "CodProvincia")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ApiRest.Models.Comuna", "Comuna")
-                        .WithMany("Cliente")
+                        .WithMany()
                         .HasForeignKey("CodRegion", "CodProvincia", "CodComuna")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -317,6 +411,8 @@ namespace ApiRest.Migrations
                     b.Navigation("Provincia");
 
                     b.Navigation("Region");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Comuna", b =>
@@ -333,15 +429,15 @@ namespace ApiRest.Migrations
             modelBuilder.Entity("ApiRest.Models.DetalleBoleta", b =>
                 {
                     b.HasOne("ApiRest.Models.Boleta", "Boleta")
-                        .WithMany("DetalleBoleta")
+                        .WithMany("Detalles")
                         .HasForeignKey("CodBoleta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ApiRest.Models.Producto", "Producto")
-                        .WithMany("DetalleBoleta")
+                        .WithMany()
                         .HasForeignKey("CodProducto")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Boleta");
@@ -390,52 +486,58 @@ namespace ApiRest.Migrations
                     b.Navigation("Comuna");
                 });
 
-            modelBuilder.Entity("BoletaCliente", b =>
+            modelBuilder.Entity("ApiRest.Models.UsuarioRol", b =>
                 {
-                    b.HasOne("ApiRest.Models.Boleta", null)
-                        .WithMany()
-                        .HasForeignKey("BoletaCodBoleta")
+                    b.HasOne("ApiRest.Models.Rol", "Rol")
+                        .WithMany("UsuarioRoles")
+                        .HasForeignKey("RolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApiRest.Models.Cliente", null)
-                        .WithMany()
-                        .HasForeignKey("ClienteNumRun")
+                    b.HasOne("ApiRest.Models.Usuario", "Usuario")
+                        .WithMany("UsuarioRoles")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Rol");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Boleta", b =>
                 {
-                    b.Navigation("DetalleBoleta");
+                    b.Navigation("Detalles");
+                });
+
+            modelBuilder.Entity("ApiRest.Models.Cliente", b =>
+                {
+                    b.Navigation("Boletas");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Comuna", b =>
                 {
-                    b.Navigation("Cliente");
-
                     b.Navigation("Sucursal");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Producto", b =>
                 {
-                    b.Navigation("DetalleBoleta");
-
                     b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Provincia", b =>
                 {
-                    b.Navigation("Cliente");
-
                     b.Navigation("Comuna");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Region", b =>
                 {
-                    b.Navigation("Cliente");
-
                     b.Navigation("Provincia");
+                });
+
+            modelBuilder.Entity("ApiRest.Models.Rol", b =>
+                {
+                    b.Navigation("UsuarioRoles");
                 });
 
             modelBuilder.Entity("ApiRest.Models.Sucursal", b =>
@@ -443,9 +545,12 @@ namespace ApiRest.Migrations
                     b.Navigation("Stock");
                 });
 
-            modelBuilder.Entity("ApiRest.Models.Tarjeta", b =>
+            modelBuilder.Entity("ApiRest.Models.Usuario", b =>
                 {
-                    b.Navigation("Boleta");
+                    b.Navigation("Cliente")
+                        .IsRequired();
+
+                    b.Navigation("UsuarioRoles");
                 });
 #pragma warning restore 612, 618
         }

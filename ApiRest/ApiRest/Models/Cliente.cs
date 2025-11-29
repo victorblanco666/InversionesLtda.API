@@ -2,26 +2,32 @@
 {
     public class Cliente
     {
-        public int NumRun { get; set; } // Clave primaria manual (Run del cliente)
-        public string DvRun { get; set; } // Dígito verificador
-        public string P_Nombre { get; set; } // Primer nombre
-        public string S_Nombre { get; set; } // Segundo nombre
-        public string A_Paterno { get; set; } // Apellido paterno
-        public string A_Materno { get; set; } // Apellido materno
-        public string Correo { get; set; } // Correo electrónico
-        public string Direccion { get; set; } // Dirección
+        public int NumRun { get; set; }             // PK (RUN numérico)
+        public string DvRun { get; set; }           // DV (k o número)
 
-        // Relación con Region
-        public int CodRegion { get; set; } // FK con Region
-        public Region Region { get; set; } // Relación uno a muchos
+        public string P_Nombre { get; set; }
+        public string S_Nombre { get; set; }
+        public string A_Paterno { get; set; }
+        public string A_Materno { get; set; }
 
-        // Relación con Provincia
-        public int CodProvincia { get; set; } // FK con Provincia
-        public Provincia Provincia { get; set; } // Relación uno a muchos
+        public string Correo { get; set; }          // correo "principal"
+        public string Direccion { get; set; }
 
-        // Relación con Comuna
-        public int CodComuna { get; set; } // FK con Comuna
-        public Comuna Comuna { get; set; } // Relación uno a muchos
-        public ICollection<Boleta> Boleta { get; set; }
+        // Territorio
+        public int CodRegion { get; set; }
+        public Region Region { get; set; }
+
+        public int CodProvincia { get; set; }
+        public Provincia Provincia { get; set; }
+
+        public int CodComuna { get; set; }
+        public Comuna Comuna { get; set; }
+
+        // Relación opcional con Usuario (null = compró como invitado / sin cuenta)
+        public int? UsuarioId { get; set; }
+        public Usuario Usuario { get; set; }
+
+        // Navegación a Boletas
+        public ICollection<Boleta> Boletas { get; set; }
     }
 }

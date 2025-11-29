@@ -1,21 +1,54 @@
-from flask import Flask, jsonify, render_template, request ,redirect
-import requests , urllib3 , string , random
+from flask import Flask, jsonify, render_template, request, redirect, session, url_for
+import requests
+import urllib3
+import string
+import random
+import json  # 👈 importante
+from datetime import datetime
 
+from functools import wraps
 
-
+# Flask config
 app = Flask(__name__, template_folder='Frontend', static_folder='Frontend/Static/css')
+
+# Clave para usar sesiones (SOLO DESARROLLO, cámbiala en producción)
+app.secret_key = "dev-unishop-secret-key"
 
 # Deshabilitar advertencias de SSL para urllib3 (solo para desarrollo)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'usuario' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        usuario = session.get('usuario')
+        roles = usuario.get('roles', []) if usuario else []
+        if 'Admin' not in roles:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+
+
+
 @app.route('/')
 def vista():
-    productos_url = 'https://localhost:5000/api/producto'
-    region_url = 'https://localhost:5000/api/Region'
-    provincia_url = 'https://localhost:5000/api/Provincia'
-    comuna_url = 'https://localhost:5000/api/Comuna'
-    sucursal_url = 'https://localhost:5000/api/Sucursal'
-    stock_url = 'https://localhost:5000/api/Stock'  # NUEVA URL PARA STOCK
+    base_url = 'https://localhost:5000/api'
+    productos_url = f'{base_url}/Producto'
+    region_url = f'{base_url}/Region'
+    provincia_url = f'{base_url}/Provincia'
+    comuna_url = f'{base_url}/Comuna'
+    sucursal_url = f'{base_url}/Sucursal'
+    stock_url = f'{base_url}/Stock'  # URL PARA STOCK
 
     try:
         # Obtener regiones
@@ -69,15 +102,17 @@ def vista():
 
 @app.route('/pago', methods=['GET', 'POST'])
 def pago():
-    transbank_url = 'https://localhost:5000/api/Transbank/Crear_transaccion'
-    cliente_url = 'https://localhost:5000/api/Cliente'
-    region_url = 'https://localhost:5000/api/Region'
-    provincia_url = 'https://localhost:5000/api/Provincia'
-    comuna_url = 'https://localhost:5000/api/Comuna'
+    base_url = 'https://localhost:5000/api'
+    transbank_url = f'{base_url}/Transbank/Crear_transaccion'
+    cliente_url = f'{base_url}/Cliente'
+    region_url = f'{base_url}/Region'
+    provincia_url = f'{base_url}/Provincia'
+    comuna_url = f'{base_url}/Comuna'
 
     def generar_codigo(prefijo, longitud=8):
         return f"{prefijo}{''.join(random.choices(string.digits, k=longitud))}"
 
+    # Cargar datos de región/provincia/comuna para el formulario
     try:
         response_regiones = requests.get(region_url, verify=False)
         regiones = response_regiones.json() if response_regiones.status_code == 200 else []
@@ -91,11 +126,27 @@ def pago():
         return f"Error de conexión: {e}"
 
     if request.method == 'POST':
+        # 🔹 Carrito real enviado desde pago.html en carrito_json (hidden)
+        carrito_json = request.form.get('carrito_json', '[]')
+        try:
+            carrito = json.loads(carrito_json)
+        except json.JSONDecodeError:
+            carrito = []
+
+        if not carrito:
+            return jsonify({"error": "El carrito está vacío o no se pudo leer."}), 400
+
+        # Guardamos el carrito en sesión para usarlo al confirmar la transacción
+        session['carrito'] = carrito
+
+        # 🔹 Monto total a pagar (proviene del formulario, calculado en frontend)
         montoPagar = float(request.form['montoPagar'])
+
         buy_order = generar_codigo("ORD", 8)
         session_id = generar_codigo("SESSION", 10)
         return_url = "http://127.0.0.1:5001/confirmar_pago"
 
+        # Datos del cliente desde el formulario
         datos_cliente = {
             "numRun": int(request.form['numRun']),
             "dvRun": request.form['dvRun'],
@@ -108,15 +159,22 @@ def pago():
             "codRegion": int(request.form['codRegion']),
             "codProvincia": int(request.form['codProvincia']),
             "codComuna": int(request.form['codComuna'])
+            # usuarioId no se envía (cliente invitado)
         }
 
+        # 🔹 Guardamos datos del cliente en sesión para usarlos luego al crear la Boleta
+        session['cliente'] = datos_cliente
+
         try:
+            # Registrar/actualizar cliente en la API
             response_cliente = requests.post(cliente_url, json=datos_cliente, verify=False)
-            if response_cliente.status_code != 201:
+            # Si ya existe (409), lo consideramos ok para efectos de flujo
+            if response_cliente.status_code not in (200, 201, 409):
                 return jsonify({"error": "Error al registrar el cliente"}), 500
         except Exception as e:
             return jsonify({"error": f"Error en el registro del cliente: {e}"}), 500
 
+        # Datos para iniciar transacción con Transbank
         datos_transbank = {
             "buy_order": buy_order,
             "session_id": session_id,
@@ -147,88 +205,325 @@ def pago():
 @app.route('/confirmar_pago', methods=['GET'])
 def recibir_token():
     """Recibe el token de Transbank después del pago y redirige a la confirmación."""
-    token = request.args.get('token_ws')  
-    
+    token = request.args.get('token_ws')
+
     if not token:
         return jsonify({"error": "No se recibió token de transacción"}), 400
 
-    return redirect(f"/confirmar_transaccion/{token}")  
+    return redirect(f"/confirmar_transaccion/{token}")
 
 
 @app.route('/confirmar_transaccion/<token>', methods=['GET'])
 def confirmar_transaccion(token):
-    confirmacion_url = f'https://localhost:5000/api/Transbank/Confirmar_transaccion/{token}'
-    tarjeta_url = 'https://localhost:5000/api/Tarjeta'
-    venta_url = 'https://localhost:5000/api/Ventas/RealizarVenta'
+    base_url = 'https://localhost:5000/api'
+    confirmacion_url = f'{base_url}/Transbank/Confirmar_transaccion/{token}'
+    tarjeta_url = f'{base_url}/Tarjeta'
+    boleta_url = f'{base_url}/Boleta'
 
     try:
-        # 1️⃣ Hacer el GET para confirmar la transacción
+        # 1️⃣ Confirmar la transacción con TransbankController
         response = requests.get(confirmacion_url, verify=False)
-        if response.status_code == 200:
-            data = response.json()
-            if data.get("exito"):
-                detalles_transaccion = data.get("data", {})
-                cod_transaccion = detalles_transaccion.get("buyOrder")  # Obtener buyOrder de la respuesta
-                card_number = detalles_transaccion.get("cardDetail", {}).get("cardNumber")
-
-                if cod_transaccion and card_number:
-                    cod_transaccion = str(cod_transaccion)  # Convertimos buyOrder a string
-                    cod_tarjeta = int(card_number)  # Convertimos a int
-
-                    # 2️⃣ Verificar si el `codTransaccion` ya está registrado
-                    response_verificar = requests.get(f"{tarjeta_url}/{cod_transaccion}", verify=False)
-
-                    if response_verificar.status_code == 200:
-                        print("🔍 La transacción ya está registrada, no es necesario volver a insertarla.")
-                    else:
-                        # 3️⃣ Registrar la transacción si no existe
-                        datos_tarjeta = {
-                            "codTransaccion": cod_transaccion,
-                            "numTarjeta": cod_tarjeta,
-                            "nombreTransaccion": "Compra Online"
-                        }
-                        response_tarjeta = requests.post(tarjeta_url, json=datos_tarjeta, verify=False)
-
-                        if response_tarjeta.status_code == 201:
-                            print("✅ Transacción registrada exitosamente")
-                        else:
-                            print(f"⚠️ Error al registrar la transacción: {response_tarjeta.status_code}")
-                            print(f"🔍 Respuesta del servidor: {response_tarjeta.text}")
-
-                    # 4️⃣ Registrar la venta después de confirmar la transacción
-                    datos_venta = {
-                        "codBoleta": 1,  # Fijo para pruebas
-                        "codTransaccion": cod_transaccion,
-                        "runCliente": "12345678-9",  # 🔴 DEBES CAMBIAR ESTO POR EL RUN CORRECTO
-                        "detalleProductos": [
-                            {
-                                "codProducto": 1,  # 🔴 DEBES OBTENER ESTO DEL FORMULARIO O CARRITO
-                                "codSucursal": 1,
-                                "cantidad": 2,
-                                "precioUnitario": 10000  # 🔴 DEBES OBTENER EL PRECIO REAL
-                            }
-                        ]
-                    }
-
-                    response_venta = requests.post(venta_url, json=datos_venta, verify=False)
-
-                    if response_venta.status_code == 201:
-                        print("✅ Venta registrada exitosamente")
-                    else:
-                        print(f"⚠️ Error al registrar la venta: {response_venta.status_code}")
-                        print(f"🔍 Respuesta del servidor: {response_venta.text}")
-
-                return render_template('transaccion_confirmada.html', detalles=detalles_transaccion)
-            else:
-                return jsonify({"error": data.get("mensaje", "Error al confirmar la transacción")}), 500
-        else:
+        if response.status_code != 200:
             return jsonify({"error": f"Error al confirmar la transacción: {response.status_code}"}), 500
+
+        data = response.json()
+        if not data.get("exito"):
+            return jsonify({"error": data.get("mensaje", "Error al confirmar la transacción")}), 500
+
+        detalles_transaccion = data.get("data", {})
+        cod_transaccion = detalles_transaccion.get("buyOrder")  # buyOrder
+        card_number = detalles_transaccion.get("cardDetail", {}).get("cardNumber")
+
+        if not cod_transaccion or not card_number:
+            return jsonify({"error": "No se pudo obtener la información de la transacción"}), 500
+
+        cod_transaccion = str(cod_transaccion)
+        cod_tarjeta = int(card_number)
+
+        # 2️⃣ Verificar si la transacción ya está registrada en Tarjeta
+        response_verificar = requests.get(f"{tarjeta_url}/{cod_transaccion}", verify=False)
+
+        if response_verificar.status_code != 200:
+            # 3️⃣ Registrar la transacción si no existe
+            datos_tarjeta = {
+                "codTransaccion": cod_transaccion,
+                "numTarjeta": cod_tarjeta,
+                "nombreTransaccion": "Compra Online",
+                "token": token  # 👈 TOKEN de WEBPAY guardado en BD
+            }
+            response_tarjeta = requests.post(tarjeta_url, json=datos_tarjeta, verify=False)
+
+            if response_tarjeta.status_code not in (200, 201):
+                print(f"⚠️ Error al registrar la transacción: {response_tarjeta.status_code}")
+                print(f"🔍 Respuesta del servidor: {response_tarjeta.text}")
+
+        # 4️⃣ Crear la Boleta en la API usando BoletaController
+        cliente_session = session.get('cliente')
+        carrito = session.get('carrito', [])
+
+        if not cliente_session:
+            return jsonify({
+                "error": "No se encontraron datos de cliente en sesión. No se puede emitir la boleta."
+            }), 400
+
+        if not carrito:
+            return jsonify({
+                "error": "No se encontró el carrito en sesión. No se puede emitir la boleta."
+            }), 400
+
+        num_run = cliente_session.get("numRun")
+        dv_run = cliente_session.get("dvRun")
+        correo = cliente_session.get("correo")
+
+        if not num_run or not dv_run:
+            return jsonify({"error": "Datos de RUN del cliente incompletos."}), 400
+
+        # Asumimos que todos los ítems salen de la misma sucursal (la del primer item)
+        cod_sucursal = carrito[0].get('codSucursal', 1)
+
+        # Construir los detalles para Boleta (solo codProducto y cantidad, sucursal va en la boleta)
+        detalles = []
+        for item in carrito:
+            detalles.append({
+                "codProducto": item["codProducto"],
+                "cantidad": item["cantidad"]
+            })
+
+        datos_boleta = {
+            "numRun": num_run,
+            "dvRun": dv_run,
+            "correoContacto": correo,
+            "esInvitada": True,          # cuando tengas login, podrás cambiar esto
+            "codSucursal": cod_sucursal,
+            "codTransaccion": cod_transaccion,
+            "detalles": detalles
+        }
+
+        response_boleta = requests.post(boleta_url, json=datos_boleta, verify=False)
+
+        if response_boleta.status_code not in (200, 201):
+            print(f"⚠️ Error al crear la boleta: {response_boleta.status_code}")
+            print(f"🔍 Respuesta del servidor: {response_boleta.text}")
+        else:
+            print("✅ Boleta creada correctamente en la API.")
+
+        # 5️⃣ Renderizar la vista de confirmación
+        return render_template('transaccion_confirmada.html', detalles=detalles_transaccion)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    base_url = 'https://localhost:5000/api'
+    login_url = f'{base_url}/Auth/Login'
+    error = None
+
+    if request.method == 'POST':
+        username_or_email = request.form.get('usernameOrEmail')
+        password = request.form.get('password')
+
+        payload = {
+            "usernameOrEmail": username_or_email,
+            "password": password
+        }
+
+        try:
+            resp = requests.post(login_url, json=payload, verify=False)
+            if resp.status_code == 200:
+                data = resp.json()
+                if data.get("exito"):
+                    user_data = data.get("data", {})
+                    # Guardamos usuario en sesión
+                    session['usuario'] = {
+                        "id": user_data.get("usuarioId"),
+                        "username": user_data.get("username"),
+                        "email": user_data.get("email"),
+                        "roles": user_data.get("roles", [])
+                    }
+
+                    # Si es admin, lo mandamos al panel admin
+                    roles = user_data.get("roles", [])
+                    if "Admin" in roles:
+                        return redirect(url_for('admin_dashboard'))
+                    else:
+                        return redirect(url_for('vista'))
+                else:
+                    error = data.get("mensaje", "Credenciales incorrectas.")
+            else:
+                error = f"Error en el servidor de autenticación ({resp.status_code})."
+        except Exception as e:
+            error = f"Error de conexión al autenticar: {e}"
+
+    return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    session.pop('usuario', None)
+    return redirect(url_for('vista'))
+# 🔹 NUEVA RUTA: PANEL ADMIN
 
 
+@app.route('/password_reset', methods=['GET', 'POST'])
+def password_reset():
+    base_url = 'https://localhost:5000/api'
+    reset_url = f'{base_url}/Auth/ResetPassword'
+    error = None
+    success = None
+
+    if request.method == 'POST':
+        username_or_email = request.form.get('usernameOrEmail')
+        new_password = request.form.get('newPassword')
+        new_password2 = request.form.get('newPassword2')
+
+        if new_password != new_password2:
+            error = "Las contraseñas no coinciden."
+        else:
+            payload = {
+                "usernameOrEmail": username_or_email,
+                "newPassword": new_password
+            }
+            try:
+                resp = requests.post(reset_url, json=payload, verify=False)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if data.get("exito"):
+                        success = "Contraseña actualizada correctamente. Ahora puedes iniciar sesión."
+                    else:
+                        error = data.get("mensaje", "No se pudo actualizar la contraseña.")
+                else:
+                    data = {}
+                    try:
+                        data = resp.json()
+                    except Exception:
+                        pass
+                    error = data.get("mensaje", f"Error al actualizar contraseña ({resp.status_code}).")
+            except Exception as e:
+                error = f"Error de conexión al actualizar contraseña: {e}"
+
+    return render_template('password_reset.html', error=error, success=success)
+
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    base_url = 'https://localhost:5000/api'
+    register_url = f'{base_url}/Auth/Register'
+    error = None
+    success = None
+
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        password2 = request.form.get('password2')
+
+        if password != password2:
+            error = "Las contraseñas no coinciden."
+        else:
+            payload = {
+                "username": username,
+                "email": email,
+                "password": password
+            }
+            try:
+                resp = requests.post(register_url, json=payload, verify=False)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if data.get("exito"):
+                        success = "Usuario registrado correctamente. Ahora puedes iniciar sesión."
+                    else:
+                        error = data.get("mensaje", "No se pudo registrar el usuario.")
+                else:
+                    data = {}
+                    try:
+                        data = resp.json()
+                    except Exception:
+                        pass
+                    error = data.get("mensaje", f"Error al registrar usuario ({resp.status_code}).")
+            except Exception as e:
+                error = f"Error de conexión al registrar: {e}"
+
+    return render_template('signup.html', error=error, success=success)
+
+
+
+
+
+@app.route('/admin')
+@admin_required
+def admin_dashboard():
+    """
+    Vista de administrador: muestra métricas básicas del negocio
+    + arreglo ventas_mensuales (enero a diciembre).
+    """
+    base_url = 'https://localhost:5000/api'
+    boleta_url = f'{base_url}/Boleta'
+    cliente_url = f'{base_url}/Cliente'
+    producto_url = f'{base_url}/Producto'
+
+    total_ventas = 0
+    total_boletas = 0
+    total_clientes = 0
+    total_productos = 0
+
+    # 12 posiciones: índice 0 = Enero, 11 = Diciembre
+    ventas_mensuales = [0] * 12
+
+    try:
+        # 🔹 Obtener boletas
+        resp_boletas = requests.get(boleta_url, verify=False)
+        boletas = resp_boletas.json() if resp_boletas.status_code == 200 else []
+
+        # 🔹 Obtener clientes
+        resp_clientes = requests.get(cliente_url, verify=False)
+        clientes = resp_clientes.json() if resp_clientes.status_code == 200 else []
+
+        # 🔹 Obtener productos
+        resp_productos = requests.get(producto_url, verify=False)
+        productos = resp_productos.json() if resp_productos.status_code == 200 else []
+
+        # Métricas simples
+        total_boletas = len(boletas)
+        total_clientes = len(clientes)
+        total_productos = len(productos)
+
+        # 🔹 Calcular total_ventas y ventas por mes
+        for b in boletas:
+            # Ajusta "total" si tu propiedad en C# se llama distinto
+            monto = int(b.get("total", 0) or 0)
+            total_ventas += monto
+
+            # Tratamos de leer alguna propiedad de fecha típica
+            fecha_str = (
+                b.get("fechaBoleta")
+                or b.get("fechaEmision")
+                or b.get("fecha")
+            )
+
+            if fecha_str:
+                try:
+                    # Si viene con 'Z' al final tipo ISO, la quitamos
+                    fecha_clean = str(fecha_str).replace('Z', '')
+                    fecha = datetime.fromisoformat(fecha_clean)
+                    mes_idx = fecha.month - 1  # 0-based: enero = 0
+                    if 0 <= mes_idx < 12:
+                        ventas_mensuales[mes_idx] += monto
+                except Exception as e:
+                    # Si alguna fecha viene en un formato raro, la ignoramos
+                    print(f"Error parseando fecha de boleta ({fecha_str}): {e}")
+
+        return render_template(
+            'admin_dashboard.html',
+            total_boletas=total_boletas,
+            total_clientes=total_clientes,
+            total_productos=total_productos,
+            total_ventas=total_ventas,
+            ventas_mensuales=ventas_mensuales  # 👈 arreglo entero para el gráfico
+        )
+
+    except requests.exceptions.RequestException as e:
+        return f"Error de conexión al cargar panel admin: {e}"
 
 
 

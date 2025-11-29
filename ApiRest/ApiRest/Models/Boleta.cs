@@ -2,14 +2,25 @@
 {
     public class Boleta
     {
-        public int CodBoleta { get; set; } // Clave primaria
-        public DateTime Fecha { get; set; } // Fecha de la transacción
-        public string CodTransaccion { get; set; } // FK hacia Tarjeta (opcional)
-        public Tarjeta Tarjeta { get; set; } // Relación con Tarjeta
-        public ICollection<DetalleBoleta> DetalleBoleta { get; set; } // Relación con DetalleBoleta
-        public ICollection<Cliente> Cliente { get; set; } // Relación con Cliente
+        public int CodBoleta { get; set; }          // PK
 
-        public int Total { get; set; } // Nuevo campo Total
-        public string RunCliente { get; set; } // Nuevo campo Run del cliente
+        public DateTime Fecha { get; set; }
+
+        // Relación con Cliente
+        public int RunCliente { get; set; }         // FK a Cliente.NumRun
+        public Cliente Cliente { get; set; }
+
+        // Info de contacto de ESTA compra
+        public string CorreoContacto { get; set; }  // correo al que se envió la boleta
+        public bool EsInvitada { get; set; }        // true si la compra fue "como invitado"
+
+        // Relación con Transacción/Tarjeta (Transbank)
+        public string CodTransaccion { get; set; }  // FK a Tarjeta.CodTransaccion
+        public Tarjeta Tarjeta { get; set; }
+
+        public int Total { get; set; }              // total en CLP
+
+        // Navegación a detalles
+        public ICollection<DetalleBoleta> Detalles { get; set; }
     }
 }

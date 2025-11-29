@@ -10,25 +10,35 @@ namespace ApiRest.Context
         public DbSet<Region> Region { get; set; }
         public DbSet<Provincia> Provincia { get; set; }
         public DbSet<Comuna> Comuna { get; set; }
-        public DbSet<Cliente> Cliente { get; set; }
+
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Stock> Stock { get; set; }
         public DbSet<Sucursal> Sucursal { get; set; }
         public DbSet<Tarjeta> Tarjeta { get; set; }
+
+        // 🔹 Nuevos DbSet para usuarios, roles y ventas
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Rol> Rol { get; set; }
+        public DbSet<UsuarioRol> UsuarioRol { get; set; }
+
+        public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Boleta> Boleta { get; set; }
         public DbSet<DetalleBoleta> DetalleBoleta { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // ============================
             // Configuración de Region
+            // ============================
             modelBuilder.Entity<Region>()
                 .Property(r => r.CodRegion)
                 .ValueGeneratedNever();
             modelBuilder.Entity<Region>()
                 .HasKey(r => r.CodRegion);
 
+            // ============================
             // Configuración de Provincia
+            // ============================
             modelBuilder.Entity<Provincia>()
                 .Property(p => p.CodProvincia)
                 .ValueGeneratedNever();
@@ -41,7 +51,9 @@ namespace ApiRest.Context
                 .HasForeignKey(p => p.CodRegion)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // ============================
             // Configuración de Comuna
+            // ============================
             modelBuilder.Entity<Comuna>()
                 .Property(c => c.CodComuna)
                 .ValueGeneratedNever();
@@ -54,32 +66,9 @@ namespace ApiRest.Context
                 .HasForeignKey(c => new { c.CodRegion, c.CodProvincia })
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Configuración de Cliente
-            modelBuilder.Entity<Cliente>()
-                .Property(cl => cl.NumRun)
-                .ValueGeneratedNever();
-            modelBuilder.Entity<Cliente>()
-                .HasKey(cl => cl.NumRun);
-
-            modelBuilder.Entity<Cliente>()
-                .HasOne(cl => cl.Region)
-                .WithMany(r => r.Cliente)
-                .HasForeignKey(cl => cl.CodRegion)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Cliente>()
-                .HasOne(cl => cl.Provincia)
-                .WithMany(p => p.Cliente)
-                .HasForeignKey(cl => new { cl.CodRegion, cl.CodProvincia })
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Cliente>()
-                .HasOne(cl => cl.Comuna)
-                .WithMany(c => c.Cliente)
-                .HasForeignKey(cl => new { cl.CodRegion, cl.CodProvincia, cl.CodComuna })
-                .OnDelete(DeleteBehavior.Restrict);
-
+            // ============================
             // Configuración de Sucursal
+            // ============================
             modelBuilder.Entity<Sucursal>()
                 .Property(s => s.CodSucursal)
                 .ValueGeneratedNever();
@@ -92,14 +81,18 @@ namespace ApiRest.Context
                 .HasForeignKey(s => new { s.CodRegion, s.CodProvincia, s.CodComuna })
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // ============================
             // Configuración de Producto
+            // ============================
             modelBuilder.Entity<Producto>()
                 .Property(p => p.CodProducto)
                 .ValueGeneratedNever();
             modelBuilder.Entity<Producto>()
                 .HasKey(p => p.CodProducto);
 
+            // ============================
             // Configuración de Stock
+            // ============================
             modelBuilder.Entity<Stock>()
                 .Property(st => st.CodStock)
                 .ValueGeneratedNever();
@@ -118,7 +111,9 @@ namespace ApiRest.Context
                 .HasForeignKey(st => st.CodSucursal)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // ============================
             // Configuración de Tarjeta
+            // ============================
             modelBuilder.Entity<Tarjeta>()
                 .HasKey(t => t.CodTransaccion); // Definir la clave primaria
 
@@ -127,58 +122,163 @@ namespace ApiRest.Context
                 .IsRequired()
                 .HasMaxLength(50) // Ajusta el tamaño según la longitud de BuyOrder
                 .ValueGeneratedNever(); // Evita que EF intente generarlo automáticamente
+                                        // 👇 NUEVO (opcional, pero ordenado)
 
             modelBuilder.Entity<Tarjeta>()
-                .HasMany(t => t.Boleta)
-                .WithOne(b => b.Tarjeta)
-                .HasForeignKey(b => b.CodTransaccion)
-                .OnDelete(DeleteBehavior.Restrict);
+                .Property(t => t.Token)
+                .HasMaxLength(255);
 
-            // Configuración de Boleta
-            modelBuilder.Entity<Boleta>()
-                .Property(b => b.CodBoleta)
-                .ValueGeneratedNever();
-            modelBuilder.Entity<Boleta>()
-                .HasKey(b => b.CodBoleta);
-            modelBuilder.Entity<Boleta>()
-                .Property(b => b.RunCliente)
-                .HasMaxLength(12) // Tamaño típico para un RUN con puntos y guion
-                .IsRequired(); // Define el campo como obligatorio
-            modelBuilder.Entity<Boleta>()
-                .Property(b => b.Total)
-                .IsRequired(); // Define el campo como obligatorio
+            // ===========================================================
+            // 🔹 NUEVOS MODELOS
+            // ===========================================================
 
+            // ============================
+            // Usuario
+            // ============================
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.HasKey(u => u.Id);
 
-            // Configuración de DetalleBoleta
-            modelBuilder.Entity<Boleta>()
-                .Property(b => b.RunCliente)
-                .HasMaxLength(12)
-                .IsRequired();
+                entity.Property(u => u.Username)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
-            modelBuilder.Entity<Boleta>()
-                .Property(b => b.Total)
-                .IsRequired();
+                entity.Property(u => u.PasswordHash)
+                    .IsRequired();
 
+                entity.Property(u => u.Email)
+                    .HasMaxLength(200);
+            });
 
-            modelBuilder.Entity<DetalleBoleta>()
-                .Property(db => db.CodDetalle)
-                .ValueGeneratedNever();
-            modelBuilder.Entity<DetalleBoleta>()
-                .HasKey(db => db.CodDetalle);
+            // ============================
+            // Rol
+            // ============================
+            modelBuilder.Entity<Rol>(entity =>
+            {
+                entity.HasKey(r => r.Id);
 
-            modelBuilder.Entity<DetalleBoleta>()
-                .HasOne(db => db.Boleta)
-                .WithMany(b => b.DetalleBoleta)
-                .HasForeignKey(db => db.CodBoleta)
-                .OnDelete(DeleteBehavior.Cascade);
+                entity.Property(r => r.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
 
-            modelBuilder.Entity<DetalleBoleta>()
-                .HasOne(db => db.Producto)
-                .WithMany(p => p.DetalleBoleta)
-                .HasForeignKey(db => db.CodProducto)
-                .OnDelete(DeleteBehavior.Restrict);
+            // ============================
+            // UsuarioRol (muchos-a-muchos)
+            // ============================
+            modelBuilder.Entity<UsuarioRol>(entity =>
+            {
+                // Clave compuesta
+                entity.HasKey(ur => new { ur.UsuarioId, ur.RolId });
 
+                entity.HasOne(ur => ur.Usuario)
+                    .WithMany(u => u.UsuarioRoles)
+                    .HasForeignKey(ur => ur.UsuarioId);
 
+                entity.HasOne(ur => ur.Rol)
+                    .WithMany(r => r.UsuarioRoles)
+                    .HasForeignKey(ur => ur.RolId);
+            });
+
+            // ============================
+            // Cliente
+            // ============================
+            modelBuilder.Entity<Cliente>(entity =>
+            {
+                entity.HasKey(c => c.NumRun); // PK = RUN numérico
+
+                entity.Property(c => c.NumRun)
+                    .ValueGeneratedNever();
+
+                entity.Property(c => c.DvRun)
+                    .IsRequired()
+                    .HasMaxLength(1);
+
+                entity.Property(c => c.P_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(c => c.S_Nombre)
+                    .HasMaxLength(100);
+
+                entity.Property(c => c.A_Paterno)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(c => c.A_Materno)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(c => c.Correo)
+                    .HasMaxLength(200);
+
+                entity.Property(c => c.Direccion)
+                    .HasMaxLength(300);
+
+                // Relación 1–1 opcional con Usuario
+                entity.HasOne(c => c.Usuario)
+                    .WithOne(u => u.Cliente)
+                    .HasForeignKey<Cliente>(c => c.UsuarioId)
+                    .OnDelete(DeleteBehavior.SetNull);
+
+                // Relación con Región
+                entity.HasOne(c => c.Region)
+                    .WithMany()
+                    .HasForeignKey(c => c.CodRegion);
+
+                // Relación con Provincia (clave compuesta)
+                entity.HasOne(c => c.Provincia)
+                    .WithMany()
+                    .HasForeignKey(c => new { c.CodRegion, c.CodProvincia })
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Relación con Comuna (clave compuesta)
+                entity.HasOne(c => c.Comuna)
+                    .WithMany()
+                    .HasForeignKey(c => new { c.CodRegion, c.CodProvincia, c.CodComuna })
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // ============================
+            // Boleta
+            // ============================
+            modelBuilder.Entity<Boleta>(entity =>
+            {
+                entity.HasKey(b => b.CodBoleta);
+
+                entity.Property(b => b.CorreoContacto)
+                    .HasMaxLength(200);
+
+                // Relación Boleta–Cliente
+                entity.HasOne(b => b.Cliente)
+                    .WithMany(c => c.Boletas)
+                    .HasForeignKey(b => b.RunCliente)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Relación Boleta–Tarjeta (por CodTransaccion)
+                entity.HasOne(b => b.Tarjeta)
+                    .WithMany() // si quieres, puedes luego añadir ICollection<Boleta> en Tarjeta
+                    .HasForeignKey(b => b.CodTransaccion)
+                    .HasPrincipalKey(t => t.CodTransaccion);
+            });
+
+            // ============================
+            // DetalleBoleta
+            // ============================
+            modelBuilder.Entity<DetalleBoleta>(entity =>
+            {
+                entity.HasKey(d => d.Id);
+
+                // Relación Detalle–Boleta
+                entity.HasOne(d => d.Boleta)
+                    .WithMany(b => b.Detalles)
+                    .HasForeignKey(d => d.CodBoleta)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                // Relación Detalle–Producto
+                entity.HasOne(d => d.Producto)
+                    .WithMany() // si quieres podrías agregar ICollection<DetalleBoleta> en Producto
+                    .HasForeignKey(d => d.CodProducto);
+            });
 
             base.OnModelCreating(modelBuilder);
         }
