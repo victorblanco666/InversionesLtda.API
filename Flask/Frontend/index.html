@@ -25,8 +25,8 @@
             <div class="row align-item-center">
                 <div class="col-md-2 text-center text-md-start">
                     <a href="index.html" class="navbar-brand">
-                        <img src="{{ url_for('static', filename='img/logo_Ferreterías_Ferremas.png') }}" alt="Ferremas logo"
-                            class="img-fluid">
+                        <img src="{{ url_for('static', filename='img/logo_Ferreterías_Ferremas.png') }}"
+                            alt="Ferremas logo" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-md-8">
@@ -62,6 +62,23 @@
                                 <i class="bi bi-cart3 fs-4"></i>
                                 <span class="badge rounded-pill" id="contador-carrito">0</span>
                             </a>
+                        </div>
+
+                        <!-- Icono de Usuario / Saludo -->
+                        <div class="nav-item ms-3">
+                            {% if session.get('usuario') %}
+                            <!-- Si el usuario está logeado, mostrar saludo y enlace al perfil -->
+                            <a class="nav-link text-white d-flex align-items-center" href="{{ url_for('perfil') }}">
+                                <i class="bi bi-person-circle fs-4 me-1"></i>
+                                <span>Hola,{{ session['usuario']['username'] }}</span>
+                            </a>
+                            {% else %}
+                            <!-- Si no está logeado, mostrar enlace de inicio de sesión -->
+                            <a class="nav-link text-white d-flex align-items-center" href="{{ url_for('login') }}">
+                                <i class="bi bi-person-circle fs-4 me-1"></i>
+                                <span>Iniciar sesión</span>
+                            </a>
+                            {% endif %}
                         </div>
                     </nav>
                     <div class="container">
@@ -144,7 +161,8 @@
                                 <!-- Cantidad -->
                                 <div class="mb-2 text-start">
                                     <label class="form-label mb-1">Cantidad</label>
-                                    <input type="number" class="form-control form-control-sm cantidad" value="1" min="1">
+                                    <input type="number" class="form-control form-control-sm cantidad" value="1"
+                                        min="1">
                                 </div>
 
                                 <!-- Sucursal -->
@@ -160,8 +178,7 @@
                                 </div>
 
                                 <a href="#" class="btn btn-primary btn-agregar"
-                                    data-producto-id="{{ producto.codProducto }}"
-                                    data-precio="{{ producto.precio }}">
+                                    data-producto-id="{{ producto.codProducto }}" data-precio="{{ producto.precio }}">
                                     Añadir al carrito
                                 </a>
                             </div>

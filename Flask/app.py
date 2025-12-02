@@ -401,6 +401,8 @@ def signup():
 @app.route('/admin')
 @admin_required
 def admin_dashboard():
+
+    
     """
     Vista de administrador: muestra métricas básicas del negocio
     + arreglo ventas_mensuales (enero a diciembre).
@@ -461,6 +463,88 @@ def admin_dashboard():
 
     except requests.exceptions.RequestException as e:
         return f"Error de conexión al cargar panel admin: {e}"
+
+@app.route('/perfil', methods=['GET', 'POST'])
+@login_required
+def perfil():
+    """
+    Muestra el perfil del usuario logeado. Permite ver y actualizar datos personales
+    y listar las compras del cliente (boletas).
+    """
+    base_url = 'https://localhost:5000/api'
+    cliente_url = f'{base_url}/Cliente'
+    boleta_url = f'{base_url}/Boleta'
+
+    # Usuario autenticado
+    usuario_session = session.get('usuario')
+    if not usuario_session:
+        return redirect(url_for('login'))
+
+    # Buscar el cliente asociado al usuario mediante su UsuarioId
+    try:
+        resp_clientes = requests.get(cliente_url, verify=False)
+        clientes = resp_clientes.json() if resp_clientes.status_code == 200 else []
+        cliente = next((c for c in clientes if c.get('usuarioId') == usuario_session.get('id')), None)
+    except Exception as e:
+        return f"Error al cargar datos del cliente: {e}", 500
+
+    if not cliente:
+        return "No se encontró un cliente asociado a este usuario.", 404
+
+    error = None
+    success = None
+
+    if request.method == 'POST':
+        # Leer datos enviados desde el formulario
+        updated_cliente = {
+            "numRun": cliente['numRun'],
+            "dvRun": request.form.get('dvRun', cliente.get('dvRun')),
+            "p_Nombre": request.form.get('p_Nombre', cliente.get('p_Nombre')),
+            "s_Nombre": request.form.get('s_Nombre', cliente.get('s_Nombre')),
+            "a_Paterno": request.form.get('a_Paterno', cliente.get('a_Paterno')),
+            "a_Materno": request.form.get('a_Materno', cliente.get('a_Materno')),
+            "correo": request.form.get('correo', cliente.get('correo')),
+            "direccion": request.form.get('direccion', cliente.get('direccion')),
+            "codRegion": cliente.get('codRegion'),
+            "codProvincia": cliente.get('codProvincia'),
+            "codComuna": cliente.get('codComuna'),
+            "usuarioId": usuario_session.get('id')
+        }
+        try:
+            # Actualizar cliente mediante PUT
+            resp_put = requests.put(f"{cliente_url}/{cliente['numRun']}", json=updated_cliente, verify=False)
+            if resp_put.status_code == 204:
+                success = "Datos actualizados correctamente."
+                cliente = updated_cliente  # Actualizamos los datos locales
+            else:
+                # Intentamos extraer mensaje de error
+                try:
+                    data_err = resp_put.json()
+                    error = data_err.get('mensaje', f"Error al actualizar datos ({resp_put.status_code}).")
+                except Exception:
+                    error = f"Error al actualizar datos ({resp_put.status_code})."
+        except Exception as e:
+            error = f"Error al actualizar datos: {e}"
+
+    # Obtener todas las boletas y filtrar por el cliente actual
+    try:
+        resp_boletas = requests.get(boleta_url, verify=False)
+        boletas_all = resp_boletas.json() if resp_boletas.status_code == 200 else []
+        mis_boletas = [b for b in boletas_all if b.get('runCliente') == cliente['numRun']]
+    except Exception as e:
+        mis_boletas = []
+        error = f"Error al cargar boletas: {e}"
+
+    # Renderizar plantilla de perfil
+    return render_template(
+        'perfil.html',
+        cliente=cliente,
+        boletas=mis_boletas,
+        error=error,
+        success=success
+    )
+
+
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
