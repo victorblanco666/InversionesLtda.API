@@ -125,6 +125,7 @@ def pago():
             "a_Materno": request.form['a_Materno'],
             "correo": request.form['correo'],
             "direccion": request.form['direccion'],
+            "telefono": request.form['telefono'],  
             "codRegion": int(request.form['codRegion']),
             "codProvincia": int(request.form['codProvincia']),
             "codComuna": int(request.form['codComuna'])

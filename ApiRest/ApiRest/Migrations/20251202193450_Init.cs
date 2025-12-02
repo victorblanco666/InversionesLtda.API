@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ApiRest.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -155,6 +155,7 @@ namespace ApiRest.Migrations
                     A_Materno = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CodRegion = table.Column<int>(type: "int", nullable: false),
                     CodProvincia = table.Column<int>(type: "int", nullable: false),
                     CodComuna = table.Column<int>(type: "int", nullable: false),

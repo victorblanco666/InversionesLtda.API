@@ -30,6 +30,7 @@ namespace ApiRest.Controllers
                 A_Materno = c.A_Materno,
                 Correo = c.Correo,
                 Direccion = c.Direccion,
+                Telefono = c.Telefono,
                 CodRegion = c.CodRegion,
                 CodProvincia = c.CodProvincia,
                 CodComuna = c.CodComuna,
@@ -114,6 +115,7 @@ namespace ApiRest.Controllers
                 A_Materno = dto.A_Materno,
                 Correo = dto.Correo,
                 Direccion = dto.Direccion,
+                Telefono = dto.Telefono,
                 CodRegion = dto.CodRegion,
                 CodProvincia = dto.CodProvincia,
                 CodComuna = dto.CodComuna,
@@ -179,6 +181,7 @@ namespace ApiRest.Controllers
             cliente.A_Materno = dto.A_Materno;
             cliente.Correo = dto.Correo;
             cliente.Direccion = dto.Direccion;
+            cliente.Telefono = dto.Telefono;    
             cliente.CodRegion = dto.CodRegion;
             cliente.CodProvincia = dto.CodProvincia;
             cliente.CodComuna = dto.CodComuna;

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiRest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251202033828_init")]
-    partial class init
+    [Migration("20251202195034_In")]
+    partial class In
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

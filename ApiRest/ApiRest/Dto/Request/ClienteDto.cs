@@ -12,6 +12,7 @@
 
         public string Correo { get; set; }
         public string Direccion { get; set; }
+        public string Telefono { get; set; }  // 👈 Nuevo campo
 
         public int CodRegion { get; set; }
         public int CodProvincia { get; set; }
