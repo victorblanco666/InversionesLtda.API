@@ -101,42 +101,43 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const canvas = document.getElementById('ventasMensualesChart');
-            if (!canvas) return;
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const canvas = document.getElementById('ventasMensualesChart');
+        if (!canvas) return;
 
-            const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
 
-            const etiquetasMeses = [
-                'Enero', 'Febrero', 'Marzo', 'Abril',
-                'Mayo', 'Junio', 'Julio', 'Agosto',
-                'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-            ];
+        const etiquetasMeses = [
+            'Enero', 'Febrero', 'Marzo', 'Abril',
+            'Mayo', 'Junio', 'Julio', 'Agosto',
+            'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
 
-            // 👉 Arreglo de 12 valores que viene desde Flask
-            const ventasMensuales = {{ ventas_mensuales | tojson }};
+        // 👉 Convertir el array enviado desde Flask a un string JSON y parsearlo
+        const ventasMensuales = JSON.parse('{{ ventas_mensuales | tojson | safe }}');
 
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: etiquetasMeses,
-                    datasets: [{
-                        label: 'Total ventas por mes',
-                        data: ventasMensuales,
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: etiquetasMeses,
+                datasets: [{
+                    label: 'Total ventas por mes',
+                    data: ventasMensuales,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
-            });
+            }
         });
-    </script>
+    });
+</script>
+
 
 </body>
 </html>

@@ -3,9 +3,8 @@ import requests
 import urllib3
 import string
 import random
-import json  # 👈 importante
+import json
 from datetime import datetime
-
 from functools import wraps
 
 # Flask config
@@ -16,7 +15,6 @@ app.secret_key = "dev-unishop-secret-key"
 
 # Deshabilitar advertencias de SSL para urllib3 (solo para desarrollo)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 
 def login_required(f):
     @wraps(f)
@@ -36,10 +34,6 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-
-
-
-
 @app.route('/')
 def vista():
     base_url = 'https://localhost:5000/api'
@@ -48,7 +42,7 @@ def vista():
     provincia_url = f'{base_url}/Provincia'
     comuna_url = f'{base_url}/Comuna'
     sucursal_url = f'{base_url}/Sucursal'
-    stock_url = f'{base_url}/Stock'  # URL PARA STOCK
+    stock_url = f'{base_url}/Stock'
 
     try:
         # Obtener regiones
@@ -81,7 +75,7 @@ def vista():
             cod_producto = stock["codProducto"]
             if cod_producto not in stock_dict:
                 stock_dict[cod_producto] = 0
-            stock_dict[cod_producto] += stock["cantidad"]  # Sumamos todas las cantidades por producto
+            stock_dict[cod_producto] += stock["cantidad"]
 
         # Añadir la cantidad de stock a cada producto
         for producto in productos:
@@ -98,7 +92,6 @@ def vista():
 
     except requests.exceptions.RequestException as e:
         return "Error de conexión: " + str(e)
-
 
 @app.route('/pago', methods=['GET', 'POST'])
 def pago():
@@ -159,7 +152,6 @@ def pago():
             "codRegion": int(request.form['codRegion']),
             "codProvincia": int(request.form['codProvincia']),
             "codComuna": int(request.form['codComuna'])
-            # usuarioId no se envía (cliente invitado)
         }
 
         # 🔹 Guardamos datos del cliente en sesión para usarlos luego al crear la Boleta
@@ -168,7 +160,6 @@ def pago():
         try:
             # Registrar/actualizar cliente en la API
             response_cliente = requests.post(cliente_url, json=datos_cliente, verify=False)
-            # Si ya existe (409), lo consideramos ok para efectos de flujo
             if response_cliente.status_code not in (200, 201, 409):
                 return jsonify({"error": "Error al registrar el cliente"}), 500
         except Exception as e:
@@ -201,7 +192,6 @@ def pago():
 
     return render_template('pago.html', regiones=regiones, provincias=provincias, comunas=comunas)
 
-
 @app.route('/confirmar_pago', methods=['GET'])
 def recibir_token():
     """Recibe el token de Transbank después del pago y redirige a la confirmación."""
@@ -211,7 +201,6 @@ def recibir_token():
         return jsonify({"error": "No se recibió token de transacción"}), 400
 
     return redirect(f"/confirmar_transaccion/{token}")
-
 
 @app.route('/confirmar_transaccion/<token>', methods=['GET'])
 def confirmar_transaccion(token):
@@ -231,7 +220,7 @@ def confirmar_transaccion(token):
             return jsonify({"error": data.get("mensaje", "Error al confirmar la transacción")}), 500
 
         detalles_transaccion = data.get("data", {})
-        cod_transaccion = detalles_transaccion.get("buyOrder")  # buyOrder
+        cod_transaccion = detalles_transaccion.get("buyOrder")
         card_number = detalles_transaccion.get("cardDetail", {}).get("cardNumber")
 
         if not cod_transaccion or not card_number:
@@ -249,10 +238,9 @@ def confirmar_transaccion(token):
                 "codTransaccion": cod_transaccion,
                 "numTarjeta": cod_tarjeta,
                 "nombreTransaccion": "Compra Online",
-                "token": token  # 👈 TOKEN de WEBPAY guardado en BD
+                "token": token
             }
             response_tarjeta = requests.post(tarjeta_url, json=datos_tarjeta, verify=False)
-
             if response_tarjeta.status_code not in (200, 201):
                 print(f"⚠️ Error al registrar la transacción: {response_tarjeta.status_code}")
                 print(f"🔍 Respuesta del servidor: {response_tarjeta.text}")
@@ -278,10 +266,8 @@ def confirmar_transaccion(token):
         if not num_run or not dv_run:
             return jsonify({"error": "Datos de RUN del cliente incompletos."}), 400
 
-        # Asumimos que todos los ítems salen de la misma sucursal (la del primer item)
         cod_sucursal = carrito[0].get('codSucursal', 1)
 
-        # Construir los detalles para Boleta (solo codProducto y cantidad, sucursal va en la boleta)
         detalles = []
         for item in carrito:
             detalles.append({
@@ -293,14 +279,13 @@ def confirmar_transaccion(token):
             "numRun": num_run,
             "dvRun": dv_run,
             "correoContacto": correo,
-            "esInvitada": True,          # cuando tengas login, podrás cambiar esto
+            "esInvitada": True,
             "codSucursal": cod_sucursal,
             "codTransaccion": cod_transaccion,
             "detalles": detalles
         }
 
         response_boleta = requests.post(boleta_url, json=datos_boleta, verify=False)
-
         if response_boleta.status_code not in (200, 201):
             print(f"⚠️ Error al crear la boleta: {response_boleta.status_code}")
             print(f"🔍 Respuesta del servidor: {response_boleta.text}")
@@ -334,7 +319,6 @@ def login():
                 data = resp.json()
                 if data.get("exito"):
                     user_data = data.get("data", {})
-                    # Guardamos usuario en sesión
                     session['usuario'] = {
                         "id": user_data.get("usuarioId"),
                         "username": user_data.get("username"),
@@ -342,7 +326,6 @@ def login():
                         "roles": user_data.get("roles", [])
                     }
 
-                    # Si es admin, lo mandamos al panel admin
                     roles = user_data.get("roles", [])
                     if "Admin" in roles:
                         return redirect(url_for('admin_dashboard'))
@@ -361,8 +344,6 @@ def login():
 def logout():
     session.pop('usuario', None)
     return redirect(url_for('vista'))
-# 🔹 NUEVA RUTA: PANEL ADMIN
-
 
 @app.route('/password_reset', methods=['GET', 'POST'])
 def password_reset():
@@ -402,8 +383,6 @@ def password_reset():
                 error = f"Error de conexión al actualizar contraseña: {e}"
 
     return render_template('password_reset.html', error=error, success=success)
-
-
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -446,10 +425,6 @@ def signup():
 
     return render_template('signup.html', error=error, success=success)
 
-
-
-
-
 @app.route('/admin')
 @admin_required
 def admin_dashboard():
@@ -490,11 +465,9 @@ def admin_dashboard():
 
         # 🔹 Calcular total_ventas y ventas por mes
         for b in boletas:
-            # Ajusta "total" si tu propiedad en C# se llama distinto
             monto = int(b.get("total", 0) or 0)
             total_ventas += monto
 
-            # Tratamos de leer alguna propiedad de fecha típica
             fecha_str = (
                 b.get("fechaBoleta")
                 or b.get("fechaEmision")
@@ -503,10 +476,15 @@ def admin_dashboard():
 
             if fecha_str:
                 try:
-                    # Si viene con 'Z' al final tipo ISO, la quitamos
+                    # Quitar la 'Z' si está presente
                     fecha_clean = str(fecha_str).replace('Z', '')
+                    # Si hay microsegundos >6 dígitos, recortar a 6 dígitos
+                    if '.' in fecha_clean:
+                        fecha_part, frac = fecha_clean.split('.', 1)
+                        frac = frac[:6]  # mantener sólo 6 dígitos
+                        fecha_clean = f"{fecha_part}.{frac}"
                     fecha = datetime.fromisoformat(fecha_clean)
-                    mes_idx = fecha.month - 1  # 0-based: enero = 0
+                    mes_idx = fecha.month - 1
                     if 0 <= mes_idx < 12:
                         ventas_mensuales[mes_idx] += monto
                 except Exception as e:
@@ -519,13 +497,11 @@ def admin_dashboard():
             total_clientes=total_clientes,
             total_productos=total_productos,
             total_ventas=total_ventas,
-            ventas_mensuales=ventas_mensuales  # 👈 arreglo entero para el gráfico
+            ventas_mensuales=ventas_mensuales
         )
 
     except requests.exceptions.RequestException as e:
         return f"Error de conexión al cargar panel admin: {e}"
-
-
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
