@@ -45,39 +45,21 @@ def vista():
     stock_url = f'{base_url}/Stock'
 
     try:
-        # Obtener regiones
-        response_regiones = requests.get(region_url, verify=False)
-        regiones = response_regiones.json() if response_regiones.status_code == 200 else []
+        # Obtener regiones, provincias, comunas y sucursales
+        regiones = requests.get(region_url, verify=False).json()
+        provincias = requests.get(provincia_url, verify=False).json()
+        comunas = requests.get(comuna_url, verify=False).json()
+        sucursales = requests.get(sucursal_url, verify=False).json()
+        productos = requests.get(productos_url, verify=False).json()
 
-        # Obtener provincias
-        response_provincias = requests.get(provincia_url, verify=False)
-        provincias = response_provincias.json() if response_provincias.status_code == 200 else []
-
-        # Obtener comunas
-        response_comunas = requests.get(comuna_url, verify=False)
-        comunas = response_comunas.json() if response_comunas.status_code == 200 else []
-
-        # Obtener sucursales
-        response_sucursales = requests.get(sucursal_url, verify=False)
-        sucursales = response_sucursales.json() if response_sucursales.status_code == 200 else []
-
-        # Obtener productos
-        response_productos = requests.get(productos_url, verify=False)
-        productos = response_productos.json() if response_productos.status_code == 200 else []
-
-        # Obtener stock
-        response_stock = requests.get(stock_url, verify=False)
-        stock_data = response_stock.json() if response_stock.status_code == 200 else []
-
-        # Crear un diccionario para asociar el stock con los productos
+        # Obtener stock y agrupar por producto
+        stock_data = requests.get(stock_url, verify=False).json()
         stock_dict = {}
         for stock in stock_data:
             cod_producto = stock["codProducto"]
-            if cod_producto not in stock_dict:
-                stock_dict[cod_producto] = 0
-            stock_dict[cod_producto] += stock["cantidad"]
+            stock_dict[cod_producto] = stock_dict.get(cod_producto, 0) + stock["cantidad"]
 
-        # Añadir la cantidad de stock a cada producto
+        # Asignar stock a cada producto
         for producto in productos:
             producto["stock_disponible"] = stock_dict.get(producto["codProducto"], 0)
 
@@ -107,19 +89,14 @@ def pago():
 
     # Cargar datos de región/provincia/comuna para el formulario
     try:
-        response_regiones = requests.get(region_url, verify=False)
-        regiones = response_regiones.json() if response_regiones.status_code == 200 else []
-
-        response_provincias = requests.get(provincia_url, verify=False)
-        provincias = response_provincias.json() if response_provincias.status_code == 200 else []
-
-        response_comunas = requests.get(comuna_url, verify=False)
-        comunas = response_comunas.json() if response_comunas.status_code == 200 else []
+        regiones = requests.get(region_url, verify=False).json()
+        provincias = requests.get(provincia_url, verify=False).json()
+        comunas = requests.get(comuna_url, verify=False).json()
     except requests.exceptions.RequestException as e:
         return f"Error de conexión: {e}"
 
     if request.method == 'POST':
-        # 🔹 Carrito real enviado desde pago.html en carrito_json (hidden)
+        # Carrito recibido desde el formulario
         carrito_json = request.form.get('carrito_json', '[]')
         try:
             carrito = json.loads(carrito_json)
@@ -129,11 +106,10 @@ def pago():
         if not carrito:
             return jsonify({"error": "El carrito está vacío o no se pudo leer."}), 400
 
-        # Guardamos el carrito en sesión para usarlo al confirmar la transacción
         session['carrito'] = carrito
 
-        # 🔹 Monto total a pagar (proviene del formulario, calculado en frontend)
-        montoPagar = float(request.form['montoPagar'])
+        # Monto total a pagar (calculado en el frontend)
+        monto_pagar = float(request.form['montoPagar'])
 
         buy_order = generar_codigo("ORD", 8)
         session_id = generar_codigo("SESSION", 10)
@@ -154,39 +130,44 @@ def pago():
             "codComuna": int(request.form['codComuna'])
         }
 
-        # 🔹 Guardamos datos del cliente en sesión para usarlos luego al crear la Boleta
+        # Si el usuario está autenticado, asociamos el cliente con su UsuarioId
+        usuario_session = session.get('usuario')
+        if usuario_session:
+            datos_cliente["usuarioId"] = usuario_session.get("id")
+
+        # Guardar datos del cliente en sesión
         session['cliente'] = datos_cliente
 
         try:
-            # Registrar/actualizar cliente en la API
-            response_cliente = requests.post(cliente_url, json=datos_cliente, verify=False)
-            if response_cliente.status_code not in (200, 201, 409):
+            # Registrar o actualizar cliente
+            resp_cliente = requests.post(cliente_url, json=datos_cliente, verify=False)
+            if resp_cliente.status_code not in (200, 201, 409):
                 return jsonify({"error": "Error al registrar el cliente"}), 500
         except Exception as e:
             return jsonify({"error": f"Error en el registro del cliente: {e}"}), 500
 
-        # Datos para iniciar transacción con Transbank
+        # Iniciar transacción con Transbank
         datos_transbank = {
             "buy_order": buy_order,
             "session_id": session_id,
-            "amount": montoPagar,
+            "amount": monto_pagar,
             "return_url": return_url
         }
 
         try:
-            response = requests.post(transbank_url, json=datos_transbank, verify=False)
-            if response.status_code == 200:
-                data = response.json()
+            resp_tbk = requests.post(transbank_url, json=datos_transbank, verify=False)
+            if resp_tbk.status_code == 200:
+                data = resp_tbk.json()
                 if data.get("exito"):
-                    urlCompleta = data["data"].get("urlCompleta")
-                    if urlCompleta:
-                        return redirect(urlCompleta)
+                    url_completa = data["data"].get("urlCompleta")
+                    if url_completa:
+                        return redirect(url_completa)
                     else:
                         return jsonify({"error": "No se encontró la URL de pago"}), 500
                 else:
                     return jsonify({"error": data.get("mensaje", "Error en la transacción")}), 500
             else:
-                return jsonify({"error": f"Error en la solicitud a Transbank: {response.status_code}"}), 500
+                return jsonify({"error": f"Error en la solicitud a Transbank: {resp_tbk.status_code}"}), 500
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
@@ -196,10 +177,8 @@ def pago():
 def recibir_token():
     """Recibe el token de Transbank después del pago y redirige a la confirmación."""
     token = request.args.get('token_ws')
-
     if not token:
         return jsonify({"error": "No se recibió token de transacción"}), 400
-
     return redirect(f"/confirmar_transaccion/{token}")
 
 @app.route('/confirmar_transaccion/<token>', methods=['GET'])
@@ -210,59 +189,51 @@ def confirmar_transaccion(token):
     boleta_url = f'{base_url}/Boleta'
 
     try:
-        # 1️⃣ Confirmar la transacción con TransbankController
-        response = requests.get(confirmacion_url, verify=False)
-        if response.status_code != 200:
-            return jsonify({"error": f"Error al confirmar la transacción: {response.status_code}"}), 500
+        # 1. Confirmar la transacción con TransbankController
+        resp = requests.get(confirmacion_url, verify=False)
+        if resp.status_code != 200:
+            return jsonify({"error": f"Error al confirmar la transacción: {resp.status_code}"}), 500
 
-        data = response.json()
+        data = resp.json()
         if not data.get("exito"):
             return jsonify({"error": data.get("mensaje", "Error al confirmar la transacción")}), 500
 
         detalles_transaccion = data.get("data", {})
-        cod_transaccion = detalles_transaccion.get("buyOrder")
+        cod_transaccion = str(detalles_transaccion.get("buyOrder"))
         card_number = detalles_transaccion.get("cardDetail", {}).get("cardNumber")
 
         if not cod_transaccion or not card_number:
             return jsonify({"error": "No se pudo obtener la información de la transacción"}), 500
 
-        cod_transaccion = str(cod_transaccion)
         cod_tarjeta = int(card_number)
 
-        # 2️⃣ Verificar si la transacción ya está registrada en Tarjeta
-        response_verificar = requests.get(f"{tarjeta_url}/{cod_transaccion}", verify=False)
-
-        if response_verificar.status_code != 200:
-            # 3️⃣ Registrar la transacción si no existe
+        # 2. Verificar si la transacción ya está registrada en Tarjeta
+        resp_verificar = requests.get(f"{tarjeta_url}/{cod_transaccion}", verify=False)
+        if resp_verificar.status_code != 200:
+            # 3. Registrar la transacción si no existe
             datos_tarjeta = {
                 "codTransaccion": cod_transaccion,
                 "numTarjeta": cod_tarjeta,
                 "nombreTransaccion": "Compra Online",
                 "token": token
             }
-            response_tarjeta = requests.post(tarjeta_url, json=datos_tarjeta, verify=False)
-            if response_tarjeta.status_code not in (200, 201):
-                print(f"⚠️ Error al registrar la transacción: {response_tarjeta.status_code}")
-                print(f"🔍 Respuesta del servidor: {response_tarjeta.text}")
+            resp_tarjeta = requests.post(tarjeta_url, json=datos_tarjeta, verify=False)
+            if resp_tarjeta.status_code not in (200, 201):
+                print(f"⚠️ Error al registrar la transacción: {resp_tarjeta.status_code}")
+                print(f"🔍 Respuesta del servidor: {resp_tarjeta.text}")
 
-        # 4️⃣ Crear la Boleta en la API usando BoletaController
+        # 4. Crear la Boleta en la API
         cliente_session = session.get('cliente')
         carrito = session.get('carrito', [])
 
         if not cliente_session:
-            return jsonify({
-                "error": "No se encontraron datos de cliente en sesión. No se puede emitir la boleta."
-            }), 400
-
+            return jsonify({"error": "No se encontraron datos de cliente en sesión. No se puede emitir la boleta."}), 400
         if not carrito:
-            return jsonify({
-                "error": "No se encontró el carrito en sesión. No se puede emitir la boleta."
-            }), 400
+            return jsonify({"error": "No se encontró el carrito en sesión. No se puede emitir la boleta."}), 400
 
         num_run = cliente_session.get("numRun")
         dv_run = cliente_session.get("dvRun")
         correo = cliente_session.get("correo")
-
         if not num_run or not dv_run:
             return jsonify({"error": "Datos de RUN del cliente incompletos."}), 400
 
@@ -275,24 +246,29 @@ def confirmar_transaccion(token):
                 "cantidad": item["cantidad"]
             })
 
+        # Definir si la compra es invitada según si existe usuario en sesión
+        es_invitada = True
+        if session.get('usuario'):
+            es_invitada = False
+
         datos_boleta = {
             "numRun": num_run,
             "dvRun": dv_run,
             "correoContacto": correo,
-            "esInvitada": True,
+            "esInvitada": es_invitada,
             "codSucursal": cod_sucursal,
             "codTransaccion": cod_transaccion,
             "detalles": detalles
         }
 
-        response_boleta = requests.post(boleta_url, json=datos_boleta, verify=False)
-        if response_boleta.status_code not in (200, 201):
-            print(f"⚠️ Error al crear la boleta: {response_boleta.status_code}")
-            print(f"🔍 Respuesta del servidor: {response_boleta.text}")
+        resp_boleta = requests.post(boleta_url, json=datos_boleta, verify=False)
+        if resp_boleta.status_code not in (200, 201):
+            print(f"⚠️ Error al crear la boleta: {resp_boleta.status_code}")
+            print(f"🔍 Respuesta del servidor: {resp_boleta.text}")
         else:
             print("✅ Boleta creada correctamente en la API.")
 
-        # 5️⃣ Renderizar la vista de confirmación
+        # 5. Mostrar la confirmación
         return render_template('transaccion_confirmada.html', detalles=detalles_transaccion)
 
     except Exception as e:
@@ -326,8 +302,7 @@ def login():
                         "roles": user_data.get("roles", [])
                     }
 
-                    roles = user_data.get("roles", [])
-                    if "Admin" in roles:
+                    if "Admin" in session['usuario']["roles"]:
                         return redirect(url_for('admin_dashboard'))
                     else:
                         return redirect(url_for('vista'))
@@ -373,11 +348,10 @@ def password_reset():
                     else:
                         error = data.get("mensaje", "No se pudo actualizar la contraseña.")
                 else:
-                    data = {}
                     try:
                         data = resp.json()
                     except Exception:
-                        pass
+                        data = {}
                     error = data.get("mensaje", f"Error al actualizar contraseña ({resp.status_code}).")
             except Exception as e:
                 error = f"Error de conexión al actualizar contraseña: {e}"
@@ -414,11 +388,10 @@ def signup():
                     else:
                         error = data.get("mensaje", "No se pudo registrar el usuario.")
                 else:
-                    data = {}
                     try:
                         data = resp.json()
                     except Exception:
-                        pass
+                        data = {}
                     error = data.get("mensaje", f"Error al registrar usuario ({resp.status_code}).")
             except Exception as e:
                 error = f"Error de conexión al registrar: {e}"
@@ -442,28 +415,17 @@ def admin_dashboard():
     total_clientes = 0
     total_productos = 0
 
-    # 12 posiciones: índice 0 = Enero, 11 = Diciembre
     ventas_mensuales = [0] * 12
 
     try:
-        # 🔹 Obtener boletas
-        resp_boletas = requests.get(boleta_url, verify=False)
-        boletas = resp_boletas.json() if resp_boletas.status_code == 200 else []
+        boletas = requests.get(boleta_url, verify=False).json()
+        clientes = requests.get(cliente_url, verify=False).json()
+        productos = requests.get(producto_url, verify=False).json()
 
-        # 🔹 Obtener clientes
-        resp_clientes = requests.get(cliente_url, verify=False)
-        clientes = resp_clientes.json() if resp_clientes.status_code == 200 else []
-
-        # 🔹 Obtener productos
-        resp_productos = requests.get(producto_url, verify=False)
-        productos = resp_productos.json() if resp_productos.status_code == 200 else []
-
-        # Métricas simples
         total_boletas = len(boletas)
         total_clientes = len(clientes)
         total_productos = len(productos)
 
-        # 🔹 Calcular total_ventas y ventas por mes
         for b in boletas:
             monto = int(b.get("total", 0) or 0)
             total_ventas += monto
@@ -476,19 +438,16 @@ def admin_dashboard():
 
             if fecha_str:
                 try:
-                    # Quitar la 'Z' si está presente
                     fecha_clean = str(fecha_str).replace('Z', '')
-                    # Si hay microsegundos >6 dígitos, recortar a 6 dígitos
                     if '.' in fecha_clean:
                         fecha_part, frac = fecha_clean.split('.', 1)
-                        frac = frac[:6]  # mantener sólo 6 dígitos
+                        frac = frac[:6]
                         fecha_clean = f"{fecha_part}.{frac}"
                     fecha = datetime.fromisoformat(fecha_clean)
                     mes_idx = fecha.month - 1
                     if 0 <= mes_idx < 12:
                         ventas_mensuales[mes_idx] += monto
                 except Exception as e:
-                    # Si alguna fecha viene en un formato raro, la ignoramos
                     print(f"Error parseando fecha de boleta ({fecha_str}): {e}")
 
         return render_template(
