@@ -53,5 +53,33 @@ namespace ApiRest.Controllers
             return CreatedAtAction(nameof(GetRegions), new { id = region.CodRegion }, regionDto);
         }
 
+        // PUT: api/Region/{id}
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateRegion(int id, [FromBody] RegionDto regionDto)
+        {
+            var region = await _context.Region.FindAsync(id);
+            if (region == null)
+                return NotFound("Región no encontrada.");
+
+            region.NombreRegion = regionDto.NombreRegion;
+            _context.Region.Update(region);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // DELETE: api/Region/{id}
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteRegion(int id)
+        {
+            var region = await _context.Region.FindAsync(id);
+            if (region == null)
+                return NotFound("Región no encontrada.");
+
+            _context.Region.Remove(region);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+
     }
 }

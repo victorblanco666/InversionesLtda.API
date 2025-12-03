@@ -57,6 +57,32 @@ namespace ApiRest.Controllers
             return CreatedAtAction(nameof(GetProvincias), new { id = provincia.CodProvincia }, provinciaDto);
         }
 
+        // PUT: api/Provincia/{codRegion}/{codProvincia}
+        [HttpPut("{codRegion:int}/{codProvincia:int}")]
+        public async Task<IActionResult> UpdateProvincia(int codRegion, int codProvincia, [FromBody] ProvinciaDto provinciaDto)
+        {
+            var provincia = await _context.Provincia.FindAsync(codRegion, codProvincia);
+            if (provincia == null)
+                return NotFound("Provincia no encontrada.");
+
+            provincia.NombreProvincia = provinciaDto.NombreProvincia;
+            _context.Provincia.Update(provincia);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // DELETE: api/Provincia/{codRegion}/{codProvincia}
+        [HttpDelete("{codRegion:int}/{codProvincia:int}")]
+        public async Task<IActionResult> DeleteProvincia(int codRegion, int codProvincia)
+        {
+            var provincia = await _context.Provincia.FindAsync(codRegion, codProvincia);
+            if (provincia == null)
+                return NotFound("Provincia no encontrada.");
+
+            _context.Provincia.Remove(provincia);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
 
 

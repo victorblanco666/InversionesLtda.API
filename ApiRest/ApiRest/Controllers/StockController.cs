@@ -66,5 +66,42 @@ namespace ApiRest.Controllers
 
             return CreatedAtAction(nameof(GetStocks), new { id = stock.CodStock }, stockDto);
         }
+
+        // PUT: api/Stock/{id}
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateStock(int id, [FromBody] StockDto stockDto)
+        {
+            var stock = await _context.Stock.FindAsync(id);
+            if (stock == null)
+                return NotFound("Stock no encontrado.");
+
+            // Validar existencia de producto y sucursal
+            if (await _context.Producto.FindAsync(stockDto.CodProducto) == null)
+                return BadRequest("El producto asociado no existe.");
+            if (await _context.Sucursal.FindAsync(stockDto.CodSucursal) == null)
+                return BadRequest("La sucursal asociada no existe.");
+
+            stock.CodProducto = stockDto.CodProducto;
+            stock.CodSucursal = stockDto.CodSucursal;
+            stock.Cantidad = stockDto.Cantidad;
+
+            _context.Stock.Update(stock);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // DELETE: api/Stock/{id}
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteStock(int id)
+        {
+            var stock = await _context.Stock.FindAsync(id);
+            if (stock == null)
+                return NotFound("Stock no encontrado.");
+
+            _context.Stock.Remove(stock);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
     }
 }

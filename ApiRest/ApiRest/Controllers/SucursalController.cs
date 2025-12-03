@@ -61,5 +61,44 @@ namespace ApiRest.Controllers
 
             return CreatedAtAction(nameof(GetSucursales), new { id = sucursal.CodSucursal }, sucursalDto);
         }
+
+        // PUT: api/Sucursal/{id}
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateSucursal(int id, [FromBody] SucursalDto sucursalDto)
+        {
+            var sucursal = await _context.Sucursal.FindAsync(id);
+            if (sucursal == null)
+                return NotFound("Sucursal no encontrada.");
+
+            // Validar existencia de la nueva comuna
+            var comuna = await _context.Comuna.FindAsync(
+                sucursalDto.CodRegion, sucursalDto.CodProvincia, sucursalDto.CodComuna);
+            if (comuna == null)
+                return BadRequest("La comuna asociada no existe.");
+
+            sucursal.Direccion = sucursalDto.Direccion;
+            sucursal.Telefono = sucursalDto.Telefono;
+            sucursal.CodRegion = sucursalDto.CodRegion;
+            sucursal.CodProvincia = sucursalDto.CodProvincia;
+            sucursal.CodComuna = sucursalDto.CodComuna;
+
+            _context.Sucursal.Update(sucursal);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // DELETE: api/Sucursal/{id}
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteSucursal(int id)
+        {
+            var sucursal = await _context.Sucursal.FindAsync(id);
+            if (sucursal == null)
+                return NotFound("Sucursal no encontrada.");
+
+            _context.Sucursal.Remove(sucursal);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
     }
 }

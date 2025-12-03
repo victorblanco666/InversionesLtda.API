@@ -525,8 +525,14 @@ def signup():
 @admin_required
 def admin_dashboard():
     """
-    Vista de administrador: muestra métricas básicas del negocio
-    + arreglo ventas_mensuales (enero a diciembre).
+    Vista de administrador: muestra métricas básicas del negocio:
+    - total_ventas
+    - total_boletas
+    - total_clientes
+    - total_productos
+    - ventas_mensuales (enero a diciembre)
+    - clientes_registrados vs clientes_no_registrados
+    - productos más vendidos (labels_productos, cantidades_productos)
     """
     base_url = 'https://localhost:5000/api'
     boleta_url = f'{base_url}/Boleta'
@@ -538,21 +544,45 @@ def admin_dashboard():
     total_clientes = 0
     total_productos = 0
 
+    # Ventas por mes (enero a diciembre)
     ventas_mensuales = [0] * 12
+
+    # Clientes registrados vs no registrados
+    clientes_registrados = 0
+    clientes_no_registrados = 0
+
+    # Productos más vendidos (por cantidad)
+    ventas_por_producto = {}  # { codProducto: cantidad_total }
 
     try:
         boletas = requests.get(boleta_url, verify=False).json()
         clientes = requests.get(cliente_url, verify=False).json()
         productos = requests.get(producto_url, verify=False).json()
 
+        # Totales simples
         total_boletas = len(boletas)
         total_clientes = len(clientes)
         total_productos = len(productos)
 
+        # ================================
+        # 1) CLIENTES REGISTRADOS / NO
+        # ================================
+        for c in clientes:
+            usuario_id = c.get("usuarioId")
+            if usuario_id is None:
+                clientes_no_registrados += 1
+            else:
+                clientes_registrados += 1
+
+        # ================================
+        # 2) VENTAS TOTALES Y POR MES
+        #    + ACUMULAR CANTIDAD POR PRODUCTO
+        # ================================
         for b in boletas:
             monto = int(b.get("total", 0) or 0)
             total_ventas += monto
 
+            # Fecha de la boleta
             fecha_str = (
                 b.get("fechaBoleta")
                 or b.get("fechaEmision")
@@ -573,17 +603,61 @@ def admin_dashboard():
                 except Exception as e:
                     print(f"Error parseando fecha de boleta ({fecha_str}): {e}")
 
+            # Detalles de la boleta: acumular cantidades por producto
+            # Ajusta la clave "detalles" si en tu API viene con otro nombre
+            detalles = b.get("detalles", [])
+            if detalles:
+                for d in detalles:
+                    cod_producto = d.get("codProducto")
+                    cantidad = int(d.get("cantidad", 0) or 0)
+                    if cod_producto is not None:
+                        ventas_por_producto[cod_producto] = ventas_por_producto.get(cod_producto, 0) + cantidad
+
+        # ================================
+        # 3) ARMAR LISTAS PARA GRÁFICO DE PRODUCTOS
+        # ================================
+        # Mapa para encontrar nombre del producto por código
+        map_productos = {}
+        for p in productos:
+            cod = p.get("codProducto")
+            # Ajusta el nombre según tu API: "nombreProducto", "nombre", etc.
+            nombre = p.get("nombreProducto") or p.get("nombre") or f"Producto {cod}"
+            if cod is not None:
+                map_productos[cod] = nombre
+
+        # Ordenar productos por cantidad vendida (descendiente)
+        productos_ordenados = sorted(
+            ventas_por_producto.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+
+        labels_productos = []
+        cantidades_productos = []
+
+        # Si quieres solo el TOP 5, usa [:5]; si quieres todos, quita el slice
+        for cod_producto, cantidad_total in productos_ordenados[:5]:
+            nombre = map_productos.get(cod_producto, f"Producto {cod_producto}")
+            labels_productos.append(nombre)
+            cantidades_productos.append(cantidad_total)
+
+        # Renderizar plantilla
         return render_template(
             'admin_dashboard.html',
             total_boletas=total_boletas,
             total_clientes=total_clientes,
             total_productos=total_productos,
             total_ventas=total_ventas,
-            ventas_mensuales=ventas_mensuales
+            ventas_mensuales=ventas_mensuales,
+            clientes_registrados=clientes_registrados,
+            clientes_no_registrados=clientes_no_registrados,
+            labels_productos=labels_productos,
+            cantidades_productos=cantidades_productos
         )
 
     except requests.exceptions.RequestException as e:
         return f"Error de conexión al cargar panel admin: {e}"
+
 
 
 @app.route('/perfil', methods=['GET', 'POST'])

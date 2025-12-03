@@ -50,5 +50,36 @@ namespace ApiRest.Controllers
 
             return CreatedAtAction(nameof(GetProductos), new { id = producto.CodProducto }, productoDto);
         }
+
+        // PUT: api/Producto/{id}
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateProducto(int id, [FromBody] ProductoDto productoDto)
+        {
+            var producto = await _context.Producto.FindAsync(id);
+            if (producto == null)
+                return NotFound("Producto no encontrado.");
+
+            producto.NombreProducto = productoDto.NombreProducto;
+            producto.Descripcion = productoDto.Descripcion;
+            producto.Precio = productoDto.Precio;
+
+            _context.Producto.Update(producto);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // DELETE: api/Producto/{id}
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteProducto(int id)
+        {
+            var producto = await _context.Producto.FindAsync(id);
+            if (producto == null)
+                return NotFound("Producto no encontrado.");
+
+            _context.Producto.Remove(producto);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
     }
 }

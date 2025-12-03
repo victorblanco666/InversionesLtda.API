@@ -58,6 +58,32 @@ namespace ApiRest.Controllers
 
             return CreatedAtAction(nameof(GetComunas), new { id = comuna.CodComuna }, comunaDto);
         }
+        // PUT: api/Comuna/{codRegion}/{codProvincia}/{codComuna}
+        [HttpPut("{codRegion:int}/{codProvincia:int}/{codComuna:int}")]
+        public async Task<IActionResult> UpdateComuna(int codRegion, int codProvincia, int codComuna, [FromBody] ComunaDto comunaDto)
+        {
+            var comuna = await _context.Comuna.FindAsync(codRegion, codProvincia, codComuna);
+            if (comuna == null)
+                return NotFound("Comuna no encontrada.");
+
+            comuna.NombreComuna = comunaDto.NombreComuna;
+            _context.Comuna.Update(comuna);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // DELETE: api/Comuna/{codRegion}/{codProvincia}/{codComuna}
+        [HttpDelete("{codRegion:int}/{codProvincia:int}/{codComuna:int}")]
+        public async Task<IActionResult> DeleteComuna(int codRegion, int codProvincia, int codComuna)
+        {
+            var comuna = await _context.Comuna.FindAsync(codRegion, codProvincia, codComuna);
+            if (comuna == null)
+                return NotFound("Comuna no encontrada.");
+
+            _context.Comuna.Remove(comuna);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
     }
 }

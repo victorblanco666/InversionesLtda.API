@@ -120,6 +120,43 @@
     ]
   },
   {
+    "ContainingType": "ApiRest.Controllers.BoletaController",
+    "Method": "ActualizarBoleta",
+    "RelativePath": "api/Boleta/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "ApiRest.Dto.Request.BoletaRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.BoletaController",
+    "Method": "EliminarBoleta",
+    "RelativePath": "api/Boleta/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiRest.Controllers.ClienteController",
     "Method": "GetClientes",
     "RelativePath": "api/Cliente",
@@ -275,6 +312,63 @@
     ]
   },
   {
+    "ContainingType": "ApiRest.Controllers.ComunaController",
+    "Method": "UpdateComuna",
+    "RelativePath": "api/Comuna/{codRegion}/{codProvincia}/{codComuna}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "codRegion",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "codProvincia",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "codComuna",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "comunaDto",
+        "Type": "ApiRest.Models.ComunaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.ComunaController",
+    "Method": "DeleteComuna",
+    "RelativePath": "api/Comuna/{codRegion}/{codProvincia}/{codComuna}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "codRegion",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "codProvincia",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "codComuna",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiRest.Controllers.ProductoController",
     "Method": "GetProductos",
     "RelativePath": "api/Producto",
@@ -319,6 +413,43 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.ProductoController",
+    "Method": "UpdateProducto",
+    "RelativePath": "api/Producto/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "productoDto",
+        "Type": "ApiRest.Models.ProductoDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.ProductoController",
+    "Method": "DeleteProducto",
+    "RelativePath": "api/Producto/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ApiRest.Controllers.ProvinciaController",
@@ -367,6 +498,53 @@
     ]
   },
   {
+    "ContainingType": "ApiRest.Controllers.ProvinciaController",
+    "Method": "UpdateProvincia",
+    "RelativePath": "api/Provincia/{codRegion}/{codProvincia}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "codRegion",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "codProvincia",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "provinciaDto",
+        "Type": "ApiRest.Models.ProvinciaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.ProvinciaController",
+    "Method": "DeleteProvincia",
+    "RelativePath": "api/Provincia/{codRegion}/{codProvincia}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "codRegion",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "codProvincia",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiRest.Controllers.RegionController",
     "Method": "GetRegions",
     "RelativePath": "api/Region",
@@ -411,6 +589,43 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.RegionController",
+    "Method": "UpdateRegion",
+    "RelativePath": "api/Region/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "regionDto",
+        "Type": "ApiRest.Models.RegionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.RegionController",
+    "Method": "DeleteRegion",
+    "RelativePath": "api/Region/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ApiRest.Controllers.StockController",
@@ -459,6 +674,43 @@
     ]
   },
   {
+    "ContainingType": "ApiRest.Controllers.StockController",
+    "Method": "UpdateStock",
+    "RelativePath": "api/Stock/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "stockDto",
+        "Type": "ApiRest.Models.StockDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.StockController",
+    "Method": "DeleteStock",
+    "RelativePath": "api/Stock/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiRest.Controllers.SucursalController",
     "Method": "GetSucursales",
     "RelativePath": "api/Sucursal",
@@ -503,6 +755,43 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.SucursalController",
+    "Method": "UpdateSucursal",
+    "RelativePath": "api/Sucursal/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sucursalDto",
+        "Type": "ApiRest.Models.SucursalDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiRest.Controllers.SucursalController",
+    "Method": "DeleteSucursal",
+    "RelativePath": "api/Sucursal/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "TarjetaController",

@@ -226,5 +226,44 @@ namespace ApiRest.Controllers
 
             return Ok(lista);
         }
+
+        // PUT: api/Boleta/{id}
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> ActualizarBoleta(int id, [FromBody] BoletaRequest request)
+        {
+            var boleta = await _context.Boleta.FirstOrDefaultAsync(b => b.CodBoleta == id);
+            if (boleta == null)
+                return NotFound(new { mensaje = "Boleta no encontrada." });
+
+            // Actualizar campos básicos
+            boleta.RunCliente = request.NumRun;
+            boleta.CorreoContacto = request.CorreoContacto;
+            boleta.EsInvitada = request.EsInvitada;
+            // Nota: no se recalcula el total ni se modifican los detalles aquí.
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // DELETE: api/Boleta/{id}
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> EliminarBoleta(int id)
+        {
+            var boleta = await _context.Boleta.FindAsync(id);
+            if (boleta == null)
+                return NotFound(new { mensaje = "Boleta no encontrada." });
+
+            // Eliminar detalles asociados
+            var detalles = await _context.DetalleBoleta
+                .Where(d => d.CodBoleta == id).ToListAsync();
+            _context.DetalleBoleta.RemoveRange(detalles);
+
+            _context.Boleta.Remove(boleta);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
     }
 }
