@@ -47,16 +47,19 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="fas fa-tools"></i> Ferretería Ferremas</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+       <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ff7a28;">
+        <div class="container-fluid">
+            <div class="col-md-2 text-center text-md-start">
+                    <a href="{{ url_for('vista') }}" class="navbar-brand" >
+                        <img style="padding-top: 1%;" src="{{ url_for('static', filename='img/test.png') }}"
+                            alt="UniShop logo" class="img-fluid">
+                    </a>
+                </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('vista') }}">Inicio</a>
+                        <a class="nav-link" href="{{ url_for('logout') }}">Salir</a>
                     </li>
                 </ul>
             </div>

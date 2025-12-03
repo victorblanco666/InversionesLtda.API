@@ -482,7 +482,7 @@ def signup():
                             resp_cliente = requests.post(cliente_url, json=cliente_dto, verify=False)
                             if resp_cliente.status_code in (200, 201):
                                 # Cliente creado con éxito
-                                success = "Usuario y cliente registrados correctamente. Ahora puedes iniciar sesión."
+                                success = "Usuario registrado correctamente. Ahora puedes iniciar sesión."
                             elif resp_cliente.status_code == 409:
                                 # Ya existe un cliente con este RUN; hacemos un PUT para asociar el usuarioId
                                 try:
