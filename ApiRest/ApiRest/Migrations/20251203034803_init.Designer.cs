@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiRest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251202195034_In")]
-    partial class In
+    [Migration("20251203034803_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,6 +111,10 @@ namespace ApiRest.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UsuarioId")
                         .HasColumnType("int");

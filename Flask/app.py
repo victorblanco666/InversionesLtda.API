@@ -16,6 +16,7 @@ app.secret_key = "dev-unishop-secret-key"
 # Deshabilitar advertencias de SSL para urllib3 (solo para desarrollo)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -23,6 +24,7 @@ def login_required(f):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
+
 
 def admin_required(f):
     @wraps(f)
@@ -33,6 +35,7 @@ def admin_required(f):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
+
 
 @app.route('/')
 def vista():
@@ -75,6 +78,7 @@ def vista():
     except requests.exceptions.RequestException as e:
         return "Error de conexión: " + str(e)
 
+
 @app.route('/pago', methods=['GET', 'POST'])
 def pago():
     base_url = 'https://localhost:5000/api'
@@ -106,6 +110,7 @@ def pago():
         if not carrito:
             return jsonify({"error": "El carrito está vacío o no se pudo leer."}), 400
 
+        # Guardamos el carrito en sesión para usarlo al confirmar la transacción
         session['carrito'] = carrito
 
         # Monto total a pagar (calculado en el frontend)
@@ -125,7 +130,7 @@ def pago():
             "a_Materno": request.form['a_Materno'],
             "correo": request.form['correo'],
             "direccion": request.form['direccion'],
-            "telefono": request.form['telefono'],  
+            "telefono": request.form['telefono'],
             "codRegion": int(request.form['codRegion']),
             "codProvincia": int(request.form['codProvincia']),
             "codComuna": int(request.form['codComuna'])
@@ -136,8 +141,10 @@ def pago():
         if usuario_session:
             datos_cliente["usuarioId"] = usuario_session.get("id")
 
-        # Guardar datos del cliente en sesión
+        # Guardar datos del cliente en sesión y marcar la sesión como modificada
         session['cliente'] = datos_cliente
+        # Marcamos la sesión como modificada para que Flask actualice la cookie
+        session.modified = True
 
         try:
             # Registrar o actualizar cliente
@@ -174,6 +181,7 @@ def pago():
 
     return render_template('pago.html', regiones=regiones, provincias=provincias, comunas=comunas)
 
+
 @app.route('/confirmar_pago', methods=['GET'])
 def recibir_token():
     """Recibe el token de Transbank después del pago y redirige a la confirmación."""
@@ -182,12 +190,15 @@ def recibir_token():
         return jsonify({"error": "No se recibió token de transacción"}), 400
     return redirect(f"/confirmar_transaccion/{token}")
 
+
 @app.route('/confirmar_transaccion/<token>', methods=['GET'])
 def confirmar_transaccion(token):
     base_url = 'https://localhost:5000/api'
     confirmacion_url = f'{base_url}/Transbank/Confirmar_transaccion/{token}'
     tarjeta_url = f'{base_url}/Tarjeta'
     boleta_url = f'{base_url}/Boleta'
+    # URL de Cliente para reconstruir el cliente si falta en sesión
+    cliente_url = f'{base_url}/Cliente'
 
     try:
         # 1. Confirmar la transacción con TransbankController
@@ -227,6 +238,21 @@ def confirmar_transaccion(token):
         cliente_session = session.get('cliente')
         carrito = session.get('carrito', [])
 
+        # Si no encontramos datos de cliente en la sesión, intentamos reconstruirlos
+        if not cliente_session:
+            usuario_session = session.get('usuario')
+            if usuario_session:
+                try:
+                    resp_clientes = requests.get(cliente_url, verify=False)
+                    if resp_clientes.status_code == 200:
+                        clientes = resp_clientes.json()
+                        cliente_session = next((c for c in clientes if c.get('usuarioId') == usuario_session.get('id')), None)
+                        if cliente_session:
+                            # Guardamos el cliente reconstruido en sesión
+                            session['cliente'] = cliente_session
+                            session.modified = True
+                except Exception:
+                    pass
         if not cliente_session:
             return jsonify({"error": "No se encontraron datos de cliente en sesión. No se puede emitir la boleta."}), 400
         if not carrito:
@@ -275,6 +301,7 @@ def confirmar_transaccion(token):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     base_url = 'https://localhost:5000/api'
@@ -316,10 +343,12 @@ def login():
 
     return render_template('login.html', error=error)
 
+
 @app.route('/logout')
 def logout():
     session.pop('usuario', None)
     return redirect(url_for('vista'))
+
 
 @app.route('/password_reset', methods=['GET', 'POST'])
 def password_reset():
@@ -359,51 +388,142 @@ def password_reset():
 
     return render_template('password_reset.html', error=error, success=success)
 
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    """
+    Página de registro: permite crear simultáneamente una cuenta de usuario y un
+    cliente asociado. En el GET se cargan las listas de regiones, provincias y
+    comunas para el formulario; en el POST se valida y registra el usuario y
+    luego se crea el cliente con el usuarioId resultante.
+    """
     base_url = 'https://localhost:5000/api'
     register_url = f'{base_url}/Auth/Register'
+    cliente_url = f'{base_url}/Cliente'
+    region_url = f'{base_url}/Region'
+    provincia_url = f'{base_url}/Provincia'
+    comuna_url = f'{base_url}/Comuna'
+
     error = None
     success = None
 
+    # Para GET: obtener regiones, provincias y comunas para las listas
+    try:
+        regiones = requests.get(region_url, verify=False).json()
+        provincias = requests.get(provincia_url, verify=False).json()
+        comunas = requests.get(comuna_url, verify=False).json()
+    except Exception as e:
+        regiones = []
+        provincias = []
+        comunas = []
+        error = f"Error al cargar datos de territorio: {e}"
+
     if request.method == 'POST':
+        # Datos de la cuenta
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
         password2 = request.form.get('password2')
 
+        # Datos del cliente
+        numRun = request.form.get('numRun')
+        dvRun = request.form.get('dvRun')
+        p_Nombre = request.form.get('p_Nombre')
+        s_Nombre = request.form.get('s_Nombre')
+        a_Paterno = request.form.get('a_Paterno')
+        a_Materno = request.form.get('a_Materno')
+        # Usaremos el mismo correo de la cuenta como correo de contacto
+        correo = email
+        direccion = request.form.get('direccion')
+        telefono = request.form.get('telefono')
+        codRegion = request.form.get('codRegion')
+        codProvincia = request.form.get('codProvincia')
+        codComuna = request.form.get('codComuna')
+
+        # Validar contraseñas
         if password != password2:
             error = "Las contraseñas no coinciden."
         else:
-            payload = {
+            # Registrar usuario
+            payload_user = {
                 "username": username,
                 "email": email,
                 "password": password
             }
             try:
-                resp = requests.post(register_url, json=payload, verify=False)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    if data.get("exito"):
-                        success = "Usuario registrado correctamente. Ahora puedes iniciar sesión."
+                resp_user = requests.post(register_url, json=payload_user, verify=False)
+                if resp_user.status_code == 200:
+                    data_user = resp_user.json()
+                    if data_user.get("exito"):
+                        # Usuario creado; obtener usuarioId
+                        user_data = data_user.get("data", {})
+                        # Según la API, el campo puede llamarse id/Id/usuarioId; usamos el que exista
+                        usuario_id = (user_data.get("usuarioId") or
+                                      user_data.get("id") or
+                                      user_data.get("Id"))
+                        # Construir cliente
+                        cliente_dto = {
+                            "numRun": int(numRun),
+                            "dvRun": dvRun,
+                            "p_Nombre": p_Nombre,
+                            "s_Nombre": s_Nombre,
+                            "a_Paterno": a_Paterno,
+                            "a_Materno": a_Materno,
+                            "correo": correo,
+                            "direccion": direccion,
+                            "telefono": telefono,
+                            "codRegion": int(codRegion) if codRegion else None,
+                            "codProvincia": int(codProvincia) if codProvincia else None,
+                            "codComuna": int(codComuna) if codComuna else None,
+                            "usuarioId": usuario_id
+                        }
+                        # Registrar cliente
+                        try:
+                            resp_cliente = requests.post(cliente_url, json=cliente_dto, verify=False)
+                            if resp_cliente.status_code in (200, 201):
+                                # Cliente creado con éxito
+                                success = "Usuario y cliente registrados correctamente. Ahora puedes iniciar sesión."
+                            elif resp_cliente.status_code == 409:
+                                # Ya existe un cliente con este RUN; hacemos un PUT para asociar el usuarioId
+                                try:
+                                    resp_put = requests.put(f"{cliente_url}/{int(numRun)}", json=cliente_dto, verify=False)
+                                    if resp_put.status_code == 204:
+                                        success = "Usuario creado y cliente existente actualizado correctamente. Ahora puedes iniciar sesión."
+                                    else:
+                                        try:
+                                            data_cli = resp_put.json()
+                                            error = data_cli.get('mensaje', f"Error al actualizar cliente ({resp_put.status_code}).")
+                                        except Exception:
+                                            error = f"Error al actualizar cliente ({resp_put.status_code})."
+                                except Exception as e:
+                                    error = f"Error al actualizar cliente existente: {e}"
+                            else:
+                                try:
+                                    data_cli = resp_cliente.json()
+                                    error = data_cli.get('mensaje', f"Error al registrar cliente ({resp_cliente.status_code}).")
+                                except Exception:
+                                    error = f"Error al registrar cliente ({resp_cliente.status_code})."
+                        except Exception as e:
+                            error = f"Error al registrar cliente: {e}"
                     else:
-                        error = data.get("mensaje", "No se pudo registrar el usuario.")
+                        error = data_user.get("mensaje", "No se pudo registrar el usuario.")
                 else:
                     try:
-                        data = resp.json()
+                        data_user = resp_user.json()
                     except Exception:
-                        data = {}
-                    error = data.get("mensaje", f"Error al registrar usuario ({resp.status_code}).")
+                        data_user = {}
+                    error = data_user.get("mensaje", f"Error al registrar usuario ({resp_user.status_code}).")
             except Exception as e:
                 error = f"Error de conexión al registrar: {e}"
 
-    return render_template('signup.html', error=error, success=success)
+    # Renderizar formulario de registro con los datos cargados
+    return render_template('signup.html', regiones=regiones, provincias=provincias,
+                           comunas=comunas, error=error, success=success)
+
 
 @app.route('/admin')
 @admin_required
 def admin_dashboard():
-
-    
     """
     Vista de administrador: muestra métricas básicas del negocio
     + arreglo ventas_mensuales (enero a diciembre).
@@ -465,6 +585,7 @@ def admin_dashboard():
     except requests.exceptions.RequestException as e:
         return f"Error de conexión al cargar panel admin: {e}"
 
+
 @app.route('/perfil', methods=['GET', 'POST'])
 @login_required
 def perfil():
@@ -506,6 +627,7 @@ def perfil():
             "a_Materno": request.form.get('a_Materno', cliente.get('a_Materno')),
             "correo": request.form.get('correo', cliente.get('correo')),
             "direccion": request.form.get('direccion', cliente.get('direccion')),
+            "telefono": request.form.get('telefono', cliente.get('telefono')),
             "codRegion": cliente.get('codRegion'),
             "codProvincia": cliente.get('codProvincia'),
             "codComuna": cliente.get('codComuna'),
@@ -518,7 +640,6 @@ def perfil():
                 success = "Datos actualizados correctamente."
                 cliente = updated_cliente  # Actualizamos los datos locales
             else:
-                # Intentamos extraer mensaje de error
                 try:
                     data_err = resp_put.json()
                     error = data_err.get('mensaje', f"Error al actualizar datos ({resp_put.status_code}).")
@@ -536,7 +657,6 @@ def perfil():
         mis_boletas = []
         error = f"Error al cargar boletas: {e}"
 
-    # Renderizar plantilla de perfil
     return render_template(
         'perfil.html',
         cliente=cliente,
@@ -544,7 +664,6 @@ def perfil():
         error=error,
         success=success
     )
-
 
 
 if __name__ == '__main__':

@@ -15,8 +15,8 @@
 
 <div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-5">
-            <h2 class="mb-4 text-center">Crear cuenta</h2>
+        <div class="col-md-8">
+            <h2 class="mb-4 text-center">Crear cuenta y cliente</h2>
 
             {% if error %}
             <div class="alert alert-danger">{{ error }}</div>
@@ -26,28 +26,91 @@
             {% endif %}
 
             <form method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Usuario</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="username" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="password2" class="form-label">Repetir contraseña</label>
+                        <input type="password" class="form-control" id="password2" name="password2" required>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="email" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                <hr class="my-4">
+                <h5>Datos personales</h5>
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label for="numRun" class="form-label">RUN</label>
+                        <input type="number" class="form-control" id="numRun" name="numRun" required>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="dvRun" class="form-label">DV</label>
+                        <input type="text" class="form-control" id="dvRun" name="dvRun" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="p_Nombre" class="form-label">Primer nombre</label>
+                        <input type="text" class="form-control" id="p_Nombre" name="p_Nombre" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="s_Nombre" class="form-label">Segundo nombre</label>
+                        <input type="text" class="form-control" id="s_Nombre" name="s_Nombre">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="a_Paterno" class="form-label">Apellido paterno</label>
+                        <input type="text" class="form-control" id="a_Paterno" name="a_Paterno" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="a_Materno" class="form-label">Apellido materno</label>
+                        <input type="text" class="form-control" id="a_Materno" name="a_Materno" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="codRegion" class="form-label">Región</label>
+                        <select class="form-select text-dark" id="codRegion" name="codRegion" required>
+                            <option value="" selected disabled>Seleccione región</option>
+                            {% for r in regiones %}
+                            <option value="{{ r.codRegion }}">{{ r.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="codProvincia" class="form-label">Provincia</label>
+                        <select class="form-select text-dark" id="codProvincia" name="codProvincia" required>
+                            <option value="" selected disabled>Seleccione provincia</option>
+                            {% for p in provincias %}
+                            <option value="{{ p.codProvincia }}">{{ p.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="codComuna" class="form-label">Comuna</label>
+                        <select class="form-select text-dark" id="codComuna" name="codComuna" required>
+                            <option value="" selected disabled>Seleccione comuna</option>
+                            {% for c in comunas %}
+                            <option value="{{ c.codComuna }}">{{ c.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
-
-                <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary w-100">Registrarme</button>
                 </div>
-
-                <div class="mb-3">
-                    <label for="password2" class="form-label">Repetir contraseña</label>
-                    <input type="password" class="form-control" id="password2" name="password2" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">Registrarme</button>
-
                 <div class="text-center mt-3">
                     <a href="{{ url_for('login') }}">¿Ya tienes cuenta? Inicia sesión</a>
                 </div>
@@ -56,5 +119,6 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

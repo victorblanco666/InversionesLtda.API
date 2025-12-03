@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\victo\\OneDrive\\Escritorio\\TESIS REPO\\InversionesLtda.API\\ApiRest\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\TESIS REPO\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20251202203312_second.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20251202203312_second.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\victo\\OneDrive\\Escritorio\\TESIS REPO\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20251203034803_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ApiRest\\Migrations\\20251203034803_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B898B540-2803-4186-A780-C042ED5EAD88}|ApiRest\\ApiRest.csproj|c:\\users\\victo\\onedrive\\escritorio\\tesis repo\\inversionesltda.api\\apirest\\apirest\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,14 +39,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20251202203312_second.cs",
-              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\TESIS REPO\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20251202203312_second.cs",
-              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20251202203312_second.cs",
-              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\TESIS REPO\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20251202203312_second.cs",
-              "RelativeToolTip": "ApiRest\\Migrations\\20251202203312_second.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAaAAAAAAAAAA==",
+              "Title": "20251203034803_init.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\OneDrive\\Escritorio\\TESIS REPO\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20251203034803_init.cs",
+              "RelativeDocumentMoniker": "ApiRest\\Migrations\\20251203034803_init.cs",
+              "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\TESIS REPO\\InversionesLtda.API\\ApiRest\\ApiRest\\Migrations\\20251203034803_init.cs",
+              "RelativeToolTip": "ApiRest\\Migrations\\20251203034803_init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T20:33:12.299Z",
+              "WhenOpened": "2025-12-03T03:48:03.98Z",
               "EditorCaption": ""
             },
             {
@@ -57,7 +57,7 @@
               "RelativeDocumentMoniker": "ApiRest\\Controllers\\ClienteController.cs",
               "ToolTip": "C:\\Users\\victo\\OneDrive\\Escritorio\\TESIS REPO\\InversionesLtda.API\\ApiRest\\ApiRest\\Controllers\\ClienteController.cs",
               "RelativeToolTip": "ApiRest\\Controllers\\ClienteController.cs",
-              "ViewState": "AgIAAJsAAAAAAAAAAAAswLEAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAswK0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-02T20:31:39.227Z",
               "EditorCaption": ""
@@ -72,8 +72,7 @@
               "RelativeToolTip": "ApiRest\\Dto\\Request\\ClienteDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T20:31:03.761Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-02T20:31:03.761Z"
             },
             {
               "$type": "Document",
@@ -85,8 +84,7 @@
               "RelativeToolTip": "ApiRest\\Models\\Cliente.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T20:30:43.603Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-02T20:30:43.603Z"
             }
           ]
         }
