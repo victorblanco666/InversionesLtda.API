@@ -5,6 +5,7 @@
         public string CodTransaccion { get; set; } // Clave primaria(numero tarjeta)
         public int NumTarjeta { get; set; } // Clave primaria(numero tarjeta)
         public string NombreTransaccion { get; set; }
+        public string Token { get; set; }
 
 
     }

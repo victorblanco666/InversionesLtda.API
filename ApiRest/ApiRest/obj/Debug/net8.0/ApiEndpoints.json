@@ -157,6 +157,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ApiRest.Controllers.BoletaController",
+    "Method": "CambiarEstadoBoleta",
+    "RelativePath": "api/Boleta/{id}/estado",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ApiRest.Dto.Request.BoletaEstadoRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiRest.Controllers.ClienteController",
     "Method": "GetClientes",
     "RelativePath": "api/Cliente",
@@ -824,6 +845,32 @@
       {
         "Name": "tarjetaDto",
         "Type": "ApiRest.Models.CreateTarjetaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ApiRest.Models.TarjetaDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "TarjetaController",
+    "Method": "GetTarjeta",
+    "RelativePath": "api/Tarjeta/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

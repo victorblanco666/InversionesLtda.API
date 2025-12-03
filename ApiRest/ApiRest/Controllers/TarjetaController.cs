@@ -24,12 +24,30 @@ public class TarjetaController : ControllerBase
             {
                 CodTransaccion = t.CodTransaccion,
                 NumTarjeta = t.NumTarjeta,
-                NombreTransaccion = t.NombreTransaccion
+                NombreTransaccion = t.NombreTransaccion,
+                Token = t.Token
             })
             .ToListAsync();
 
         return Ok(tarjetas);
     }
+
+    // GET: api/Tarjeta/{id}
+    [HttpGet("{id}")]
+    public async Task<ActionResult<TarjetaDto>> GetTarjeta(string id)
+    {
+        var tarjeta = await _context.Tarjeta.FindAsync(id);
+        if (tarjeta == null) return NotFound();
+
+        return Ok(new TarjetaDto
+        {
+            CodTransaccion = tarjeta.CodTransaccion,
+            NumTarjeta = tarjeta.NumTarjeta,
+            NombreTransaccion = tarjeta.NombreTransaccion,
+            Token = tarjeta.Token
+        });
+    }
+
 
     // POST: api/Tarjeta
     [HttpPost]

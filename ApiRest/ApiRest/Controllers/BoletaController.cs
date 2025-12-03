@@ -45,7 +45,8 @@ namespace ApiRest.Controllers
                 EsInvitada = b.EsInvitada,
                 CodTransaccion = b.CodTransaccion,
                 Total = b.Total,
-                Detalles = detalleDtos
+                Detalles = detalleDtos,
+                Estado = b.Estado
             };
         }
 
@@ -263,6 +264,24 @@ namespace ApiRest.Controllers
 
             return NoContent();
         }
+
+        // PUT: api/Boleta/5/estado
+        [HttpPut("{id:int}/estado")]
+        public async Task<IActionResult> CambiarEstadoBoleta(int id, [FromBody] BoletaEstadoRequestDto dto)
+        {
+            if (dto == null || string.IsNullOrWhiteSpace(dto.Estado))
+                return BadRequest("El estado es obligatorio.");
+
+            var boleta = await _context.Boleta.FirstOrDefaultAsync(b => b.CodBoleta == id);
+            if (boleta == null)
+                return NotFound();
+
+            boleta.Estado = dto.Estado;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
 
 
     }

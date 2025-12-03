@@ -22,5 +22,6 @@
 
         // Navegación a detalles
         public ICollection<DetalleBoleta> Detalles { get; set; }
+        public string Estado { get; set; } = "Aprobada";
     }
 }

@@ -283,6 +283,48 @@
         }
       }
     },
+    "/api/Boleta/{id}/estado": {
+      "put": {
+        "tags": [
+          "Boleta"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BoletaEstadoRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BoletaEstadoRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BoletaEstadoRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Cliente": {
       "get": {
         "tags": [
@@ -1488,6 +1530,45 @@
         }
       }
     },
+    "/api/Tarjeta/{id}": {
+      "get": {
+        "tags": [
+          "Tarjeta"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TarjetaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TarjetaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TarjetaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Transbank/Crear_transaccion": {
       "post": {
         "tags": [
@@ -1646,6 +1727,20 @@
             "items": {
               "$ref": "#/components/schemas/DetalleBoletaDto"
             },
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BoletaEstadoRequestDto": {
+        "type": "object",
+        "properties": {
+          "estado": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -2016,6 +2111,10 @@
             "format": "int32"
           },
           "nombreTransaccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
             "type": "string",
             "nullable": true
           }

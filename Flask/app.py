@@ -640,7 +640,8 @@ def admin_dashboard():
             nombre = map_productos.get(cod_producto, f"Producto {cod_producto}")
             labels_productos.append(nombre)
             cantidades_productos.append(cantidad_total)
-
+        
+        boletas_listado = boletas  # o boletas[-20:] si quieres limitar a las últimas
         # Renderizar plantilla
         return render_template(
             'admin_dashboard.html',
@@ -652,7 +653,8 @@ def admin_dashboard():
             clientes_registrados=clientes_registrados,
             clientes_no_registrados=clientes_no_registrados,
             labels_productos=labels_productos,
-            cantidades_productos=cantidades_productos
+            cantidades_productos=cantidades_productos,
+            boletas=boletas_listado
         )
 
     except requests.exceptions.RequestException as e:

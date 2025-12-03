@@ -13,6 +13,7 @@
         public int Total { get; set; }
 
         public List<DetalleBoletaDto> Detalles { get; set; }
+        public string Estado { get; set; }
     }
 
     public class DetalleBoletaDto

@@ -1365,10 +1365,10 @@ C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRes
 C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\ApiRest.csproj.Up2Date
 C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\ApiRest.dll
 C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\refint\ApiRest.dll
 C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\ApiRest.pdb
 C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\ApiRest.genruntimeconfig.cache
 C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\ref\ApiRest.dll
+C:\Users\victo\OneDrive\Escritorio\TESIS REPO\InversionesLtda.API\ApiRest\ApiRest\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
