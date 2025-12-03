@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Iniciar sesión - UniShop</title>
@@ -42,19 +43,20 @@
         }
     </style>
 </head>
+
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ff7a28;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ff7a28;">
         <div class="container-fluid">
             <div class="col-md-2 text-center text-md-start">
-                    <a href="{{ url_for('vista') }}" class="navbar-brand" >
-                        <img style="padding-top: 1%;" src="{{ url_for('static', filename='img/test.png') }}"
-                            alt="UniShop logo" class="img-fluid">
-                    </a>
-                </div>
+                <a href="{{ url_for('vista') }}" class="navbar-brand">
+                    <img style="padding-top: 1%;" src="{{ url_for('static', filename='img/test.png') }}"
+                        alt="UniShop logo" class="img-fluid">
+                </a>
+            </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('logout') }}">Salir</a>
                     </li>
@@ -63,36 +65,39 @@
         </div>
     </nav>
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            <h2 class="mb-4 text-center">Iniciar sesión</h2>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h2 class="mb-4 text-center">Iniciar sesión</h2>
 
-            {% if error %}
-            <div class="alert alert-danger">{{ error }}</div>
-            {% endif %}
+                {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
 
-            <form method="post">
-                <div class="mb-3">
-                    <label for="usernameOrEmail" class="form-label">Usuario o correo</label>
-                    <input type="text" class="form-control" id="usernameOrEmail" name="usernameOrEmail" required>
-                </div>
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="usernameOrEmail" class="form-label">Usuario o correo</label>
+                        <input type="text" class="form-control" id="usernameOrEmail" name="usernameOrEmail" required>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
 
-                <button type="submit" class="btn btn-primary w-100 mb-3">Entrar</button>
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Entrar</button>
 
-                <div class="d-flex justify-content-between">
-                    <a href="{{ url_for('signup') }}">Crear cuenta</a>
-                    <a href="{{ url_for('password_reset') }}">¿Olvidaste tu contraseña?</a>
-                </div>
-            </form>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('signup') }}">Crear cuenta</a>
+                        <a href="{{ url_for('password_reset') }}">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 E-Comerce UniShop. Todos los derechos reservados.</p>
+    </footer>
 </body>
+
 </html>
